@@ -45,7 +45,9 @@ const Homepage = () => {
                         <div className="row">
                             {/* cards */}
                             {products.map((product) => (
-                                <Link key={product.id} to={`/product/${product.id}`}>
+                                <Link 
+                                    key={product.id} 
+                                    to={`/product/${product.id}`}>
                                     <Cards product={product} />
                                 </Link>
                             ))}
@@ -60,13 +62,13 @@ const Homepage = () => {
                         <h2>LATEST PRODUCTS</h2>
                         <div className="row">
                             {/* cards */}
-                            {products.map((product, idx) => (
-                                <Link key={idx} to={`/product/${idx}`}>
+                            {products.map((product) => (
+                                <Link 
+                                    key={product.id} 
+                                    to={`/product/${product.id}`}>
                                     <Cards product={product} />
                                 </Link>
-                            ))}
-                            
-
+                            ))}                      
                         </div>
                     </div>
                 </div>
