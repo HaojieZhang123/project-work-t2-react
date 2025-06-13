@@ -7,7 +7,7 @@ const Header = () => {
                 <div className="row">
                     {/* Div laterale barra di ricerca */}
                     <div className='col-4'>
-                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <i className="fa-solid fa-magnifying-glass"></i>
                         <input type="text" placeholder="Search" />
                     </div>
                     {/* div centrale logo */}
@@ -17,10 +17,10 @@ const Header = () => {
                     {/* div laterale carrello e wish-list */}
                     <div className='col-4 d-flex justify-content-end'>
                         <div>
-                            <i class="fa-regular fa-heart"></i>
+                            <i className="fa-regular fa-heart"></i>
                         </div>
                         <div>
-                            <i class="fa-solid fa-bag-shopping"></i>
+                            <i className="fa-solid fa-bag-shopping"></i>
                         </div>
                     </div>
                 </div>
