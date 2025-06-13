@@ -1,5 +1,30 @@
 import React from 'react'
 import Cards from '../components/Cards'
+import { Link } from 'react-router-dom'
+
+const products = [
+    {
+        id: "1",
+        product_name: "Product 1",
+        price: 100,
+        image: "https://picsum.photos/200/300",
+        brand_id: "Brand A",
+        category: "Category X",
+        description: "This is a great product.",
+        sold: 50,
+        discount: 10,
+        vendor_mail: "ddsdd"
+    },
+    {   
+        id: "2",
+        product_name: "Product 2",
+        price: 150,
+        image: "https://picsum.photos/200/300?2",
+        brand_id: "Brand B",
+        category: "Category Y",
+        description: "This is another great product."
+    }
+];
 
 const Homepage = () => {
     return (
@@ -19,7 +44,11 @@ const Homepage = () => {
                         <h2>BEST SELLERS</h2>
                         <div className="row">
                             {/* cards */}
-                            <Cards />
+                            {products.map((product) => (
+                                <Link key={product.id} to={`/product/${product.id}`}>
+                                    <Cards product={product} />
+                                </Link>
+                            ))}
                         </div>
                     </div>
                 </div>
@@ -31,7 +60,12 @@ const Homepage = () => {
                         <h2>LATEST PRODUCTS</h2>
                         <div className="row">
                             {/* cards */}
-                            <Cards />
+                            {products.map((product, idx) => (
+                                <Link key={idx} to={`/product/${idx}`}>
+                                    <Cards product={product} />
+                                </Link>
+                            ))}
+                            
 
                         </div>
                     </div>
