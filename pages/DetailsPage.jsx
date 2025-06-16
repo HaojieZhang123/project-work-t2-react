@@ -31,17 +31,36 @@ const DetailsPage = () => {
         return <div>Product not found</div>;
     }
 
+
     return (
         <div className="container mt-5">
-            <h2>{product.product_name}</h2>
-            <img src={product.image} alt={product.product_name} />
-            <p >{product.description}</p>
-            <h3>Price: €{product.price}</h3>
-            <p><strong>Category:</strong> {product.category}</p>
-            <p><strong>Brand:</strong> {product.brand_id}</p>
-            <Link to="/">
-                <button className="btn btn-primary">Return to home</button>
-            </Link>
+            <div className="row">
+                {/* Colonna immagine */}
+                <div className="col-md-6 d-flex justify-content-center align-items-start">
+                    <img src={product.image} alt={product.product_name} />
+                </div>
+
+                {/* Colonna dettagli */}
+                <div className="col-md-6">
+                    <h6>{product.brand_id}</h6>
+                    <h2>{product.product_name}</h2>
+                    <p>{product.description}</p>
+                    <h4>€{product.price}</h4>
+                    <p>{product.category}</p>
+
+                    <div className="d-flex my-4">
+                        <span>Disponibile</span>
+                        <span>Limited</span>
+                    </div>
+
+                    <p> Spedizione entro 3-6 giorni lavorativi</p>
+                    <p> Spedizione gratuita da € 35,00</p>
+
+                    {/* Bottone per aggiungi al carrello */}
+                    <button className="mt-3">Aggiungi al carrello</button>
+
+                </div>
+            </div>
         </div>
     );
 };
