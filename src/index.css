@@ -15,3 +15,78 @@ header ul li a {
     text-decoration: none;
     color: black;
 }
+
+/* PRODUCT CARD */
+.color-main {
+    color: #1d1d1d;
+}
+
+.color-main-subtle {
+    color: #1d1d1d7e;
+}
+
+.color-accent1 {
+    color: #a8bba2;
+}
+
+.color-accent1-subtle {
+    color: #a8bba27e;
+}
+
+.color-accent2 {
+    color: #F9E6D8;
+}
+
+.card-link {
+    text-decoration: none;
+}
+
+.product-card {
+    max-width: 230px;
+    padding: 5px;
+    margin-bottom: 30px;
+}
+
+.card-image-container img {
+    width: 100%;
+}
+
+.card-body-container {
+    padding: 10px 0;
+}
+
+.card-brand {
+    text-transform: uppercase;
+    font-size: .8rem;
+    margin-bottom: 5px;
+}
+
+.card-product-name {
+    font-size: 1.2rem;
+}
+
+.card-category {
+    margin-bottom: 20px;
+}
+
+.card-price {
+    font-weight: 500;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.card-original-price {
+    font-size: 1rem;
+    text-decoration: line-through;
+}
+
+.card-tag {
+    display: inline-block;
+    background-color: #a8bba2;
+    padding: 2px 20px;
+    margin-right: 5px;
+    text-align: center;
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: .8rem;
+}
