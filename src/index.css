@@ -114,3 +114,17 @@ header ul li a {
 .transition-icon.rotate {
     transform: rotate(180deg);
 }
+
+.btn-add-to-cart {
+    background-color: #a8bba2;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-add-to-cart:hover {
+    background-color: #92a58c;
+}

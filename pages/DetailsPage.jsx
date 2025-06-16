@@ -97,7 +97,7 @@ const DetailsPage = () => {
                             </p>
                         </div>
                     </div>
-                    <button className="mt-5">Aggiungi al carrello</button>
+                    <button className="mt-5 btn-add-to-cart">AGGIUNGI AL CARRELLO</button>
                 </div>
             </div>
         </div>
