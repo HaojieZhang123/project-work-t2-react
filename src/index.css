@@ -16,3 +16,16 @@ header ul li a {
 
 
 /* FOOTER */
+footer {
+    background-color: rgba(170, 187, 163, 255);
+    padding: 10px;
+}
+
+footer ul {
+    list-style-type: none;
+}
+
+footer ul li {
+    display: inline-block;
+    margin-right: 5px;
+}
