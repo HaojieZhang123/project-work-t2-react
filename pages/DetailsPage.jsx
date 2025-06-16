@@ -1,16 +1,18 @@
 import { useParams } from 'react-router-dom';
+// import products from '../data/products';
+import { Link } from 'react-router-dom';
+
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const DetailsPage = () => {
     const { id } = useParams();
 
-    const [product, setProduct] = useState(null);
+    const [product, setProduct] = useState([]);
     const [open, setOpen] = useState(false); // stato accordion
-
     const endpoint = `http://localhost:3000/api/products/${id}`;
 
-    // funzione per fetch prodotto
+    // function to fetch product
     const fetchProduct = () => {
         axios.get(endpoint)
             .then(response => {
@@ -24,7 +26,7 @@ const DetailsPage = () => {
 
     useEffect(() => {
         fetchProduct();
-    }, [id]);
+    }, []);
 
     if (!product) {
         return <div>Product not found</div>;
@@ -40,7 +42,7 @@ const DetailsPage = () => {
                         <img
                             src={product.image}
                             alt={product.product_name}
-                            className="img-fluid w-100 h-100 object-fit-cover"
+                            className="w-100 h-100 object-fit-cover"
                         />
                     </div>
                 </div>
@@ -48,12 +50,13 @@ const DetailsPage = () => {
                 {/* Colonna dettagli */}
                 <div className="col-md-6 d-flex flex-column justify-content-between pt-4 px-4">
                     <div className='margin-b-details-page'>
+                        {/* nome brand al momento vuoto */}
                         <h6 className='text-gray-details-page'>{product.brand_id}</h6>
                         <h2>{product.product_name}</h2>
+                        {/* categorie al momento vuoto */}
                         <p className='text-gray-details-page'>{product.category}</p>
                         <hr className='hr-details-page my-5' />
                         <h4 className='text-end'>&#8364;{product.price}</h4>
-                        <p>{product.category}</p>
                         <div className="d-flex flex-column align-items-start my-4">
                             <span className="green-bc-icon">LIMITED</span>
                             <span className="d-flex align-items-center text-gray-details-page mt-4">
@@ -76,17 +79,22 @@ const DetailsPage = () => {
                                 aria-controls="product-details-content"
                             >
                                 <span>DETTAGLI DEL PRODOTTO</span>
-                                <i class="fa-solid fa-chevron-down"></i>
+                                <i className={`fa-solid fa-chevron-down text-gray-details-page transition-icon ${open ? 'rotate' : ''}`}></i>
                             </div>
-                            {open && (
-                                <div id="product-details-content" className="content">
-                                    <p>{product.description || "Nessun dettaglio aggiuntivo disponibile."}</p>
-                                </div>
-                            )}
+                            <div className={`content ${!open ? 'closed' : ''}`}>
+                                <p>{product.description || "Nessun dettaglio aggiuntivo disponibile."}</p>
+                            </div>
                         </div>
-                        <div>
-                            <p> <i className="fa-solid fa-truck green-details-page me-2"></i>Spedizione entro 3-6 giorni lavorativi</p>
-                            <p> <i className="fa-solid fa-box-open green-details-page me-2"></i>Spedizione gratuita da € 35,00</p>
+
+                        <div className='mt-5'>
+                            <p className='text-gray-details-page'>
+                                <i className="fa-solid fa-truck green-details-page me-2"></i>
+                                Spedizione entro 3-6 giorni lavorativi
+                            </p>
+                            <p className='text-gray-details-page'>
+                                <i className="fa-solid fa-box-open green-details-page me-2"></i>
+                                Spedizione gratuita da € 35,00
+                            </p>
                         </div>
                     </div>
                     <button className="mt-5">Aggiungi al carrello</button>
