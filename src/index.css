@@ -16,3 +16,115 @@ header ul li a {
 
 
 /* FOOTER */
+
+/* DETAILS PAGE */
+
+.margin-y-details-page {
+    margin-top: 50px;
+    margin-bottom: 80px;
+}
+
+.margin-b-details-page {
+    margin-bottom: 85px;
+}
+
+.text-gray-details-page {
+    color: #C3C3C3
+}
+
+.hr-details-page {
+    width: 100%;
+}
+
+.green-details-page {
+    color: #a8bba2;
+}
+
+.pink-details-page {
+    color: #f9e6d8;
+}
+
+.green-bc-icon {
+    background-color: #a8bba2;
+    padding: 0px 15px 0px 15px;
+}
+
+.green-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: green;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.accordion {
+    margin-top: 2rem;
+    width: 100%;
+    max-width: 600px;
+    height: 150px;
+    /* fissa */
+    overflow: hidden;
+    position: relative;
+}
+
+.accordion .header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    cursor: pointer;
+    font-weight: 400;
+    user-select: none;
+    border-top: 1px solid #C3C3C3;
+    border-bottom: 1px solid #C3C3C3;
+    transition: background-color 0.2s, outline 0.2s;
+}
+
+.accordion .header:hover {
+    background-color: #b6cab048;
+}
+
+.accordion .content {
+    position: absolute;
+    top: 90px;
+    left: 0;
+    right: 0;
+    padding-top: 15px;
+    font-size: 1rem;
+    color: #444;
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    pointer-events: auto;
+}
+
+.accordion .content.closed {
+    opacity: 0;
+    transform: translateY(10px);
+    pointer-events: none;
+}
+
+.transition-icon {
+    transition: transform 0.3s ease;
+}
+
+.transition-icon.rotate {
+    transform: rotate(180deg);
+}
+
+.btn-add-to-cart {
+    background-color: #a8bba2;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-add-to-cart:hover {
+    background-color: #92a58c;
+}
