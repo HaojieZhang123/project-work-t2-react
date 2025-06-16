@@ -33,8 +33,8 @@ const Homepage = () => {
             <div className="container pt-3 pb-3">
                 <div className="row">
                     {/* hero banner */}
-                    <div className="col-12 col-8 col-4 hero-banner">
-                        <img src="https://picsum.photos/1300/720" alt="image" />
+                    <div className="col-12">
+                        <img src="https://picsum.photos/1300/720" alt="image" className="hero-banner" />
                     </div>
                 </div>
             </div>
