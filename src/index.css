@@ -148,7 +148,7 @@ footer ul li {
     margin-top: 2rem;
     width: 100%;
     max-width: 600px;
-    height: 150px;
+    height: 200px;
     /* fissa */
     overflow: hidden;
     position: relative;
@@ -185,6 +185,9 @@ footer ul li {
     transform: translateY(0);
     transition: opacity 0.4s ease, transform 0.4s ease;
     pointer-events: auto;
+    max-height: 200px;
+    overflow-y: auto;
+    transition: max-height 0.3s ease;
 }
 
 .accordion .content.closed {

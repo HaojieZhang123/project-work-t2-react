@@ -81,12 +81,15 @@ const DetailsPage = () => {
                                 <span>DETTAGLI DEL PRODOTTO</span>
                                 <i className={`fa-solid fa-chevron-down text-gray-details-page transition-icon ${open ? 'rotate' : ''}`}></i>
                             </div>
-                            <div className={`content ${!open ? 'closed' : ''}`}>
+                            <div
+                                className={`content ${!open ? 'closed' : ''}`}
+                                style={{ maxHeight: '200px', overflowY: 'auto', transition: 'max-height 0.3s ease' }}
+                            >
                                 <p>{product.description || "Nessun dettaglio aggiuntivo disponibile."}</p>
                             </div>
                         </div>
 
-                        <div className='mt-5'>
+                        <div className='mt-4'>
                             <p className='text-gray-details-page'>
                                 <i className="fa-solid fa-truck green-details-page me-2"></i>
                                 Spedizione entro 3-6 giorni lavorativi
@@ -97,7 +100,7 @@ const DetailsPage = () => {
                             </p>
                         </div>
                     </div>
-                    <button className="mt-5 btn-add-to-cart">AGGIUNGI AL CARRELLO</button>
+                    <button className="btn-add-to-cart">AGGIUNGI AL CARRELLO</button>
                 </div>
             </div>
         </div>
