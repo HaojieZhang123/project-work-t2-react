@@ -30,38 +30,40 @@ const Homepage = () => {
 
     return (
         <>
-            <div className="container">
+            <div className="container ">
                 <div className="row">
                     {/* hero banner */}
-                    <div className="col-12">
+                    <div className="col-12 hero-banner">
                         <img src="https://picsum.photos/1300/720" alt="image" />
                     </div>
                 </div>
             </div>
 
-            <div className="container">
-                <div className="row">
-                    <div className="col-12">
-                        <h2>BEST SELLERS</h2>
-                        <div className="row d-flex justify-content-between">
-                            {/* cards */}
-                            {products.map((product) => (
-                                <div className="col-4 col-md-3" key={product.id}>
-                                    <Link
-                                        to={`/product/${product.id}`}>
-                                        <Cards product={product} />
-                                    </Link>
-                                </div>
-                            ))}
+            <div className="mt-5 pt-5 pb-5 bcolor-rose ">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-12">
+                            <h2 className='mb-5'>FEATURED PRODUCTS</h2>
+                            <div className="row d-flex justify-content-between">
+                                {/* cards */}
+                                {products.map((product) => (
+                                    <div className="col-4 col-md-3" key={product.id}>
+                                        <Link
+                                            to={`/product/${product.id}`}>
+                                            <Cards product={product} />
+                                        </Link>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div className="container">
+            <div className="container mt-5 pt-5">
                 <div className="row">
                     <div className="col-12">
-                        <h2>LATEST PRODUCTS</h2>
+                        <h2 className='mb-5'>LATEST PRODUCTS</h2>
                         <div className="row d-flex justify-content-between">
                             {/* cards */}
                             {products.map((product) => (
