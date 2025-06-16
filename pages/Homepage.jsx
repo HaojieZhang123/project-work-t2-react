@@ -1,10 +1,33 @@
 import React from 'react'
 import Cards from '../components/Cards'
 import { Link } from 'react-router-dom'
-import products from '../data/products'
+// import products from '../data/products'
 
+import { useState, useEffect } from 'react'
+import axios from 'axios'
 
 const Homepage = () => {
+
+    const [products, setProducts] = useState([])
+    const endpoint = 'http://localhost:3000/api/products/'
+
+    // function for fetch products via axios
+    const fetchProducts = () => {
+        axios.get(endpoint)
+            .then(response => {
+                setProducts(response.data)
+                console.log(products)
+                console.log(response.data)
+            })
+            .catch(error => {
+                console.error("There was an error fetching the products!", error);
+            });
+    }
+
+    useEffect(() => {
+        fetchProducts()
+    }, [])
+
     return (
         <>
             <div className="container">
