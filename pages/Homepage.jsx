@@ -11,13 +11,16 @@ const Homepage = () => {
     const [products, setProducts] = useState([])
     const endpoint = 'http://localhost:3000/api/products/'
 
+    const [bestSellers, setBestSellers] = useState([])
+    const [latestProducts, setLatestProducts] = useState([])
+
     // function for fetch products via axios
     const fetchProducts = () => {
         axios.get(endpoint)
             .then(response => {
                 setProducts(response.data)
-                console.log(products)
-                console.log(response.data)
+                // console.log(products)
+                // console.log(response.data)
             })
             .catch(error => {
                 console.error("There was an error fetching the products!", error);
@@ -26,7 +29,17 @@ const Homepage = () => {
 
     useEffect(() => {
         fetchProducts()
-    }, [])
+        if (products && products.length > 0) {
+            setBestSellers(
+                // copy product, sort by sold and take top 5
+                products.slice().sort((a, b) => b.sold - a.sold).slice(0, 5)
+            );
+            setLatestProducts(
+                // copy product, sort by added_date and take top 5
+                products.slice().sort((a, b) => new Date(b.added_date) - new Date(a.added_date)).slice(0, 5)
+            );
+        }
+    }, [products])
 
     return (
         <>
@@ -43,10 +56,10 @@ const Homepage = () => {
                 <div className="container">
                     <div className="row">
                         <div className="col-12">
-                            <h2 className='mb-5'>FEATURED PRODUCTS</h2>
+                            <h2 className='mb-5'>BEST SELLERS</h2>
                             <div className="row d-flex justify-content-between">
                                 {/* cards */}
-                                {products.map((product) => (
+                                {bestSellers.map((product) => (
                                     <div className="col-4 col-md-3" key={product.id}>
                                         <Link
                                             to={`/product/${product.id}`}>
@@ -66,7 +79,7 @@ const Homepage = () => {
                         <h2 className='mb-5'>LATEST PRODUCTS</h2>
                         <div className="row d-flex justify-content-between">
                             {/* cards */}
-                            {products.map((product) => (
+                            {latestProducts.map((product) => (
                                 <div className="col-4 col-md-3" key={product.id}>
                                     <Link
                                         to={`/product/${product.id}`}>
