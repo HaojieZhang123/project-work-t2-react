@@ -24,6 +24,10 @@ header ul li a {
     margin-bottom: 80px;
 }
 
+.margin-b-details-page {
+    margin-bottom: 85px;
+}
+
 .text-gray-details-page {
     color: #C3C3C3
 }
@@ -38,4 +42,45 @@ header ul li a {
 
 .pink-details-page {
     color: #f9e6d8;
+}
+
+.green-bc-icon {
+    background-color: #a8bba2;
+    padding: 0px 15px 0px 15px;
+}
+
+.green-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: green;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.accordion {
+    border-top: 1px solid #C3C3C3;
+    border-bottom: 1px solid #C3C3C3;
+    margin-top: 2rem;
+    width: 100%;
+    max-width: 600px;
+}
+
+.accordion .header {
+    display: flex;
+    justify-content: space-between;
+    padding: 30px 16px;
+    cursor: pointer;
+    font-weight: 400;
+    user-select: none;
+}
+
+.accordion .header:hover {
+    outline: 2px solid #a8bba2;
+}
+
+.accordion .content {
+    padding: 12px 16px;
+    font-size: 1rem;
+    color: #444;
 }
