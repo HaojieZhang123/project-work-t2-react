@@ -30,10 +30,10 @@ const Homepage = () => {
 
     return (
         <>
-            <div className="container ">
+            <div className="container pt-3 pb-3">
                 <div className="row">
                     {/* hero banner */}
-                    <div className="col-12 hero-banner">
+                    <div className="col-12 col-8 col-4 hero-banner">
                         <img src="https://picsum.photos/1300/720" alt="image" />
                     </div>
                 </div>
@@ -60,7 +60,7 @@ const Homepage = () => {
                 </div>
             </div>
 
-            <div className="container mt-5 pt-5">
+            <div className="container mt-5 pt-3 pb-5">
                 <div className="row">
                     <div className="col-12">
                         <h2 className='mb-5'>LATEST PRODUCTS</h2>
