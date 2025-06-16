@@ -81,7 +81,7 @@ const Homepage = () => {
                             {/* cards */}
                             {latestProducts.map((product) => (
                                 <div className="col-4 col-md-3" key={product.id}>
-                                    <Link
+                                    <Link className='card-link'
                                         to={`/product/${product.id}`}>
                                         <Cards product={product} />
                                     </Link>
