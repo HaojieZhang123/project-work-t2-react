@@ -9,6 +9,13 @@ const Cards = ({ product }) => {
     const actualPrice = price - discountValue
 
 
+    // Calcolo se il prodotto è "new"
+    const today = new Date()
+    const addedDate = new Date(added_date)
+    const diffTime = today - addedDate
+    const diffDays = diffTime / (1000 * 60 * 60 * 24)
+    const isNew = diffDays <= 14 && diffDays >= 0
+
     return (
         <div className="product-card color-main">
             <div className="card-image-container">
@@ -22,8 +29,8 @@ const Cards = ({ product }) => {
                     {`€ ${actualPrice.toFixed(2)}`}
                     {discount != 0 && <i className='card-original-price ms-2 color-main-subtle'>{`€ ${price}`}</i>}
                 </div>
-                <div className="card-tag">promo</div>
-                <div className="card-tag">new</div>
+                {discount != 0 && <div className="card-tag">promo</div>}
+                {isNew && <div className="card-tag">new</div>}
             </div>
 
         </div>
