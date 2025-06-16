@@ -6,7 +6,7 @@ const Footer = () => {
             <div className="container">
                 <div className="row">
                     <div className="col-8">
-                        <ul className='d-flex'>
+                        <ul className='d-flex justify-content-between list-unstyled'>
                             <li>Privacy</li>
                             <li>Contacts</li>
                             <li>Recess rights</li>
