@@ -2,6 +2,16 @@
     font-family: 'Outfit', sans-serif;
 }
 
-.w-18rem{
+.w-18rem {
     width: 18rem;
+}
+
+
+header ul li {
+    list-style-type: none;
+}
+
+header ul li a {
+    text-decoration: none;
+    color: black;
 }
