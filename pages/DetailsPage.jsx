@@ -33,36 +33,42 @@ const DetailsPage = () => {
 
 
     return (
-        <div className="container mt-5">
-            <div className="row">
+        <div className="container margin-y-details-page">
+            <div className="row align-items-stretch">
+
                 {/* Colonna immagine */}
-                <div className="col-md-6 d-flex justify-content-center align-items-start">
-                    <img src={product.image} alt={product.product_name} />
+                <div className="col-md-6 d-flex justify-content-center align-items-start p-0">
+                    <div className="w-100 h-100">
+                        <img
+                            src={product.image}
+                            alt={product.product_name}
+                            className="img-fluid w-100 h-100 object-fit-cover"
+                        />
+                    </div>
                 </div>
 
                 {/* Colonna dettagli */}
-                <div className="col-md-6">
-                    <h6>{product.brand_id}</h6>
-                    <h2>{product.product_name}</h2>
-                    <p>{product.description}</p>
-                    <h4>€{product.price}</h4>
-                    <p>{product.category}</p>
-
-                    <div className="d-flex my-4">
-                        <span>Disponibile</span>
-                        <span>Limited</span>
+                <div className="col-md-6 d-flex flex-column justify-content-between pt-4 px-4">
+                    <div>
+                        <h6 className='text-gray-details-page'>{product.brand_id}</h6>
+                        <h2>{product.product_name}</h2>
+                        <p className='text-gray-details-page'>{product.description}</p>
+                        <hr className='hr-details-page my-5' />
+                        <h4>&#8364;{product.price}</h4>
+                        <p>{product.category}</p>
+                        <div className="d-flex my-4">
+                            <span>Disponibile</span>
+                            <span className="ms-3">Limited</span>
+                        </div>
+                        <p> <i class="fa-solid fa-truck"></i>Spedizione entro 3-6 giorni lavorativi</p>
+                        <p> <i class="fa-solid fa-box-open"></i>Spedizione gratuita da € 35,00</p>
                     </div>
-
-                    <p> Spedizione entro 3-6 giorni lavorativi</p>
-                    <p> Spedizione gratuita da € 35,00</p>
-
-                    {/* Bottone per aggiungi al carrello */}
-                    <button className="mt-3">Aggiungi al carrello</button>
-
+                    <button className="">Aggiungi al carrello</button>
                 </div>
             </div>
         </div>
     );
+
 };
 
 export default DetailsPage;

@@ -18,3 +18,24 @@ header ul li a {
 /* FOOTER */
 
 /* DETAILS PAGE */
+
+.margin-y-details-page {
+    margin-top: 50px;
+    margin-bottom: 80px;
+}
+
+.text-gray-details-page {
+    color: #C3C3C3
+}
+
+.hr-details-page {
+    width: 100%;
+}
+
+.green-details-page {
+    color: #a8bba2;
+}
+
+.pink-details-page {
+    color: #f9e6d8;
+}
