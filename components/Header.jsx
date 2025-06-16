@@ -2,7 +2,7 @@
 const Header = () => {
     return (
         <>
-            <div className="container p-5">
+            <div className="container p-3">
                 {/* main header */}
                 <div className="row">
                     {/* Div laterale barra di ricerca */}
