@@ -106,6 +106,20 @@ const SearchPage = () => {
         return array.filter(product => product.brand_id === brandId);
     }
 
+    // filter by price range
+    const filterPrice = (array) => {
+        // if minPrice or maxPrice is not present, return the original array
+        if (!minPrice && !maxPrice) return array;
+        // filter products by price range
+        return array.filter(product => {
+            const discount = product.discount;
+            const price = parseFloat(product.price - (product.price * discount) / 100);
+            const min = parseFloat(minPrice) || 0;
+            const max = parseFloat(maxPrice) || Infinity;
+            return price >= min && price <= max;
+        });
+    }
+
     // refresh component to show filtered products
     useEffect(() => {
         // filter only when filteredProducts is not empty
@@ -116,6 +130,7 @@ const SearchPage = () => {
             if (name) filtered = filterName(filtered);
             if (cat) filtered = filterCategory(filtered);
             if (brand) filtered = filterBrand(filtered);
+            if (minPrice || maxPrice) filtered = filterPrice(filtered);
             setFilteredProducts(filtered);
         }
     }, [products, name, cat, brand, minPrice, maxPrice, promo]);
