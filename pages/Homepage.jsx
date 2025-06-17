@@ -9,7 +9,7 @@ import axios from 'axios'
 const Homepage = () => {
 
     const [products, setProducts] = useState([])
-    const endpoint = 'http://localhost:3000/api/products/'
+    const endpoint = 'http://localhost:3001/api/products/'
 
     const [bestSellers, setBestSellers] = useState([])
     const [latestProducts, setLatestProducts] = useState([])

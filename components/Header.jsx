@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 
 const Header = () => {
     return (
@@ -6,11 +7,31 @@ const Header = () => {
                 {/* main header */}
                 <div className="row">
                     {/* Div laterale barra di ricerca */}
-                    <div className='col-4'>
-                        <i className="fa-solid fa-magnifying-glass px-2"></i>
-                        <input type="text" placeholder="Search" />
+                    <div className='col-4 d-flex align-items-center'>
+                        <form
+                            className="d-flex w-100"
+                            // passaggio dei parametri di ricerca tramite query string
+                            onSubmit={e => {
+                                e.preventDefault();
+                                const name = e.target.elements.search.value.trim();
+                                if (name) {
+                                    window.location.href = `/search?name=${encodeURIComponent(name)}`;
+                                }
+                            }}
+                        >
+                            <i className="fa-solid fa-magnifying-glass px-2"></i>
+                            <input
+                                type="text"
+                                name="search"
+                                placeholder="Search"
+                                className="form-control"
+                                autoComplete="off"
+                            />
+                        </form>
+                        <Link to={`/`} >Homepage</Link>
                     </div>
-                    {/* div centrale logo */}
+
+
                     <div className='col-4 d-flex justify-content-center'>
                         <img src="/Logo-black.svg" alt="logo" />
                     </div>
