@@ -5,6 +5,7 @@ import DefaultLayout from '../layout/DefaultLayout'
 import Homepage from '../pages/Homepage'
 import SearchPage from '../pages/SearchPage'
 import DetailsPage from '../pages/DetailsPage'
+import NotFound from '../pages/NotFound'
 
 function App() {
 
@@ -16,6 +17,9 @@ function App() {
             <Route path="/" element={<Homepage />} />
             <Route path="/search" element={<SearchPage />} />
             <Route path="/product/:id" element={<DetailsPage />} />
+
+            {/* 404 not found page */}
+            <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
       </BrowserRouter>
