@@ -9,10 +9,24 @@ const SearchPage = () => {
     const [products, setProducts] = useState([]);
     const endpoint = 'http://localhost:3000/api/products/'
     const [filteredProducts, setFilteredProducts] = useState([]);
+    const endpointCategories = 'http://localhost:3000/api/categories/'
+    const endpointProductCategory = 'http://localhost:3000/api/product_category/'
+
+    const [categories, setCategories] = useState([]);
+    const [productCategories, setProductCategories] = useState([]);
 
 
     // get params for query string
     const [searchParams, setSearchParams] = useSearchParams();
+    // get all query params
+    // read query string
+    // possible query key: name, cat, brand, minPrice, maxPrice, promo
+    const name = searchParams.get('name') || '';
+    const cat = searchParams.get('cat') || '';
+    const brand = searchParams.get('brand') || '';
+    const minPrice = searchParams.get('minPrice') || '';
+    const maxPrice = searchParams.get('maxPrice') || '';
+    const promo = searchParams.get('promo') || '';
 
     // function for products with axios
     const fetchProducts = () => {
@@ -28,19 +42,19 @@ const SearchPage = () => {
 
     useEffect(() => {
         fetchProducts()
+        if (cat) {
+            axios.get(endpointCategories)
+                .then(response => setCategories(response.data))
+                .catch(error => console.error("There was an error fetching the categories!", error));
+
+            axios.get(endpointProductCategory)
+                .then(response => setProductCategories(response.data))
+                .catch(error => console.error("There was an error fetching the product categories!", error));
+        }
     }, [])
 
     // filter section
-    // read query string
-    // possible query key: name, cat, brand, minPrice, maxPrice, promo
 
-    // get all query params
-    const name = searchParams.get('name') || '';
-    const cat = searchParams.get('cat') || '';
-    const brand = searchParams.get('brand') || '';
-    const minPrice = searchParams.get('minPrice') || '';
-    const maxPrice = searchParams.get('maxPrice') || '';
-    const promo = searchParams.get('promo') || '';
 
     // filter products based on name
     const filterName = (array) => {
@@ -52,14 +66,35 @@ const SearchPage = () => {
         return filteredArray;
     }
 
+    // filter by category
+    const filterCategory = (array) => {
+
+        if (!cat) return array;
+        // Find the category id
+        const categoryObj = categories.find(c => c.category_name.toLowerCase() === cat.toLowerCase());
+        if (!categoryObj) return [];
+        const categoryId = categoryObj.id;
+        // Find product ids for this category
+        const productIds = productCategories
+            .filter(pc => pc.category_id === categoryId)
+            .map(pc => pc.product_id);
+        // Filter products by those ids
+        return array.filter(product => productIds.includes(product.id));
+
+    }
+
     // refresh component to show filtered products
     useEffect(() => {
         // filter only when filteredProducts is not empty
         if (products.length > 0) {
-            const filtered = filterName(products);
+            // filtered array with all produicts
+            let filtered = products;
+            // apply filters when parameters are present
+            if (name) filtered = filterName(filtered);
+            if (cat) filtered = filterCategory(filtered);
             setFilteredProducts(filtered);
         }
-    }, [products, name]);
+    }, [products, name, cat, brand, minPrice, maxPrice, promo]);
 
 
     return (
