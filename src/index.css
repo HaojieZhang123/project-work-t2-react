@@ -40,6 +40,17 @@ header ul li a {
     }
 }
 
+@media (max-width: 480px) {
+    .logo-img {
+        max-height: 30px;
+    }
+
+    .search-input {
+        max-width: 90px;
+        font-size: 0.8rem;
+    }
+}
+
 /* PRODUCT CARD */
 
 .card-link {
