@@ -11,6 +11,28 @@ header ul li a {
     color: black;
 }
 
+/* header RESPONSIVE *
+
+/* mobile: max 767px */
+@media (max-width: 767px) {
+
+    /* nascondi l'icona lente */
+    .search-icon {
+        display: none;
+    }
+
+    /* rimpicciolisci logo */
+    .logo-img {
+        max-height: 40px;
+    }
+
+    /* rimpicciolisci barra di ricerca */
+    .search-input {
+        max-width: 120px;
+        font-size: 0.9rem;
+    }
+}
+
 /* PRODUCT CARD */
 
 .card-link {
