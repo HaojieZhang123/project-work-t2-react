@@ -82,9 +82,7 @@ const DetailsPage = () => {
                                 <i className={`fa-solid fa-chevron-down text-gray-details-page transition-icon ${open ? 'rotate' : ''}`}></i>
                             </div>
                             <div
-                                className={`content ${!open ? 'closed' : ''}`}
-                                style={{ maxHeight: '200px', overflowY: 'auto', transition: 'max-height 0.3s ease' }}
-                            >
+                                className={`content ${!open ? 'closed' : ''}`}>
                                 <p>{product.description || "Nessun dettaglio aggiuntivo disponibile."}</p>
                             </div>
                         </div>
