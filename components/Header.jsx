@@ -33,7 +33,7 @@ const Header = () => {
                                 <a href="#">PROMOTIONS</a>
                             </li>
                             <li>
-                                <a href="#">CLEANING</a>
+                                <a href="#">SKIN CARE</a>
                             </li>
                             <li>
                                 <a href="#">MAKE-UP</a>
