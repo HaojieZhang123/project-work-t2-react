@@ -29,7 +29,6 @@ const Header = () => {
                                 autoComplete="off"
                             />
                         </form>
-                        <Link to={`/`} >Homepage</Link>
                     </div>
 
 
