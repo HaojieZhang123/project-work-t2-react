@@ -11,9 +11,12 @@ const SearchPage = () => {
     const [filteredProducts, setFilteredProducts] = useState([]);
     const endpointCategories = 'http://localhost:3000/api/categories/'
     const endpointProductCategory = 'http://localhost:3000/api/product_category/'
+    const endpointBrands = 'http://localhost:3000/api/brands/'
 
     const [categories, setCategories] = useState([]);
     const [productCategories, setProductCategories] = useState([]);
+
+    const [brands, setBrands] = useState([]);
 
 
     // get params for query string
@@ -51,6 +54,12 @@ const SearchPage = () => {
                 .then(response => setProductCategories(response.data))
                 .catch(error => console.error("There was an error fetching the product categories!", error));
         }
+        if (brand) {
+            axios.get(endpointBrands)
+                .then(response => setBrands(response.data))
+                .catch(error => console.error("There was an error fetching the brands!", error));
+
+        }
     }, [])
 
     // filter section
@@ -83,6 +92,34 @@ const SearchPage = () => {
 
     }
 
+    // filter by brand
+    const filterBrand = (array) => {
+        // if brand is not present, return the original array
+        if (!brand) return array;
+        // Find the brand object
+        const brandObj = brands.find(b => b.brand_name.toLowerCase() === brand.toLowerCase());
+        // if brand object is not found, return an empty array
+        if (!brandObj) return [];
+        // Get the brand id
+        const brandId = brandObj.id;
+        // Filter products by brand id
+        return array.filter(product => product.brand_id === brandId);
+    }
+
+    // filter by price range
+    const filterPrice = (array) => {
+        // if minPrice or maxPrice is not present, return the original array
+        if (!minPrice && !maxPrice) return array;
+        // filter products by price range
+        return array.filter(product => {
+            const discount = product.discount;
+            const price = parseFloat(product.price - (product.price * discount) / 100);
+            const min = parseFloat(minPrice) || 0;
+            const max = parseFloat(maxPrice) || Infinity;
+            return price >= min && price <= max;
+        });
+    }
+
     // refresh component to show filtered products
     useEffect(() => {
         // filter only when filteredProducts is not empty
@@ -92,6 +129,8 @@ const SearchPage = () => {
             // apply filters when parameters are present
             if (name) filtered = filterName(filtered);
             if (cat) filtered = filterCategory(filtered);
+            if (brand) filtered = filterBrand(filtered);
+            if (minPrice || maxPrice) filtered = filterPrice(filtered);
             setFilteredProducts(filtered);
         }
     }, [products, name, cat, brand, minPrice, maxPrice, promo]);
