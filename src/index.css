@@ -68,6 +68,7 @@ header ul li a {
 
 .product-card {
     width: 230px;
+    height: 500px;
     padding: 5px;
     display: flex;
     flex-direction: column;
