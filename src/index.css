@@ -100,14 +100,23 @@ header ul li a {
 
 /* FOOTER */
 footer {
-    background-color: rgba(170, 187, 163, 255);
+    background-color: rgba(170, 187, 163, 1);
     padding: 10px;
 }
 
-footer ul li {
-    display: inline-block;
-    margin-right: 5px;
+footer ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    list-style: none;
+    padding-left: 0;
 }
+
+footer ul li {
+    margin: 5px 15px;
+    display: inline-block;
+}
+
 
 /* DETAILS PAGE */
 
