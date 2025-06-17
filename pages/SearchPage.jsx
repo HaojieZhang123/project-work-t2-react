@@ -1,24 +1,25 @@
 import React, { useEffect } from 'react'
 import Cards from '../components/Cards'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import { useState } from 'react'
 import axios from 'axios'
-
-
-
-
-
 
 const SearchPage = () => {
 
     const [products, setProducts] = useState([]);
     const endpoint = 'http://localhost:3000/api/products/'
+    const [filteredProducts, setFilteredProducts] = useState([]);
+
+
+    // get params for query string
+    const [searchParams, setSearchParams] = useSearchParams();
 
     // function for products with axios
     const fetchProducts = () => {
         axios.get(endpoint)
             .then(response => {
                 setProducts(response.data)
+                setFilteredProducts(response.data); // initialize filtered products with all products
             })
             .catch(error => {
                 console.error("There was an error fetching the products!", error)
@@ -28,6 +29,37 @@ const SearchPage = () => {
     useEffect(() => {
         fetchProducts()
     }, [])
+
+    // filter section
+    // read query string
+    // possible query key: name, cat, brand, minPrice, maxPrice, promo
+
+    // get all query params
+    const name = searchParams.get('name') || '';
+    const cat = searchParams.get('cat') || '';
+    const brand = searchParams.get('brand') || '';
+    const minPrice = searchParams.get('minPrice') || '';
+    const maxPrice = searchParams.get('maxPrice') || '';
+    const promo = searchParams.get('promo') || '';
+
+    // filter products based on name
+    const filterName = (array) => {
+        // array filtered
+        const filteredArray = [...array];
+        if (name) {
+            return filteredArray.filter(product => product.product_name.toLowerCase().includes(name.toLowerCase()));
+        }
+        return filteredArray;
+    }
+
+    // refresh component to show filtered products
+    useEffect(() => {
+        // filter only when filteredProducts is not empty
+        if (products.length > 0) {
+            const filtered = filterName(products);
+            setFilteredProducts(filtered);
+        }
+    }, [products, name]);
 
 
     return (
@@ -88,7 +120,7 @@ const SearchPage = () => {
                     {/* RISULTATI */}
                     <section className='col-md-9 gx-5'>
                         <div className="row">
-                            {products.map((product) => (
+                            {filteredProducts.map((product) => (
                                 <div className="col-4 col-md-3" key={product.id}>
                                     <Link className='card-link'
                                         to={`/product/${product.id}`}>
