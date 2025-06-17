@@ -14,7 +14,9 @@ const Header = () => {
                     </div>
                     {/* div centrale logo */}
                     <div className='col-4 d-flex justify-content-center logo-container'>
-                        <img src="/Logo-black.svg" alt="logo" className="logo-img" />
+                        <Link to="/">
+                            <img src="/Logo-black.svg" alt="logo" className="logo-img" />
+                        </Link>
                     </div>
                     {/* div laterale carrello e wish-list */}
                     <div className='col-4 d-flex justify-content-end'>
