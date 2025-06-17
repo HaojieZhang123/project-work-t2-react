@@ -11,6 +11,10 @@ header ul li a {
     color: black;
 }
 
+.search-icon {
+    padding: 11px;
+}
+
 /* homepage */
 
 .hero-banner {
