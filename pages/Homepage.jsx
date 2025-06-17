@@ -57,7 +57,7 @@ const Homepage = () => {
                     <div className="row">
                         <div className="col-12">
                             <h2 className='mb-5'>BEST SELLERS</h2>
-                            <div className="d-flex justify-content-between overflow-auto">
+                            <div className="d-flex justify-content-between overflow-auto align-items-stretch">
                                 {/* cards */}
                                 {bestSellers.map((product) => (
                                     <div className="card-content" key={product.id}>
@@ -77,7 +77,7 @@ const Homepage = () => {
                 <div className="row">
                     <div className="col-12">
                         <h2 className='mb-5'>LATEST PRODUCTS</h2>
-                        <div className="d-flex justify-content-between overflow-auto">
+                        <div className="d-flex justify-content-between overflow-auto align-items-stretch">
                             {/* cards */}
                             {latestProducts.map((product) => (
                                 <div className="card-content" key={product.id}>

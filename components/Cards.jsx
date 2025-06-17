@@ -20,7 +20,7 @@ const Cards = ({ product }) => {
     const isPromo = discount > 0
 
     return (
-        <div className="product-card color-main">
+        <div className="product-card color-main h-100">
             <div className="card-body-container">
                 <div className="card-image-container">
                     <img src={image} alt="" />

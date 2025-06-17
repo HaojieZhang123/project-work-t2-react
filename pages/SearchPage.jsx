@@ -198,7 +198,7 @@ const SearchPage = () => {
                                 <div className="d-flex justify-content-around flex-wrap">
                                     {/* cards */}
                                     {filteredProducts.map((product) => (
-                                        <div className="card-content" key={product.id}>
+                                        <div className="card-content mb-3" key={product.id}>
                                             <Link className='card-link'
                                                 to={`/product/${product.id}`}>
                                                 <Cards product={product} />
