@@ -57,10 +57,10 @@ const Homepage = () => {
                     <div className="row">
                         <div className="col-12">
                             <h2 className='mb-5'>BEST SELLERS</h2>
-                            <div className="row d-flex justify-content-between">
+                            <div className="d-flex justify-content-between overflow-auto">
                                 {/* cards */}
                                 {bestSellers.map((product) => (
-                                    <div className="col-4 col-md-3" key={product.id}>
+                                    <div className="card-content" key={product.id}>
                                         <Link className='card-link'
                                             to={`/product/${product.id}`}>
                                             <Cards product={product} />
@@ -77,10 +77,10 @@ const Homepage = () => {
                 <div className="row">
                     <div className="col-12">
                         <h2 className='mb-5'>LATEST PRODUCTS</h2>
-                        <div className="row d-flex justify-content-between">
+                        <div className="d-flex justify-content-between overflow-auto">
                             {/* cards */}
                             {latestProducts.map((product) => (
-                                <div className="col-4 col-md-3" key={product.id}>
+                                <div className="card-content" key={product.id}>
                                     <Link className='card-link'
                                         to={`/product/${product.id}`}>
                                         <Cards product={product} />
