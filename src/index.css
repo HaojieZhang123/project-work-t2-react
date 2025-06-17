@@ -11,6 +11,13 @@ header ul li a {
     color: black;
 }
 
+/* homepage */
+
+.hero-banner {
+    width: 100%;
+    height: auto;
+}
+
 /* header RESPONSIVE *
 
 /* mobile: max 767px */

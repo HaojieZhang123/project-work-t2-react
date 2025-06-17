@@ -47,7 +47,7 @@ const Homepage = () => {
                 <div className="row">
                     {/* hero banner */}
                     <div className="col-12">
-                        <img src="https://picsum.photos/1300/720" alt="image" className="hero-banner" />
+                        <img src="./hero_banner.PNG" alt="image" className="hero-banner" />
                     </div>
                 </div>
             </div>
