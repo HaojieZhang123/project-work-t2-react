@@ -20,16 +20,17 @@ header ul li a {
 .product-card {
     max-width: 230px;
     padding: 5px;
-    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .card-image-container img {
     width: 100%;
+    margin-bottom: 10px;
 }
 
-.card-body-container {
-    padding: 10px 0;
-}
+/* .card-body-container {} */
 
 .card-brand {
     text-transform: uppercase;
@@ -44,6 +45,8 @@ header ul li a {
 .card-category {
     margin-bottom: 20px;
 }
+
+/* .card-bottom-row {} */
 
 .card-price {
     font-weight: 500;
