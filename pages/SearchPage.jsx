@@ -194,14 +194,19 @@ const SearchPage = () => {
                     {/* RISULTATI */}
                     <section className='col-md-9 gx-5'>
                         <div className="row">
-                            {filteredProducts.map((product) => (
-                                <div className="col-4 col-md-3" key={product.id}>
-                                    <Link className='card-link'
-                                        to={`/product/${product.id}`}>
-                                        <Cards product={product} />
-                                    </Link>
+                            <div className="col-12">
+                                <div className="d-flex justify-content-around flex-wrap">
+                                    {/* cards */}
+                                    {filteredProducts.map((product) => (
+                                        <div className="card-content" key={product.id}>
+                                            <Link className='card-link'
+                                                to={`/product/${product.id}`}>
+                                                <Cards product={product} />
+                                            </Link>
+                                        </div>
+                                    ))}
                                 </div>
-                            ))}
+                            </div>
                         </div>
                     </section>
                 </div >
