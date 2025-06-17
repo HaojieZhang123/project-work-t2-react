@@ -52,7 +52,7 @@ const Homepage = () => {
                 </div>
             </div>
 
-            <div className="mt-5 pt-5 pb-5 bcolor-rose ">
+            <div className="mt-5 pt-5 pb-5 background-rose ">
                 <div className="container">
                     <div className="row">
                         <div className="col-12">

@@ -1,5 +1,4 @@
 import React from 'react'
-import './SearchPage.css'
 import Cards from '../components/Cards'
 import { Link } from 'react-router-dom'
 
@@ -119,11 +118,11 @@ const SearchPage = () => {
 
                 {/* SIDEBAR */}
                 <div className="row">
-                    <aside className='col-md-3 py-5'>
+                    <aside className='background-accent1-subtle col-md-3 py-5'>
 
                         {/* CATEGORIE */}
                         <div className="mb-4">
-                            <h6>CATEGORY</h6>
+                            <h6 className='p-1'>CATEGORY</h6>
                             <ul>
                                 <li><input type="checkbox" />Face Treatments</li>
                                 <li><input type="checkbox" />Face Treatments</li>
@@ -137,7 +136,7 @@ const SearchPage = () => {
 
                         {/* BRAND */}
                         <div className="mb-4">
-                            <h6>BRAND</h6>
+                            <h6 className='p-1'>BRAND</h6>
                             <ul>
                                 <li><input type="checkbox" />Face Treatments</li>
                                 <li><input type="checkbox" />Face Treatments</li>
@@ -151,7 +150,7 @@ const SearchPage = () => {
 
                         {/* PRICE */}
                         <div className="mb-4">
-                            <h6>PRICE</h6>
+                            <h6 className='p-1'>PRICE</h6>
                             <div className="d-flex align-items-center gap-2">
                                 <input type="number" className="form-control form-control-sm" placeholder="€ 0" />
                                 <span>–</span>
