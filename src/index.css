@@ -22,6 +22,11 @@ header ul li a {
     height: auto;
 }
 
+.form-control:focus {
+    border-color: #f9e6d8 !important;
+    box-shadow: 0 0 0 0.25rem #f9e6d86e !important;
+}
+
 /* header RESPONSIVE *
 
 /* mobile: max 767px */
