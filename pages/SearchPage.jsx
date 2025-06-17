@@ -45,21 +45,18 @@ const SearchPage = () => {
 
     useEffect(() => {
         fetchProducts()
-        if (cat) {
-            axios.get(endpointCategories)
-                .then(response => setCategories(response.data))
-                .catch(error => console.error("There was an error fetching the categories!", error));
 
-            axios.get(endpointProductCategory)
-                .then(response => setProductCategories(response.data))
-                .catch(error => console.error("There was an error fetching the product categories!", error));
-        }
-        if (brand) {
-            axios.get(endpointBrands)
-                .then(response => setBrands(response.data))
-                .catch(error => console.error("There was an error fetching the brands!", error));
+        axios.get(endpointCategories)
+            .then(response => setCategories(response.data))
+            .catch(error => console.error("There was an error fetching the categories!", error));
 
-        }
+        axios.get(endpointProductCategory)
+            .then(response => setProductCategories(response.data))
+            .catch(error => console.error("There was an error fetching the product categories!", error));
+
+        axios.get(endpointBrands)
+            .then(response => setBrands(response.data))
+            .catch(error => console.error("There was an error fetching the brands!", error));
     }, [])
 
     // filter section
@@ -135,13 +132,17 @@ const SearchPage = () => {
         }
     }, [products, name, cat, brand, minPrice, maxPrice, promo]);
 
-
     return (
         <>
             <div className="container">
                 <div className="row">
                     <div className="col-12">
-                        <p className="my-5">642 RESULTS FOR <strong>"SKIN CARE"</strong></p>
+                        <p className="my-5 text-uppercase">
+
+                            {/* uppercase all */}
+                            {filteredProducts.length} results for <b>"{name}"</b> {cat && `in category "${cat}"`} {brand && `by brand "${brand}"`} {minPrice && `with min price €${minPrice}`} {maxPrice && `and max price €${maxPrice}`} {promo && 'on promo'}
+
+                        </p>
                     </div>
                 </div>
 
@@ -153,13 +154,20 @@ const SearchPage = () => {
                         <div className="mb-4">
                             <h6 className='p-1'>CATEGORY</h6>
                             <ul>
-                                <li><input type="checkbox" />Face Treatments</li>
-                                <li><input type="checkbox" />Face Treatments</li>
-                                <li><input type="checkbox" />Face Treatments</li>
-                                <li><input type="checkbox" />Face Treatments</li>
-                                <li><input type="checkbox" />Face Treatments</li>
-                                <li><input type="checkbox" />Face Treatments</li>
-                                <li><input type="checkbox" />Face Treatments</li>
+                                {categories.map((category) => (
+                                    <li key={`cat-${category.id}`}>
+                                        <input type="checkbox"
+                                            onChange={() => {
+                                                // update query params
+                                                setSearchParams({
+                                                    ...Object.fromEntries(searchParams.entries()),
+                                                    cat: category.category_name
+                                                });
+                                            }}
+                                            checked={cat === category.category_name} />
+                                        {category.category_name}
+                                    </li>
+                                ))}
                             </ul>
                         </div>
 
@@ -167,13 +175,20 @@ const SearchPage = () => {
                         <div className="mb-4">
                             <h6 className='p-1'>BRAND</h6>
                             <ul>
-                                <li><input type="checkbox" />Face Treatments</li>
-                                <li><input type="checkbox" />Face Treatments</li>
-                                <li><input type="checkbox" />Face Treatments</li>
-                                <li><input type="checkbox" />Face Treatments</li>
-                                <li><input type="checkbox" />Face Treatments</li>
-                                <li><input type="checkbox" />Face Treatments</li>
-                                <li><input type="checkbox" />Face Treatments</li>
+                                {brands.map((element) => (
+                                    <li key={`brand-${element.id}`}>
+                                        <input type="checkbox"
+                                            onChange={() => {
+                                                // update query params
+                                                setSearchParams({
+                                                    ...Object.fromEntries(searchParams.entries()),
+                                                    brand: element.brand_name
+                                                });
+                                            }}
+                                            checked={brand === element.brand_name} />
+                                        {element.brand_name}
+                                    </li>
+                                ))}
                             </ul>
                         </div>
 
@@ -219,13 +234,13 @@ export default SearchPage
 
 
 {/* <div className="product-card">
-                            <div className="product-image">
-                                <img src="https://picsum.photos/200/300" alt="" />
-                            </div>
-                            <div className="product-info">
-                                <p className='brand'>BRAND</p>
-                                <h6 className='title'>NOME PRODOTTO</h6>
-                                <p className='description'>DESCRIPTION</p>
-                                <p><strong>20,00 &euro;</strong></p>
-                            </div>
-                        </div> */}
+    <div className="product-image">
+        <img src="https://picsum.photos/200/300" alt="" />
+    </div>
+    <div className="product-info">
+        <p className='brand'>BRAND</p>
+        <h6 className='title'>NOME PRODOTTO</h6>
+        <p className='description'>DESCRIPTION</p>
+        <p><strong>20,00 &euro;</strong></p>
+    </div>
+</div> */}
