@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 
 const Header = () => {
     return (
@@ -7,11 +8,31 @@ const Header = () => {
                 {/* main header */}
                 <div className="row align-items-center">
                     {/* Div laterale barra di ricerca */}
-                    <div className='col-4 search-container d-flex align-items-center'>
-                        <i className="fa-solid fa-magnifying-glass px-2 search-icon"></i>
-                        <input type="text" placeholder="Search" className="search-input form-control" />
+                    <div className='col-4 d-flex search-container align-items-center'>
+                        <form
+                            className="d-flex w-100"
+                            // passaggio dei parametri di ricerca tramite query string
+                            onSubmit={e => {
+                                e.preventDefault();
+                                const name = e.target.elements.search.value.trim();
+                                if (name) {
+                                    window.location.href = `/search?name=${encodeURIComponent(name)}`;
+                                }
+                            }}
+                        >
+                            <i className="fa-solid fa-magnifying-glass px-2 search-icon"></i>
+                            <input
+                                type="text"
+                                name="search"
+                                placeholder="Search"
+                                className="search-input form-control"
+                                autoComplete="off"
+                            />
+                        </form>
+                        <Link to={`/`} >Homepage</Link>
                     </div>
-                    {/* div centrale logo */}
+
+
                     <div className='col-4 d-flex justify-content-center logo-container'>
                         <img src="/Logo-black.svg" alt="logo" className="logo-img" />
                     </div>

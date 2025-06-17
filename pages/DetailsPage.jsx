@@ -10,7 +10,7 @@ const DetailsPage = () => {
 
     const [product, setProduct] = useState([]);
     const [open, setOpen] = useState(false); // stato accordion
-    const endpoint = `http://localhost:3000/api/products/${id}`;
+    const endpoint = `http://localhost:3001/api/products/${id}`;
 
     // function to fetch product
     const fetchProduct = () => {
