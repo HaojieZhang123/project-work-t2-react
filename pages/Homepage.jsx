@@ -8,50 +8,51 @@ import axios from 'axios'
 
 const Homepage = () => {
 
-    // usestate for heart wishlist
     const [wishlist, setWishlist] = useState([])
-
-    const [products, setProducts] = useState([])
     const endpoint = 'http://localhost:3000/api/products/'
 
     const [bestSellers, setBestSellers] = useState([])
     const [latestProducts, setLatestProducts] = useState([])
 
+    const endpointBestSellers = 'http://localhost:3000/api/products/special/best-sellers'
+    const endpointLatestProducts = 'http://localhost:3000/api/products/special/latest-products'
+
     // function for fetch products via axios
     const fetchProducts = () => {
-        axios.get(endpoint)
+
+        // fetch best sellers
+        axios.get(endpointBestSellers)
             .then(response => {
-                setProducts(response.data)
-                // console.log(products)
-                // console.log(response.data)
+                setBestSellers(response.data)
             })
             .catch(error => {
-                console.error("There was an error fetching the products!", error);
+                console.error("There was an error fetching the best sellers!", error);
+            });
+
+        // fetch latest products
+        axios.get(endpointLatestProducts)
+            .then(response => {
+                setLatestProducts(response.data)
+            })
+            .catch(error => {
+                console.error("There was an error fetching the latest products!", error);
             });
     }
 
     useEffect(() => {
         fetchProducts()
-        if (products && products.length > 0) {
-            setBestSellers(
-                // copy product, sort by sold and take top 5
-                products.slice().sort((a, b) => b.sold - a.sold).slice(0, 5)
-            );
-            setLatestProducts(
-                // copy product, sort by added_date and take top 5
-                products.slice().sort((a, b) => new Date(b.added_date) - new Date(a.added_date)).slice(0, 5)
-            );
-        }
-    }, [products])
+    }, [])
 
-    // Funzione per il toggle del cuore wishlist
     const toggleWishlist = (productId) => {
         setWishlist(prev =>
             prev.includes(productId)
                 ? prev.filter(id => id !== productId)
                 : [...prev, productId]
         );
+
+
     };
+
     return (
         <>
             <div className="container pt-3 pb-3">

@@ -143,8 +143,6 @@ header ul li a {
     font-size: .8rem;
 }
 
-
-
 /* FOOTER */
 footer {
     background-color: rgba(170, 187, 163, 1);
@@ -274,6 +272,20 @@ footer ul li {
 
 .btn-add-to-cart:hover {
     background-color: #92a58c;
+}
+
+.btn-add-to-wishlist {
+    background-color: #D44E4B;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-add-to-wishlist:hover {
+    background-color: #b84442;
 }
 
 /* colors */

@@ -43,6 +43,9 @@ const Header = () => {
                             <Link to="/checkout">
                                 <i className="fa-regular fa-heart px-3"></i>
                             </Link>
+                            <Link to="/wishlist">
+                                <i className="fa-regular fa-heart px-3 text-dark"></i>
+                            </Link>
                         </div>
                         <div>
                             <Link to="/cart">

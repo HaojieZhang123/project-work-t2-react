@@ -98,7 +98,10 @@ const DetailsPage = () => {
                             </p>
                         </div>
                     </div>
-                    <button className="btn-add-to-cart">AGGIUNGI AL CARRELLO</button>
+                    <div className="d-flex align-items-center gap-1">
+                        <button className="btn-add-to-cart">AGGIUNGI AL CARRELLO <i class="fa-solid fa-cart-shopping"></i></button>
+                        <button className="btn-add-to-wishlist">AGGIUNGI ALLA WISHLIST <i class="fa-solid fa-heart"></i></button>
+                    </div>
                 </div>
             </div>
         </div>

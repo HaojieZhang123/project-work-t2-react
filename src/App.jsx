@@ -8,6 +8,7 @@ import DetailsPage from '../pages/DetailsPage'
 import NotFound from '../pages/NotFound'
 import Cart from '../pages/Cart'
 import Checkout from '../pages/Checkout'
+import WishList from '../pages/WishList'
 
 
 
@@ -23,6 +24,7 @@ function App() {
             <Route path="/product/:id" element={<DetailsPage />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/checkout" element={<Checkout />} />
+            <Route path="/wishlist" element={<WishList />} />
 
             {/* 404 not found page */}
             <Route path="*" element={<NotFound />} />
