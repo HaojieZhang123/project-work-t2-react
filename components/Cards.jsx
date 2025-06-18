@@ -2,6 +2,9 @@ import React from 'react'
 
 const Cards = ({ product }) => {
 
+    // usestate for heart wishlist
+    const [isWishlisted, setIsWishlisted] = useState(false)
+
     const { image, product_name, brand_id, discount, price, added_date, sold } = product
 
     const discountValue = (price * discount) / 100
@@ -19,6 +22,10 @@ const Cards = ({ product }) => {
     // Calcolo se il prodotto è "promo"
     const isPromo = discount > 0
 
+    // Funzione per il toggle del cuore wishlist
+    const toggleWishlist = () => {
+        setIsWishlisted(!isWishlisted)
+    }
     return (
         <div className="product-card color-main h-100">
             <div className="card-body-container">
