@@ -43,7 +43,9 @@ const Header = () => {
                             <i className="fa-regular fa-heart px-3"></i>
                         </div>
                         <div>
-                            <i className="fa-solid fa-bag-shopping"></i>
+                            <Link to="/cart">
+                                <i className="fa-solid fa-bag-shopping text-dark"></i>
+                            </Link>
                         </div>
                     </div>
                 </div>
