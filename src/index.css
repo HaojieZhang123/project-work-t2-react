@@ -286,3 +286,14 @@ footer ul li {
 .background-accent1-subtle {
     background-color: #a8bba27e;
 }
+
+/* NOT FOUND */
+.notFound-banner {
+    text-align: center;
+}
+
+.notFound-text {
+    text-align: center;
+    margin-top: -150px;
+    margin-bottom: 100px;
+}

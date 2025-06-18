@@ -4,9 +4,14 @@ const NotFound = () => {
     return (
         <>
             <div className="container">
+                <div className="notFound-banner">
+                    <img src="./public/not-found-banner.PNG" alt="Not Found Banner" className="notFound-banner-image" />
+                </div>
 
-                <h1>Error 404</h1>
-                <p>The page you are looking for does not exist</p>
+                <div className='notFound-text'>
+                    <h1>Oops! Something went wrong.</h1>
+                    <h5 className='color-main-subtle'>We can't find the page you are looking for</h5>
+                </div>
 
             </div>
         </>
