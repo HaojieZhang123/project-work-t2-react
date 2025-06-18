@@ -49,8 +49,6 @@ const Homepage = () => {
                 ? prev.filter(id => id !== productId)
                 : [...prev, productId]
         );
-
-
     };
 
     return (
@@ -78,7 +76,7 @@ const Homepage = () => {
                                             onClick={() => toggleWishlist(product.id)}
                                         ></i>
                                         <Link className='card-link'
-                                            to={`/product/${product.id}`}>
+                                            to={`/product/${product.slug}`}>
                                             <Cards product={product} />
                                         </Link>
                                     </div>
@@ -102,7 +100,7 @@ const Homepage = () => {
                                         onClick={() => toggleWishlist(product.id)}
                                     ></i>
                                     <Link className='card-link'
-                                        to={`/product/${product.id}`}>
+                                        to={`/product/${product.slug}`}>
                                         <Cards product={product} />
                                     </Link>
                                 </div>

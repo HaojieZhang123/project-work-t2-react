@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 
 const Cards = ({ product }) => {
 
-    const { image, product_name, brand_id, discount, price, added_date, sold } = product
+    const { product_name, slug, brand_id, price, discount, added_date, image, } = product
 
     const discountValue = (price * discount) / 100
 

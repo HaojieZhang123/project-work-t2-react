@@ -230,7 +230,7 @@ const SearchPage = () => {
                                                 onClick={() => toggleWishlist(product.id)}
                                             ></i>
                                             <Link className='card-link'
-                                                to={`/product/${product.id}`}>
+                                                to={`/product/${product.slug}`}>
                                                 <Cards product={product} />
                                             </Link>
                                         </div>

@@ -6,11 +6,11 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const DetailsPage = () => {
-    const { id } = useParams();
+    const { slug } = useParams();
 
     const [product, setProduct] = useState([]);
     const [open, setOpen] = useState(false); // stato accordion
-    const endpoint = `http://localhost:3000/api/products/${id}`;
+    const endpoint = `http://localhost:3000/api/products/${slug}`;
 
     // function to fetch product
     const fetchProduct = () => {
