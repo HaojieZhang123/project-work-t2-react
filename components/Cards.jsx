@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState } from 'react'
+
 
 const Cards = ({ product }) => {
 
@@ -31,6 +32,10 @@ const Cards = ({ product }) => {
             <div className="card-body-container">
                 <div className="card-image-container">
                     <img src={image} alt="" />
+                    <i
+                        className={`wishlist-heart fa-heart position-absolute top-0 end-0 m-2 ${isWishlisted ? 'fas' : 'far'}`}
+                        onClick={toggleWishlist}
+                    ></i>
                 </div>
                 <div className="card-brand color-main-subtle">Brand N°{brand_id}</div>
                 <div className="card-product-name">{product_name}</div>
