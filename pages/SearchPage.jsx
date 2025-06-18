@@ -234,7 +234,6 @@ const SearchPage = () => {
                                                 <Cards product={product} />
                                             </Link>
                                         </div>
-
                                     ))}
                                 </div>
                             </div>
