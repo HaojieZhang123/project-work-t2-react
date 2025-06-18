@@ -276,6 +276,20 @@ footer ul li {
     background-color: #92a58c;
 }
 
+.btn-add-to-wishlist {
+    background-color: #D44E4B;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-add-to-wishlist:hover {
+    background-color: #b84442;
+}
+
 /* colors */
 .color-main {
     color: #1d1d1d;
