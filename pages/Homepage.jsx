@@ -96,6 +96,10 @@ const Homepage = () => {
                             {/* cards */}
                             {latestProducts.map((product) => (
                                 <div className="card-content" key={product.id}>
+                                    <i
+                                        className={`wishlist-heart fa-heart position-absolute top-0 end-0 m-2 ${wishlist.includes(product.id) ? 'fas' : 'far'}`}
+                                        onClick={() => toggleWishlist(product.id)}
+                                    ></i>
                                     <Link className='card-link'
                                         to={`/product/${product.id}`}>
                                         <Cards product={product} />
