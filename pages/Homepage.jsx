@@ -8,6 +8,9 @@ import axios from 'axios'
 
 const Homepage = () => {
 
+    // usestate for heart wishlist
+    const [wishlist, setWishlist] = useState([])
+
     const [products, setProducts] = useState([])
     const endpoint = 'http://localhost:3000/api/products/'
 
@@ -41,6 +44,14 @@ const Homepage = () => {
         }
     }, [products])
 
+    // Funzione per il toggle del cuore wishlist
+    const toggleWishlist = (productId) => {
+        setWishlist(prev =>
+            prev.includes(productId)
+                ? prev.filter(id => id !== productId)
+                : [...prev, productId]
+        );
+    };
     return (
         <>
             <div className="container pt-3 pb-3">
@@ -61,6 +72,10 @@ const Homepage = () => {
                                 {/* cards */}
                                 {bestSellers.map((product) => (
                                     <div className="card-content" key={product.id}>
+                                        <i
+                                            className={`wishlist-heart fa-heart position-absolute top-0 end-0 m-2 ${wishlist.includes(product.id) ? 'fas' : 'far'}`}
+                                            onClick={() => toggleWishlist(product.id)}
+                                        ></i>
                                         <Link className='card-link'
                                             to={`/product/${product.id}`}>
                                             <Cards product={product} />
@@ -81,6 +96,10 @@ const Homepage = () => {
                             {/* cards */}
                             {latestProducts.map((product) => (
                                 <div className="card-content" key={product.id}>
+                                    <i
+                                        className={`wishlist-heart fa-heart position-absolute top-0 end-0 m-2 ${wishlist.includes(product.id) ? 'fas' : 'far'}`}
+                                        onClick={() => toggleWishlist(product.id)}
+                                    ></i>
                                     <Link className='card-link'
                                         to={`/product/${product.id}`}>
                                         <Cards product={product} />
