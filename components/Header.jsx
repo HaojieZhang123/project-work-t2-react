@@ -40,7 +40,9 @@ const Header = () => {
                     {/* div laterale carrello e wish-list */}
                     <div className='col-4 d-flex justify-content-end'>
                         <div>
-                            <i className="fa-regular fa-heart px-3"></i>
+                            <Link to="/checkout">
+                                <i className="fa-regular fa-heart px-3"></i>
+                            </Link>
                         </div>
                         <div>
                             <Link to="/cart">
