@@ -6,6 +6,8 @@ import axios from 'axios'
 
 const SearchPage = () => {
 
+    // usestate for heart wishlist
+    const [wishlist, setWishlist] = useState([])
     const [products, setProducts] = useState([]);
     const endpoint = 'http://localhost:3000/api/products/'
     const [filteredProducts, setFilteredProducts] = useState([]);
@@ -132,6 +134,15 @@ const SearchPage = () => {
         }
     }, [products, name, cat, brand, minPrice, maxPrice, promo]);
 
+    // Funzione per il toggle del cuore wishlist
+    const toggleWishlist = (productId) => {
+        setWishlist(prev =>
+            prev.includes(productId)
+                ? prev.filter(id => id !== productId)
+                : [...prev, productId]
+        );
+    };
+
     return (
         <>
             <div className="container">
@@ -214,6 +225,10 @@ const SearchPage = () => {
                                     {/* cards */}
                                     {filteredProducts.map((product) => (
                                         <div className="card-content mb-3" key={product.id}>
+                                            <i
+                                                className={`wishlist-heart fa-heart position-absolute top-0 end-0 m-2 ${wishlist.includes(product.id) ? 'fas' : 'far'}`}
+                                                onClick={() => toggleWishlist(product.id)}
+                                            ></i>
                                             <Link className='card-link'
                                                 to={`/product/${product.id}`}>
                                                 <Cards product={product} />

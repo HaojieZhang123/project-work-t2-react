@@ -75,6 +75,23 @@ header ul li a {
     justify-content: space-between;
 }
 
+
+/* cuore per wishlist */
+.wishlist-heart {
+    font-size: 1.5rem;
+    color: #ccc;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.wishlist-heart:hover {
+    color: #D44E4B
+}
+
+.wishlist-heart.fas {
+    color: #D44E4B
+}
+
 .card-image-container img {
     width: 100%;
     margin-bottom: 10px;
@@ -83,6 +100,7 @@ header ul li a {
 .card-content {
     width: 230px;
     display: inline-block;
+    position: relative;
 }
 
 /* .card-body-container {} */
