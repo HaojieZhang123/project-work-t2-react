@@ -126,7 +126,7 @@ const SearchPage = () => {
                                                 // update query params
                                                 setSearchParams({
                                                     ...Object.fromEntries(searchParams.entries()),
-                                                    cat: category
+                                                    cat: cat === category ? '' : category // unselect if already selected
                                                 });
                                             }}
                                             checked={cat === category} />
@@ -147,7 +147,7 @@ const SearchPage = () => {
                                                 // update query params
                                                 setSearchParams({
                                                     ...Object.fromEntries(searchParams.entries()),
-                                                    brand: brandName
+                                                    brand: brand === brandName ? '' : brandName // unselect if already selected
                                                 });
                                             }}
                                             checked={brand === brandName} />
