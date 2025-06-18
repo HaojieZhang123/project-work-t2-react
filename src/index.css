@@ -85,11 +85,11 @@ header ul li a {
 }
 
 .wishlist-heart:hover {
-    color: red;
+    color: #D44E4B
 }
 
 .wishlist-heart.fas {
-    color: red;
+    color: #D44E4B
 }
 
 .card-image-container img {
