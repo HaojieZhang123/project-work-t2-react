@@ -130,19 +130,19 @@ header ul li a {
 /* FOOTER */
 footer {
     background-color: rgba(170, 187, 163, 1);
-    padding: 10px;
+    padding: 5px;
 }
 
 footer ul {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    list-style: none;
+    list-style-type: none;
     padding-left: 0;
 }
 
 footer ul li {
-    margin: 5px 15px;
+    margin: 5px;
     display: inline-block;
 }
 
