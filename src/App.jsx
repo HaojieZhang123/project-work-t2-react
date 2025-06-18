@@ -7,6 +7,7 @@ import SearchPage from '../pages/SearchPage'
 import DetailsPage from '../pages/DetailsPage'
 import NotFound from '../pages/NotFound'
 import Cart from '../pages/Cart'
+import Checkout from '../pages/Checkout'
 
 
 
@@ -21,6 +22,7 @@ function App() {
             <Route path="/search" element={<SearchPage />} />
             <Route path="/product/:id" element={<DetailsPage />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/checkout" element={<Checkout />} />
 
             {/* 404 not found page */}
             <Route path="*" element={<NotFound />} />
