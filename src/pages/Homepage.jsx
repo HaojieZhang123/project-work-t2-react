@@ -28,13 +28,13 @@ const Homepage = () => {
         isInWishlist
     } = useWishlist();
 
-    const endpoint = 'http://localhost:3001/api/products/'
+    const endpoint = 'http://localhost:3000/api/products/'
 
     const [bestSellers, setBestSellers] = useState([])
     const [latestProducts, setLatestProducts] = useState([])
 
-    const endpointBestSellers = 'http://localhost:3001/api/products/special/best-sellers'
-    const endpointLatestProducts = 'http://localhost:3001/api/products/special/latest-products'
+    const endpointBestSellers = 'http://localhost:3000/api/products/special/best-sellers'
+    const endpointLatestProducts = 'http://localhost:3000/api/products/special/latest-products'
 
     // function for fetch products via axios
     const fetchProducts = () => {

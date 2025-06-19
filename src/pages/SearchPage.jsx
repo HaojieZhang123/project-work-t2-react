@@ -20,7 +20,7 @@ const SearchPage = () => {
     } = useWishlist();
     // state
     const [products, setProducts] = useState([]);
-    const endpoint = 'http://localhost:3001/api/products/'
+    const endpoint = 'http://localhost:3000/api/products/'
     const [filteredProducts, setFilteredProducts] = useState([]);
 
     // initial state view grid is true
@@ -54,7 +54,7 @@ const SearchPage = () => {
     useEffect(() => {
         if (name) {
             // If searching by name, use the search endpoint
-            axios.get(`http://localhost:3001/api/products/search?name=${encodeURIComponent(name)}`)
+            axios.get(`http://localhost:3000/api/products/search?name=${encodeURIComponent(name)}`)
                 .then(response => {
                     setProducts(response.data);
                     setFilteredProducts(response.data); // You can still apply other filters client-side
@@ -169,18 +169,18 @@ const SearchPage = () => {
                     </div>
                 </div>
 
-                         {/*Ordina*/}
+                {/*Ordina*/}
                 <div className="mb-3">
                     <label className="me-2">Sort by:</label>
-                        <select
-                            value={sortOrder}
-                            onChange={e => setSortOrder(e.target.value)}
-                            className="form-select form-select-sm d-inline-block w-auto"
-                        >
-                            <option value="price-asc">Increasing price</option>
-                            <option value="price-desc">Decreasing price</option>
-                        </select>
-                 </div>
+                    <select
+                        value={sortOrder}
+                        onChange={e => setSortOrder(e.target.value)}
+                        className="form-select form-select-sm d-inline-block w-auto"
+                    >
+                        <option value="price-asc">Increasing price</option>
+                        <option value="price-desc">Decreasing price</option>
+                    </select>
+                </div>
 
                 {/* SIDEBAR */}
                 <div className="row">

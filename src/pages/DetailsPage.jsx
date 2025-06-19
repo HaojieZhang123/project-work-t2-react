@@ -30,12 +30,12 @@ const DetailsPage = () => {
     const { slug } = useParams();
     const [product, setProduct] = useState([]);
     const [open, setOpen] = useState(false); // stato accordion
-    const endpoint = `http://localhost:3001/api/products/${slug}`;
+    const endpoint = `http://localhost:3000/api/products/${slug}`;
     const [brandName, setBrandName] = useState('');
     const [categoryName, setCategoryName] = useState('');
     const [price, setPrice] = useState(0);
     const [discount, setDiscount] = useState(0);
-    const endpointBestSellers = 'http://localhost:3001/api/products/special/best-sellers'
+    const endpointBestSellers = 'http://localhost:3000/api/products/special/best-sellers'
     const [bestSellers, setBestSellers] = useState([])
 
     // Calcolo se il prodotto è "new"
@@ -150,7 +150,7 @@ const DetailsPage = () => {
                             </div>
                             <span className="d-flex align-items-center text-gray-details-page mt-4">
                                 <span className="green-dot"></span>
-                                Disponibile
+                                In Stock
                             </span>
                         </div>
 
@@ -167,7 +167,7 @@ const DetailsPage = () => {
                                 aria-expanded={open}
                                 aria-controls="product-details-content"
                             >
-                                <span>DETTAGLI DEL PRODOTTO</span>
+                                <span>PRODUCT DETAILS</span>
                                 <i className={`fa-solid fa-chevron-down text-gray-details-page transition-icon ${open ? 'rotate' : ''}`}></i>
                             </div>
                             <div
@@ -179,21 +179,21 @@ const DetailsPage = () => {
                         <div className='mt-4'>
                             <p className='text-gray-details-page'>
                                 <i className="fa-solid fa-truck green-details-page me-2"></i>
-                                Spedizione entro 3-6 giorni lavorativi
+                                Fast Shipping in 3/6 working days
                             </p>
                             <p className='text-gray-details-page'>
                                 <i className="fa-solid fa-box-open green-details-page me-2"></i>
-                                Spedizione gratuita da € 35,00
+                                Free shipping on orders over €35
                             </p>
                         </div>
                     </div>
                     <div className="d-flex align-items-center gap-1">
                         <button className="btn-add-to-cart" onClick={() => addCartButtonHandler(product.slug)}>
-                            AGGIUNGI AL CARRELLO {isInCart(product.slug) ? `(${cart.find(item => item.slug === product.slug)?.quantity}) ` : ' '}
+                            ADD TO CART {isInCart(product.slug) ? `(${cart.find(item => item.slug === product.slug)?.quantity}) ` : ' '}
                             <i className="fa-solid fa-cart-shopping"></i>
                         </button>
                         <button className="btn-add-to-wishlist" onClick={() => toggleWishlistIcon(product.slug)}>
-                            {isInWishlist(product.slug) ? 'RIMUOVI DALLA WISHLIST ' : 'AGGIUNGI ALLA WISHLIST '}
+                            {isInWishlist(product.slug) ? 'REMOVE FROM WISHLIST ' : 'ADD TO WISHLIST '}
                             <i className="fa-solid fa-heart"></i>
                         </button>
                     </div>
@@ -201,7 +201,7 @@ const DetailsPage = () => {
             </div>
             {/* card suggeriti per te */}
             <div className="col-12 mt-5 pt-5">
-                <h2 className='mb-2'>SUGGERITI PER TE</h2>
+                <h2 className='mb-2'>TAKE A LOOK AT</h2>
                 <div className="d-flex justify-content-between overflow-auto align-items-stretch">
                     {/* cards */}
                     {bestSellers.map((product) => (
