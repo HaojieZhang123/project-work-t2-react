@@ -9,7 +9,7 @@ import ProductRow from '../components/ProductRow'
 
 const WishList = () => {
     // state for product rows
-    const [productRowsState, setProductRowsState] = useState(1) // 1 for wishlist, 2 for cart
+    const [productRowsState, setProductRowsState] = useState(2) // 1 for wishlist, 2 for cart
     const [bestSellers, setBestSellers] = useState([])
     const [products, setProducts] = useState([])
     const endpointBestSellers = 'http://localhost:3000/api/products/special/best-sellers'
@@ -22,7 +22,7 @@ const WishList = () => {
         isInWishlist
     } = useWishlist();
 
-    console.log(products);
+    // console.log(products);
 
     // function to fetch product
     const fetchProduct = () => {
@@ -59,21 +59,20 @@ const WishList = () => {
     useEffect(() => {
         fetchProduct();
     }, [wishlist]);
-    console.log(wishlist);
+    // console.log(wishlist);
 
 
 
     return (
         <>
             <div className='container py-3'>
-                <h3 className='wishlist-heading'>
-                    your wishlist <b className='wishlist-counter'><i>({products.length} products)</i></b>
-                </h3>
+                <h3 className='wishlist-heading'>your wishlist <b className='wishlist-counter'><i>{`(3 products)`}</i></b></h3>
+
                 <div className="wishlist-product-list">
                     {/* stampo in pagina le card dei prodotti in wishlist */}
                     {products.map(product => {
                         return (
-                            <ProductRow state={productRowsState} product={product} key={product.id} />
+                            <ProductRow state={productRowsState} product={product} key={product.slug} />
                         )
                     })}
                 </div>
@@ -83,7 +82,7 @@ const WishList = () => {
                 <div className="container">
                     {/* card suggeriti per te */}
                     <div className="col-12 my-5 pt-5">
-                        <h2 className='mb-2'>TAKE A LOOK AT</h2>
+                        <h2 className='mb-2'>SUGGERITI PER TE</h2>
                         <div className="d-flex justify-content-between overflow-auto align-items-stretch">
                             {/* cards */}
                             {bestSellers.map((product) => (

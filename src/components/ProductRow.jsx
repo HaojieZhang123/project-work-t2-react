@@ -1,17 +1,35 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 //context
 import { useWishlist } from '../context/WishlistContext'
+import { useCart } from '../context/CartContext'
 
 const ProductRow = ({ state, product }) => {
     const { slug, image, brand_name, product_name, category_name, price, discount, added_date } = product;
 
-    // context    
+
+
+    // context
+    const {
+        cart,
+        addToCart,
+        removeFromCart,
+        updateCartQuantity,
+        isInCart
+    } = useCart();
+
     const {
         wishlist,
         addToWishlist,
         removeFromWishlist,
         isInWishlist
     } = useWishlist();
+
+    const [quantityValue, setQuantityValue] = useState(() => {
+        // Initialize quantityValue based on whether the product is in the cart
+        const cartItem = cart.find(item => item.slug === slug);
+        return cartItem ? cartItem.quantity : 1; // Default to 1 if not in cart
+    });
+
 
     const toggleWishlistIcon = (slug) => {
         if (isInWishlist(slug)) {
@@ -35,6 +53,13 @@ const ProductRow = ({ state, product }) => {
 
     // Calcolo se il prodotto è "promo"
     const isPromo = discount > 0
+
+    console.log(quantityValue);
+
+    // calculate de quantity of a product in the cart
+    useEffect(() => {
+        updateCartQuantity(slug, quantityValue);
+    }, [quantityValue])
 
     return (
         <>
@@ -90,11 +115,11 @@ const ProductRow = ({ state, product }) => {
 
                     <div className="product-row-price-section">
                         <div className="product-row-cta mb-5">
-                            <div className="product-row-delete" onClick={() => toggleWishlistIcon(slug)}>
+                            <div className="product-row-delete" onClick={() => removeFromCart(slug)}>
                                 <i className="fa-solid fa-trash"></i>
                             </div>
                             <div className="product-row-quantity-selector">
-                                <input type="number" min="1" max="99" defaultValue="1" className="product-row-quantity-input p-2 ms-3" />
+                                <input type="number" min="1" max="99" className="product-row-quantity-input p-2 ms-3" value={quantityValue} onChange={(e) => setQuantityValue(e.target.value)} />
                             </div>
                         </div>
                         <div className="card-original-price color-main-subtle">{`€ ${price}`}</div>
