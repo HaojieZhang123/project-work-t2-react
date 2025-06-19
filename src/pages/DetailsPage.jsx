@@ -5,7 +5,27 @@ import Cards from '../components/Cards';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
+// context
+import { useCart } from '../context/CartContext'
+import { useWishlist } from '../context/WishlistContext'
+
 const DetailsPage = () => {
+
+    // context
+    const {
+        cart,
+        addToCart,
+        removeFromCart,
+        updateCartQuantity,
+        isInCart
+    } = useCart();
+
+    const {
+        wishlist,
+        addToWishlist,
+        removeFromWishlist,
+        isInWishlist
+    } = useWishlist();
 
     const { slug } = useParams();
     const [product, setProduct] = useState([]);
@@ -17,7 +37,6 @@ const DetailsPage = () => {
     const [discount, setDiscount] = useState(0);
     const endpointBestSellers = 'http://localhost:3000/api/products/special/best-sellers'
     const [bestSellers, setBestSellers] = useState([])
-    const [wishlist, setWishlist] = useState([])
 
     // Calcolo se il prodotto è "new"
     const today = new Date()
@@ -63,12 +82,25 @@ const DetailsPage = () => {
         fetchProduct();
     }, [slug]);
 
-    const toggleWishlist = (productId) => {
-        setWishlist(prev =>
-            prev.includes(productId)
-                ? prev.filter(id => id !== productId)
-                : [...prev, productId]
-        );
+    // function to toggle wishlist icon
+    const toggleWishlistIcon = (slug) => {
+        if (isInWishlist(slug)) {
+            removeFromWishlist(slug);
+        } else {
+            addToWishlist(slug);
+        }
+    };
+
+    // add product to cart. if already in cart, increase quantity by 1
+    const addCartButtonHandler = (slug) => {
+        if (isInCart(slug)) {
+            // get the current quantity and increase it by 1
+            const currentQuantity = cart.find(item => item.slug === slug)?.quantity || 0;
+            // update the cart quantity
+            updateCartQuantity(slug, currentQuantity + 1);
+        } else {
+            addToCart(slug, 1);
+        }
     };
 
     if (!product) {
@@ -156,8 +188,14 @@ const DetailsPage = () => {
                         </div>
                     </div>
                     <div className="d-flex align-items-center gap-1">
-                        <button className="btn-add-to-cart">AGGIUNGI AL CARRELLO <i className="fa-solid fa-cart-shopping"></i></button>
-                        <button className="btn-add-to-wishlist">AGGIUNGI ALLA WISHLIST <i className="fa-solid fa-heart"></i></button>
+                        <button className="btn-add-to-cart" onClick={() => addCartButtonHandler(product.slug)}>
+                            AGGIUNGI AL CARRELLO {isInCart(product.slug) ? `(${cart.find(item => item.slug === product.slug)?.quantity}) ` : ' '}
+                            <i className="fa-solid fa-cart-shopping"></i>
+                        </button>
+                        <button className="btn-add-to-wishlist" onClick={() => toggleWishlistIcon(product.slug)}>
+                            {isInWishlist(product.slug) ? 'RIMUOVI DALLA WISHLIST ' : 'AGGIUNGI ALLA WISHLIST '}
+                            <i className="fa-solid fa-heart"></i>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -169,8 +207,9 @@ const DetailsPage = () => {
                     {bestSellers.map((product) => (
                         <div className="card-content" key={product.id}>
                             <i
-                                className={`wishlist-heart fa-heart position-absolute top-0 end-0 m-2 ${wishlist.includes(product.id) ? 'fas' : 'far'}`}
-                                onClick={() => toggleWishlist(product.id)}
+                                className={`wishlist-heart fa-heart position-absolute top-0 end-0 m-2 ${isInWishlist(product.slug) ? 'fas' : 'far'}`}
+                                onClick={() => toggleWishlistIcon(product.slug)}
+                                style={{ cursor: 'pointer' }}
                             ></i>
                             <Link className='card-link'
                                 to={`/product/${product.slug}`}>
