@@ -7,7 +7,7 @@ const Checkout = () => {
                 <div className='col'>
                     <h1>Inserisci i tuoi dati.</h1>
                     <form>
-                        Attenzione!Tutti i campi sono obbligatori.
+                        <h6>Attenzione!Tutti i campi sono obbligatori.</h6>
                         <div>
                             <label htmlFor="name">Name </label>
                             <input type="text"
