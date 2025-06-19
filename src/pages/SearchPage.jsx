@@ -1,35 +1,26 @@
-import React, { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Cards from '../components/Cards'
 import { Link, useSearchParams } from 'react-router-dom'
-import { useState } from 'react'
+
 import axios from 'axios'
 import CardsList from '../components/CardsList'
 
 // context
-import { useCart } from '../context/CartContext'
+
 import { useWishlist } from '../context/WishlistContext'
 
 const SearchPage = () => {
 
     // context
     const {
-        cart,
-        addToCart,
-        removeFromCart,
-        updateCartQuantity,
-        isInCart
-    } = useCart();
 
-    const {
-        wishlist,
         addToWishlist,
         removeFromWishlist,
         isInWishlist
     } = useWishlist();
-
-    // usestate for heart wishlist
+    // state
     const [products, setProducts] = useState([]);
-    const endpoint = 'http://localhost:3000/api/products/'
+    const endpoint = 'http://localhost:3001/api/products/'
     const [filteredProducts, setFilteredProducts] = useState([]);
 
     // initial state view grid is true
@@ -59,10 +50,11 @@ const SearchPage = () => {
             });
     }
 
+
     useEffect(() => {
         if (name) {
             // If searching by name, use the search endpoint
-            axios.get(`http://localhost:3000/api/products/search?name=${encodeURIComponent(name)}`)
+            axios.get(`http://localhost:3001/api/products/search?name=${encodeURIComponent(name)}`)
                 .then(response => {
                     setProducts(response.data);
                     setFilteredProducts(response.data); // You can still apply other filters client-side
@@ -115,6 +107,33 @@ const SearchPage = () => {
         }
     };
 
+    // Stato per l'ordinamento
+    const [sortOrder, setSortOrder] = useState('name-asc'); // 'name-asc', 'price-asc', 'price-desc'
+
+    // Effetto per ordinare i prodotti filtrati
+    useEffect(() => {
+        let sorted = [...filteredProducts];
+        if (sortOrder === 'price-asc') {
+            sorted.sort((a, b) => {
+                const priceA = a.price - (a.price * (a.discount || 0) / 100);
+                const priceB = b.price - (b.price * (b.discount || 0) / 100);
+                return priceA - priceB;
+            });
+        } else if (sortOrder === 'price-desc') {
+            sorted.sort((a, b) => {
+                const priceA = a.price - (a.price * (a.discount || 0) / 100);
+                const priceB = b.price - (b.price * (b.discount || 0) / 100);
+                return priceB - priceA;
+            });
+        }
+        // Only update if the sorted array is different to avoid infinite loop
+        if (JSON.stringify(sorted) !== JSON.stringify(filteredProducts)) {
+            setFilteredProducts(sorted);
+        }
+        // eslint-disable-next-line
+    }, [sortOrder]);
+
+
     return (
         <>
             <div className="container">
@@ -149,6 +168,19 @@ const SearchPage = () => {
                         </div>
                     </div>
                 </div>
+
+                         {/*Ordina*/}
+                <div className="mb-3">
+                    <label className="me-2">Ordina per:</label>
+                        <select
+                            value={sortOrder}
+                            onChange={e => setSortOrder(e.target.value)}
+                            className="form-select form-select-sm d-inline-block w-auto"
+                        >
+                            <option value="price-asc">Prezzo crescente</option>
+                            <option value="price-desc">Prezzo decrescente</option>
+                        </select>
+                 </div>
 
                 {/* SIDEBAR */}
                 <div className="row">

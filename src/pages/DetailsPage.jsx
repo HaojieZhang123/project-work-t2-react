@@ -30,12 +30,12 @@ const DetailsPage = () => {
     const { slug } = useParams();
     const [product, setProduct] = useState([]);
     const [open, setOpen] = useState(false); // stato accordion
-    const endpoint = `http://localhost:3000/api/products/${slug}`;
+    const endpoint = `http://localhost:3001/api/products/${slug}`;
     const [brandName, setBrandName] = useState('');
     const [categoryName, setCategoryName] = useState('');
     const [price, setPrice] = useState(0);
     const [discount, setDiscount] = useState(0);
-    const endpointBestSellers = 'http://localhost:3000/api/products/special/best-sellers'
+    const endpointBestSellers = 'http://localhost:3001/api/products/special/best-sellers'
     const [bestSellers, setBestSellers] = useState([])
 
     // Calcolo se il prodotto è "new"
