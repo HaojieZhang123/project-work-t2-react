@@ -15,6 +15,9 @@ export const WishlistProvider = ({ children }) => {
     // Save to localStorage on change
     useEffect(() => {
         localStorage.setItem('wishlist', JSON.stringify(wishlist));
+
+        // show wishlist in console for debugging
+        console.log('Wishlist updated:', wishlist);
     }, [wishlist]);
 
     // Wishlist functions
