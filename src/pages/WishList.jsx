@@ -5,8 +5,11 @@ import Cards from '../components/Cards'
 
 //context
 import { useWishlist } from '../context/WishlistContext'
+import ProductRow from '../components/ProductRow'
 
 const WishList = () => {
+    // state for product rows
+    const [productRowsState, setProductRowsState] = useState(1) // 1 for wishlist, 2 for cart
     const [bestSellers, setBestSellers] = useState([])
     const [products, setProducts] = useState([])
     const endpointBestSellers = 'http://localhost:3000/api/products/special/best-sellers'
@@ -65,39 +68,14 @@ const WishList = () => {
             <div className='container py-3'>
                 <h3 className='wishlist-heading'>your wishlist <b className='wishlist-counter'><i>{`(3 products)`}</i></b></h3>
 
-                {/* stampo in pagina le card dei prodotti in wishlist */}
-                {products.map(product => {
-                    return (
-                        <div className="wishlist-product-list" key={product.id}>
-                            <div className="wishlist-product-card">
-                                <div className="wishlist-card-image">
-                                    <img src={product.image} alt="" />
-                                </div>
-
-                                <div className="wishlist-card-details color-main">
-                                    <div className="card-brand color-main-subtle">{product.brand_name}</div>
-                                    <div className="card-product-name">{product.product_name}</div>
-                                    <div className="card-category color-main-subtle">{product.category_name.toUpperCase()}</div>
-                                    {product.discount != 0 && <div className="card-tag">promo</div>}
-                                </div>
-
-                                <div className="wishlist-card-price-section">
-                                    <div className="card-original-price">{`€ ${product.price}`}</div>
-                                    <div className="card-price">{`€ ${(product.price - (product.price * product.discount) / 100).toFixed(2)}`}</div>
-                                    <div className="wishlist-card-cta">
-                                        <div className="card-delete" onClick={() => toggleWishlistIcon(product.slug)}>
-                                            <i className="fa-solid fa-trash"></i>
-                                        </div>
-                                        <div className="card-add-to-cart color-main">
-                                            <span>Add to cart</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="wishlist-separator"></div>
-                        </div>
-                    )
-                })}
+                <div className="wishlist-product-list">
+                    {/* stampo in pagina le card dei prodotti in wishlist */}
+                    {products.map(product => {
+                        return (
+                            <ProductRow state={productRowsState} product={product} key={product.id} />
+                        )
+                    })}
+                </div>
 
             </div>
             <div className="background-rose pb-5">
@@ -110,8 +88,9 @@ const WishList = () => {
                             {bestSellers.map((product) => (
                                 <div className="card-content" key={product.id}>
                                     <i
-                                        className={`wishlist-heart fa-heart position-absolute top-0 end-0 m-2 ${wishlist.includes(product.id) ? 'fas' : 'far'}`}
-                                        onClick={() => toggleWishlist(product.id)}
+                                        className={`wishlist-heart fa-heart position-absolute top-0 end-0 m-2 ${isInWishlist(product.slug) ? 'fas' : 'far'}`}
+                                        onClick={() => toggleWishlistIcon(product.slug)}
+                                        style={{ cursor: 'pointer' }}
                                     ></i>
                                     <Link className='card-link'
                                         to={`/product/${product.slug}`}>

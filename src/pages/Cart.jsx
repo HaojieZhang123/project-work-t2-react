@@ -11,6 +11,8 @@ const PROMOCODES = {
 };
 
 const Cart = () => {
+    // state for product rows
+    const [productRowsState, setProductRowsState] = useState(2) // 1 for wishlist, 2 for cart
     const [cart, setCart] = useState(initialCart);
     const [promocode, setPromocode] = useState('');
     const [discount, setDiscount] = useState(0);
