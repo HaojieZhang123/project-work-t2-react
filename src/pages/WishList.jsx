@@ -12,7 +12,7 @@ const WishList = () => {
     const [productRowsState, setProductRowsState] = useState(1) // 1 for wishlist, 2 for cart
     const [bestSellers, setBestSellers] = useState([])
     const [products, setProducts] = useState([])
-    const endpointBestSellers = 'http://localhost:3001/api/products/special/best-sellers'
+    const endpointBestSellers = 'http://localhost:3000/api/products/special/best-sellers'
 
     // context    
     const {
@@ -27,7 +27,7 @@ const WishList = () => {
     // function to fetch product
     const fetchProduct = () => {
         // fetch products in wishlist
-        axios.get('http://localhost:3001/api/products')
+        axios.get('http://localhost:3000/api/products')
             .then(response => {
                 const allProducts = response.data;
                 // filter products that are in the wishlist
