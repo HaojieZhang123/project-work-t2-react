@@ -1,32 +1,75 @@
 import { useParams } from 'react-router-dom';
 // import products from '../data/products';
 import { Link } from 'react-router-dom';
-
+import Cards from '../components/Cards';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const DetailsPage = () => {
-    const { slug } = useParams();
 
+    const { slug } = useParams();
     const [product, setProduct] = useState([]);
     const [open, setOpen] = useState(false); // stato accordion
     const endpoint = `http://localhost:3000/api/products/${slug}`;
+    const [brandName, setBrandName] = useState('');
+    const [categoryName, setCategoryName] = useState('');
+    const [price, setPrice] = useState(0);
+    const [discount, setDiscount] = useState(0);
+    const endpointBestSellers = 'http://localhost:3000/api/products/special/best-sellers'
+    const [bestSellers, setBestSellers] = useState([])
+    const [wishlist, setWishlist] = useState([])
+
+    // Calcolo se il prodotto è "new"
+    const today = new Date()
+    const addedDate = new Date(product.added_date)
+    const diffTime = today - addedDate
+    const diffDays = diffTime / (1000 * 60 * 60 * 24)
+    const isNew = diffDays <= 28 && diffDays >= 0
+
+    // Calcolo se il prodotto è "promo"
+    const isPromo = product.discount > 0
 
     // function to fetch product
     const fetchProduct = () => {
         axios.get(endpoint)
             .then(response => {
                 setProduct(response.data);
-                console.log(response.data);
+                // console.log(response.data);
+                setBrandName(response.data.brand_name);
+                setCategoryName(response.data.category_name);
+                setPrice(Number(response.data.price));
+                setDiscount(response.data.discount || 0); // default to 0 if no discount
             })
             .catch(error => {
                 console.error("There was an error fetching the product!", error);
             });
+
+        // fetch best sellers
+        axios.get(endpointBestSellers)
+            .then(response => {
+                setBestSellers(response.data)
+            })
+            .catch(error => {
+                console.error("There was an error fetching the best sellers!", error);
+            });
+    };
+
+    // function to calculate discounted price
+    const getDiscountedPrice = () => {
+        return (price * (1 - discount / 100)).toFixed(2);
     };
 
     useEffect(() => {
         fetchProduct();
-    }, []);
+    }, [slug]);
+
+    const toggleWishlist = (productId) => {
+        setWishlist(prev =>
+            prev.includes(productId)
+                ? prev.filter(id => id !== productId)
+                : [...prev, productId]
+        );
+    };
 
     if (!product) {
         return <div>Product not found</div>;
@@ -50,15 +93,29 @@ const DetailsPage = () => {
                 {/* Colonna dettagli */}
                 <div className="col-md-6 d-flex flex-column justify-content-between pt-4 px-4">
                     <div className='margin-b-details-page'>
-                        {/* nome brand al momento vuoto */}
-                        <h6 className='text-gray-details-page'>{product.brand_id}</h6>
+                        <h6 className='text-gray-details-page'>{brandName.charAt(0).toUpperCase() + brandName.slice(1)}</h6>
                         <h2>{product.product_name}</h2>
-                        {/* categorie al momento vuoto */}
-                        <p className='text-gray-details-page'>{product.category}</p>
+                        <p className='text-gray-details-page'>{categoryName.charAt(0).toUpperCase() + categoryName.slice(1)}</p>
                         <hr className='hr-details-page my-5' />
-                        <h4 className='text-end'>&#8364;{product.price}</h4>
+                        <h4 className='text-end'>
+                            {discount > 0 ? (
+                                <>
+                                    <span className='barred-price'>
+                                        €{!isNaN(price) ? Number(price).toFixed(2) : '0.00'}
+                                    </span>
+                                    <span className='discount-price'>
+                                        €{getDiscountedPrice()}
+                                    </span>
+                                </>
+                            ) : (
+                                <span className='normal-price'>€{!isNaN(price) ? Number(price).toFixed(2) : '0.00'}</span>
+                            )}
+                        </h4>
                         <div className="d-flex flex-column align-items-start my-4">
-                            <span className="green-bc-icon">LIMITED</span>
+                            <div className='d-flex justify-content-start align-items-center gap-2'>
+                                {isPromo && <div className="green-bc-icon">PROMO</div>}
+                                {isNew && <div className="green-bc-icon">NEW</div>}
+                            </div>
                             <span className="d-flex align-items-center text-gray-details-page mt-4">
                                 <span className="green-dot"></span>
                                 Disponibile
@@ -102,6 +159,25 @@ const DetailsPage = () => {
                         <button className="btn-add-to-cart">AGGIUNGI AL CARRELLO <i className="fa-solid fa-cart-shopping"></i></button>
                         <button className="btn-add-to-wishlist">AGGIUNGI ALLA WISHLIST <i className="fa-solid fa-heart"></i></button>
                     </div>
+                </div>
+            </div>
+            {/* card suggeriti per te */}
+            <div className="col-12 mt-5 pt-5">
+                <h2 className='mb-2'>SUGGERITI PER TE</h2>
+                <div className="d-flex justify-content-between overflow-auto align-items-stretch">
+                    {/* cards */}
+                    {bestSellers.map((product) => (
+                        <div className="card-content" key={product.id}>
+                            <i
+                                className={`wishlist-heart fa-heart position-absolute top-0 end-0 m-2 ${wishlist.includes(product.id) ? 'fas' : 'far'}`}
+                                onClick={() => toggleWishlist(product.id)}
+                            ></i>
+                            <Link className='card-link'
+                                to={`/product/${product.slug}`}>
+                                <Cards product={product} />
+                            </Link>
+                        </div>
+                    ))}
                 </div>
             </div>
         </div>

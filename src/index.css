@@ -288,6 +288,22 @@ footer ul li {
     background-color: #b84442;
 }
 
+/* price */
+
+.barred-price {
+    text-decoration: line-through;
+    color: #C3C3C3;
+    margin-right: 10px;
+}
+
+.discount-price {
+    color: #b84442;
+}
+
+.normal-price {
+    color: #1d1d1d;
+}
+
 /* colors */
 .color-main {
     color: #1d1d1d;
