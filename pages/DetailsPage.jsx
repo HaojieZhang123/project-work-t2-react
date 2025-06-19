@@ -1,13 +1,13 @@
 import { useParams } from 'react-router-dom';
 // import products from '../data/products';
 import { Link } from 'react-router-dom';
-
+import Cards from '../components/Cards';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const DetailsPage = () => {
-    const { slug } = useParams();
 
+    const { slug } = useParams();
     const [product, setProduct] = useState([]);
     const [open, setOpen] = useState(false); // stato accordion
     const endpoint = `http://localhost:3000/api/products/${slug}`;
@@ -15,6 +15,10 @@ const DetailsPage = () => {
     const [categoryName, setCategoryName] = useState('');
     const [price, setPrice] = useState(0);
     const [discount, setDiscount] = useState(0);
+    const endpointBestSellers = 'http://localhost:3000/api/products/special/best-sellers'
+    const [bestSellers, setBestSellers] = useState([])
+    const [wishlist, setWishlist] = useState([])
+
 
     // function to fetch product
     const fetchProduct = () => {
@@ -30,6 +34,15 @@ const DetailsPage = () => {
             .catch(error => {
                 console.error("There was an error fetching the product!", error);
             });
+
+        // fetch best sellers
+        axios.get(endpointBestSellers)
+            .then(response => {
+                setBestSellers(response.data)
+            })
+            .catch(error => {
+                console.error("There was an error fetching the best sellers!", error);
+            });
     };
 
     // function to calculate discounted price
@@ -39,7 +52,15 @@ const DetailsPage = () => {
 
     useEffect(() => {
         fetchProduct();
-    }, []);
+    }, [slug]);
+
+    const toggleWishlist = (productId) => {
+        setWishlist(prev =>
+            prev.includes(productId)
+                ? prev.filter(id => id !== productId)
+                : [...prev, productId]
+        );
+    };
 
     if (!product) {
         return <div>Product not found</div>;
@@ -128,6 +149,24 @@ const DetailsPage = () => {
                         <button className="btn-add-to-cart">AGGIUNGI AL CARRELLO <i className="fa-solid fa-cart-shopping"></i></button>
                         <button className="btn-add-to-wishlist">AGGIUNGI ALLA WISHLIST <i className="fa-solid fa-heart"></i></button>
                     </div>
+                </div>
+            </div>
+            <div className="col-12 mt-5 pt-5">
+                <h2 className='mb-2'>SUGGERITI PER TE</h2>
+                <div className="d-flex justify-content-between overflow-auto align-items-stretch">
+                    {/* cards */}
+                    {bestSellers.map((product) => (
+                        <div className="card-content" key={product.id}>
+                            <i
+                                className={`wishlist-heart fa-heart position-absolute top-0 end-0 m-2 ${wishlist.includes(product.id) ? 'fas' : 'far'}`}
+                                onClick={() => toggleWishlist(product.id)}
+                            ></i>
+                            <Link className='card-link'
+                                to={`/product/${product.slug}`}>
+                                <Cards product={product} />
+                            </Link>
+                        </div>
+                    ))}
                 </div>
             </div>
         </div>
