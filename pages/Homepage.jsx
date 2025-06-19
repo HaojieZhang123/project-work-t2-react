@@ -6,9 +6,30 @@ import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 
+// context
+import { useCart } from '../context/CartContext'
+import { useWishlist } from '../context/WishlistContext'
+
+
 const Homepage = () => {
 
-    const [wishlist, setWishlist] = useState([])
+    // context
+    const {
+        cart,
+        addToCart,
+        removeFromCart,
+        updateCartQuantity,
+        isInCart
+    } = useCart();
+
+    const {
+        wishlist,
+        addToWishlist,
+        removeFromWishlist,
+        isInWishlist
+    } = useWishlist();
+
+    const [wishlistIcon, setWishlistIcon] = useState([])
     const endpoint = 'http://localhost:3000/api/products/'
 
     const [bestSellers, setBestSellers] = useState([])
@@ -43,8 +64,8 @@ const Homepage = () => {
         fetchProducts()
     }, [])
 
-    const toggleWishlist = (productId) => {
-        setWishlist(prev =>
+    const toggleWishlistIcon = (productId) => {
+        setWishlistIcon(prev =>
             prev.includes(productId)
                 ? prev.filter(id => id !== productId)
                 : [...prev, productId]
@@ -72,8 +93,8 @@ const Homepage = () => {
                                 {bestSellers.map((product) => (
                                     <div className="card-content" key={product.id}>
                                         <i
-                                            className={`wishlist-heart fa-heart position-absolute top-0 end-0 m-2 ${wishlist.includes(product.id) ? 'fas' : 'far'}`}
-                                            onClick={() => toggleWishlist(product.id)}
+                                            className={`wishlist-heart fa-heart position-absolute top-0 end-0 m-2 ${wishlistIcon.includes(product.id) ? 'fas' : 'far'}`}
+                                            onClick={() => toggleWishlistIcon(product.id)}
                                         ></i>
                                         <Link className='card-link'
                                             to={`/product/${product.slug}`}>
@@ -97,7 +118,7 @@ const Homepage = () => {
                                 <div className="card-content" key={product.id}>
                                     <i
                                         className={`wishlist-heart fa-heart position-absolute top-0 end-0 m-2 ${wishlist.includes(product.id) ? 'fas' : 'far'}`}
-                                        onClick={() => toggleWishlist(product.id)}
+                                        onClick={() => toggleWishlistIcon(product.id)}
                                     ></i>
                                     <Link className='card-link'
                                         to={`/product/${product.slug}`}>

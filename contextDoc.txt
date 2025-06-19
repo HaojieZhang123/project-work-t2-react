@@ -1,0 +1,78 @@
+Import the useContext hooks
+
+import { useCart } from '../context/CartContext';
+import { useWishlist } from '../context/WishlistContext';
+
+
+inside the component, explode the context values for easier access
+
+const {
+    cart,
+    addToCart,
+    removeFromCart,
+    updateCartQuantity,
+    isInCart
+} = useCart();
+
+const {
+    wishlist,
+    addToWishlist,
+    removeFromWishlist,
+    isInWishlist
+} = useWishlist();
+
+
+ALL CART OPERATIONS
+
+
+// Add to cart
+const handleAddToCart = () => {
+    addToCart(product.slug, 1);
+};
+
+After slug, remember to pass the quantity of the product. Set default as 1 if not specified.
+
+
+// Read all cart objects
+const allCartItems = cart;
+
+Assign it to variable of choice, recommend using a state variable
+
+
+// Read single cart object
+const cartItem = cart.find(item => item.slug === product.slug);
+
+cartItem can be named anything you like, but it should be descriptive of the context.
+
+
+// Modify existing cart object
+const handleUpdateQuantity = (newQty) => {
+    updateCartQuantity(product.slug, newQty);
+};
+
+
+// Remove all cart objects
+const handleClearCart = () => {
+    cart.forEach(item => removeFromCart(item.slug));
+};
+
+
+
+
+ALL WISHLIST OPERATIONS (similar to cart operations, read above for details)
+
+// Add to wishlist
+const handleAddToWishlist = () => {
+    addToWishlist(product.slug);
+};
+
+// Read all wishlist objects
+const allWishlistItems = wishlist;
+
+// Read single wishlist object
+const isWishlisted = isInWishlist(product.slug);
+
+// Remove all wishlist objects
+const handleClearWishlist = () => {
+    wishlist.forEach(slug => removeFromWishlist(slug));
+};

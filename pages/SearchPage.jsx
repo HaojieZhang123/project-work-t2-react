@@ -5,10 +5,30 @@ import { useState } from 'react'
 import axios from 'axios'
 import CardsList from '../components/CardsList'
 
+// context
+import { useCart } from '../context/CartContext'
+import { useWishlist } from '../context/WishlistContext'
+
 const SearchPage = () => {
 
+    // context
+    const {
+        cart,
+        addToCart,
+        removeFromCart,
+        updateCartQuantity,
+        isInCart
+    } = useCart();
+
+    const {
+        wishlist,
+        addToWishlist,
+        removeFromWishlist,
+        isInWishlist
+    } = useWishlist();
+
     // usestate for heart wishlist
-    const [wishlist, setWishlist] = useState([])
+    const [wishlistIcon, setWishlistIcon] = useState([])
     const [products, setProducts] = useState([]);
     const endpoint = 'http://localhost:3000/api/products/'
     const [filteredProducts, setFilteredProducts] = useState([]);
@@ -88,8 +108,8 @@ const SearchPage = () => {
     }, [products, name, cat, brand, minPrice, maxPrice, promo]);
 
     // Funzione per il toggle del cuore wishlist
-    const toggleWishlist = (productId) => {
-        setWishlist(prev =>
+    const toggleWishlistIcon = (productId) => {
+        setWishlistIcon(prev =>
             prev.includes(productId)
                 ? prev.filter(id => id !== productId)
                 : [...prev, productId]
@@ -218,8 +238,8 @@ const SearchPage = () => {
                                     {filteredProducts.map((product) => (
                                         <div className={`card-content mb-3 position-relative`} key={product.id}>
                                             <i
-                                                className={`wishlist-heart fa-heart position-absolute top-0 end-0 m-2 ${wishlist.includes(product.id) ? 'fas' : 'far'}`}
-                                                onClick={() => toggleWishlist(product.id)}
+                                                className={`wishlist-heart fa-heart position-absolute top-0 end-0 m-2 ${wishlistIcon.includes(product.id) ? 'fas' : 'far'}`}
+                                                onClick={() => toggleWishlistIcon(product.id)}
                                             ></i>
                                             <Link to={`/product/${product.slug}`} className='card-link'>
                                                 {isGrid
