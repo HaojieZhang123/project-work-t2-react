@@ -3,7 +3,11 @@ import React, { useState } from 'react'
 
 const Cards = ({ product }) => {
 
-    const { product_name, slug, brand_id, price, discount, added_date, image, } = product
+    const { product_name, slug, brand_id, price, discount, added_date, image, brand_name, category_name } = product
+
+    //const { category_name } = category
+
+    //const { brand_name } = brand
 
     const discountValue = (price * discount) / 100
 
@@ -26,9 +30,10 @@ const Cards = ({ product }) => {
                 <div className="card-image-container">
                     <img src={image} alt="" />
                 </div>
-                <div className="card-brand color-main-subtle">Brand N°{brand_id}</div>
+                <div className="card-brand color-main-subtle">{brand_name}</div>
+                
                 <div className="card-product-name">{product_name}</div>
-                <div className="card-category color-main-subtle">Categoria prodotto</div>
+                <div className="card-category color-main-subtle">{category_name}</div>
             </div>
             <div className="card-bottom-row">
                 <div className="card-price">
