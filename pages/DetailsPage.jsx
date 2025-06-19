@@ -13,6 +13,8 @@ const DetailsPage = () => {
     const endpoint = `http://localhost:3000/api/products/${slug}`;
     const [brandName, setBrandName] = useState('');
     const [categoryName, setCategoryName] = useState('');
+    const [price, setPrice] = useState(0);
+    const [discount, setDiscount] = useState(0);
 
     // function to fetch product
     const fetchProduct = () => {
@@ -22,10 +24,17 @@ const DetailsPage = () => {
                 // console.log(response.data);
                 setBrandName(response.data.brand_name);
                 setCategoryName(response.data.category_name);
+                setPrice(Number(response.data.price));
+                setDiscount(response.data.discount || 0); // default to 0 if no discount
             })
             .catch(error => {
                 console.error("There was an error fetching the product!", error);
             });
+    };
+
+    // function to calculate discounted price
+    const getDiscountedPrice = () => {
+        return (price * (1 - discount / 100)).toFixed(2);
     };
 
     useEffect(() => {
@@ -60,7 +69,20 @@ const DetailsPage = () => {
                         {/* categorie al momento vuoto */}
                         <p className='text-gray-details-page'>{categoryName.charAt(0).toUpperCase() + categoryName.slice(1)}</p>
                         <hr className='hr-details-page my-5' />
-                        <h4 className='text-end'>&#8364;{product.price}</h4>
+                        <h4 className='text-end'>
+                            {discount > 0 ? (
+                                <>
+                                    <span className='barred-price'>
+                                        €{!isNaN(price) ? Number(price).toFixed(2) : '0.00'}
+                                    </span>
+                                    <span className='discount-price'>
+                                        €{getDiscountedPrice()}
+                                    </span>
+                                </>
+                            ) : (
+                                <span className='normal-price'>€{!isNaN(price) ? Number(price).toFixed(2) : '0.00'}</span>
+                            )}
+                        </h4>
                         <div className="d-flex flex-column align-items-start my-4">
                             <span className="green-bc-icon">LIMITED</span>
                             <span className="d-flex align-items-center text-gray-details-page mt-4">
