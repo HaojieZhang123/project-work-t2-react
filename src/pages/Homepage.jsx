@@ -7,8 +7,8 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 
 // context
-import { useCart } from '../src/context/CartContext'
-import { useWishlist } from '../src/context/WishlistContext'
+import { useCart } from '../context/CartContext'
+import { useWishlist } from '../context/WishlistContext'
 
 
 const Homepage = () => {

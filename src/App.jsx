@@ -2,18 +2,18 @@ import { useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 // context
-import { CartProvider } from '../context/CartContext'
-import { WishlistProvider } from '../context/WishlistContext'
+import { CartProvider } from './context/CartContext'
+import { WishlistProvider } from './context/WishlistContext'
 
 // components
-import DefaultLayout from '../layout/DefaultLayout'
-import Homepage from '../pages/Homepage'
-import SearchPage from '../pages/SearchPage'
-import DetailsPage from '../pages/DetailsPage'
-import NotFound from '../pages/NotFound'
-import Cart from '../pages/Cart'
-import Checkout from '../pages/Checkout'
-import WishList from '../pages/WishList'
+import DefaultLayout from './layout/DefaultLayout'
+import Homepage from './pages/Homepage'
+import SearchPage from './pages/SearchPage'
+import DetailsPage from './pages/DetailsPage'
+import NotFound from './pages/NotFound'
+import Cart from './pages/Cart'
+import Checkout from './pages/Checkout'
+import WishList from './pages/WishList'
 
 function App() {
 
