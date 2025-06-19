@@ -76,7 +76,7 @@ const Homepage = () => {
                 <div className="row">
                     {/* hero banner */}
                     <div className="col-12">
-                        <img src="./hero_banner.PNG" alt="image" className="hero-banner" />
+                        <img src="./hero_banner_finale.PNG" alt="image" className="hero-banner" />
                     </div>
                 </div>
             </div>
