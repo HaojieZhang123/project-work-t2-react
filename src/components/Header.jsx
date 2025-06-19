@@ -4,17 +4,17 @@ import { Link } from "react-router-dom";
 const Header = () => {
     // Array delle categorie per i tab
     const categories = [
-        { label: "PROMOTIONS", value: "promotions" },
-        { label: "SKIN CARE", value: "skin-care" },
-        { label: "MAKE-UP", value: "make-up" },
-        { label: "FACE", value: "face" },
-        { label: "BODY", value: "body" },
-        { label: "HAIR", value: "hair" },
+        { label: "SERUM", value: "serum" },
+        { label: "MASCARA", value: "mascara" },
+        { label: "FOUNDATION", value: "foundation" },
+        { label: "SCRUB", value: "scrub" },
+        { label: "BODY WASH ", value: "body+wash" },
+        { label: "SHAMPOO", value: "shampoo" },
     ];
 
     // Funzione per gestire il click su una categoria
     const handleCategoryClick = (category) => {
-        window.location.href = `/search?category=${encodeURIComponent(category)}`;
+        window.location.href = `/search?cat=${(category)}`;
     };
 
     return (

@@ -13,7 +13,6 @@ const SHIPPING_COST = 5;
 const Cart = () => {
     const [productRowsState, setProductRowsState] = useState(2) // 1 for wishlist, 2 for cart    
     const [products, setProducts] = useState([])
-
     const [subtotal, setSubtotal] = useState(0);
 
     // context
@@ -56,7 +55,18 @@ const Cart = () => {
 
     // Placeholder function for applying promo code
     const handleApplyPromo = () => {
-        setAppliedPromo({ code: promoCode });
+        axios.get(`http://localhost:3000/api/promo_codes/${promoCode}`)
+            .then(response => {
+                const promo = response.data;
+                if (promo && promo.code === promoCode) {
+                    setAppliedPromo(promo);
+                }
+            })
+            .catch(error => {
+                console.error("There was an error applying the promo code!", error);
+            });
+
+        setPromoCode('');
     };
 
     console.log(cart);

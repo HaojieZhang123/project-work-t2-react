@@ -35,8 +35,8 @@ const DetailsPage = () => {
     const [categoryName, setCategoryName] = useState('');
     const [price, setPrice] = useState(0);
     const [discount, setDiscount] = useState(0);
-    const endpointBestSellers = 'http://localhost:3000/api/products/special/best-sellers'
-    const [bestSellers, setBestSellers] = useState([])
+    const endpointRelatedProducts = 'http://localhost:3000/api/products/:slug/related'
+    const [relatedProducts, setRelatedProducts] = useState([])
 
     // Calcolo se il prodotto è "new"
     const today = new Date()
@@ -64,9 +64,9 @@ const DetailsPage = () => {
             });
 
         // fetch best sellers
-        axios.get(endpointBestSellers)
+        axios.get(`http://localhost:3000/api/products/${slug}/related`)
             .then(response => {
-                setBestSellers(response.data)
+                setRelatedProducts(response.data)
             })
             .catch(error => {
                 console.error("There was an error fetching the best sellers!", error);
@@ -183,7 +183,7 @@ const DetailsPage = () => {
                             </p>
                             <p className='text-gray-details-page'>
                                 <i className="fa-solid fa-box-open green-details-page me-2"></i>
-                                Free shipping on orders over €35
+                                Free shipping on orders over €50
                             </p>
                         </div>
                     </div>
@@ -204,7 +204,7 @@ const DetailsPage = () => {
                 <h2 className='mb-2'>TAKE A LOOK AT</h2>
                 <div className="d-flex justify-content-between overflow-auto align-items-stretch">
                     {/* cards */}
-                    {bestSellers.map((product) => (
+                    {relatedProducts.map((product) => (
                         <div className="card-content" key={product.id}>
                             <i
                                 className={`wishlist-heart fa-heart position-absolute top-0 end-0 m-2 ${isInWishlist(product.slug) ? 'fas' : 'far'}`}

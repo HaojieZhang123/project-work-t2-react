@@ -66,7 +66,7 @@ const WishList = () => {
     return (
         <>
             <div className='container py-3'>
-                <h3 className='wishlist-heading'>your wishlist <b className='wishlist-counter'><i>{`(3 products)`}</i></b></h3>
+                <h3 className='wishlist-heading'>your wishlist <b className='wishlist-counter'><i>{`${products.length} product(s)`}</i></b></h3>
 
                 <div className="wishlist-product-list">
                     {/* stampo in pagina le card dei prodotti in wishlist */}
