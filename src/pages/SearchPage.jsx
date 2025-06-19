@@ -28,7 +28,6 @@ const SearchPage = () => {
     } = useWishlist();
 
     // usestate for heart wishlist
-    const [wishlistIcon, setWishlistIcon] = useState([])
     const [products, setProducts] = useState([]);
     const endpoint = 'http://localhost:3000/api/products/'
     const [filteredProducts, setFilteredProducts] = useState([]);
@@ -108,12 +107,12 @@ const SearchPage = () => {
     }, [products, name, cat, brand, minPrice, maxPrice, promo]);
 
     // Funzione per il toggle del cuore wishlist
-    const toggleWishlistIcon = (productId) => {
-        setWishlistIcon(prev =>
-            prev.includes(productId)
-                ? prev.filter(id => id !== productId)
-                : [...prev, productId]
-        );
+    const toggleWishlistIcon = (slug) => {
+        if (isInWishlist(slug)) {
+            removeFromWishlist(slug);
+        } else {
+            addToWishlist(slug);
+        }
     };
 
     return (
@@ -238,8 +237,9 @@ const SearchPage = () => {
                                     {filteredProducts.map((product) => (
                                         <div className={`card-content mb-3 position-relative`} key={product.id}>
                                             <i
-                                                className={`wishlist-heart fa-heart position-absolute top-0 end-0 m-2 ${wishlistIcon.includes(product.id) ? 'fas' : 'far'}`}
-                                                onClick={() => toggleWishlistIcon(product.id)}
+                                                className={`wishlist-heart fa-heart position-absolute top-0 end-0 m-2 ${isInWishlist(product.slug) ? 'fas' : 'far'}`}
+                                                onClick={() => toggleWishlistIcon(product.slug)}
+                                                style={{ cursor: 'pointer' }}
                                             ></i>
                                             <Link to={`/product/${product.slug}`} className='card-link'>
                                                 {isGrid
