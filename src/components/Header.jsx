@@ -2,6 +2,21 @@ import React from 'react';
 import { Link } from "react-router-dom";
 
 const Header = () => {
+    // Array delle categorie per i tab
+    const categories = [
+        { label: "PROMOTIONS", value: "promotions" },
+        { label: "SKIN CARE", value: "skin-care" },
+        { label: "MAKE-UP", value: "make-up" },
+        { label: "FACE", value: "face" },
+        { label: "BODY", value: "body" },
+        { label: "HAIR", value: "hair" },
+    ];
+
+    // Funzione per gestire il click su una categoria
+    const handleCategoryClick = (category) => {
+        window.location.href = `/search?category=${encodeURIComponent(category)}`;
+    };
+
     return (
         <>
             <div className="container p-3">
@@ -31,7 +46,6 @@ const Header = () => {
                         </form>
                     </div>
 
-
                     <div className='col-4 d-flex justify-content-center logo-container'>
                         <Link to="/">
                             <img src="/Logo-black.svg" alt="logo" className="logo-img" />
@@ -56,14 +70,19 @@ const Header = () => {
                 <div className="row">
                     <div className="col-12 pt-5">
                         <ul className="d-flex flex-wrap justify-content-center px-3">
-                            <li className="mx-2"><a href="#">PROMOTIONS</a></li>
-                            <li className="mx-2"><a href="#">SKIN CARE</a></li>
-                            <li className="mx-2"><a href="#">MAKE-UP</a></li>
-                            <li className="mx-2"><a href="#">FACE</a></li>
-                            <li className="mx-2"><a href="#">BODY</a></li>
-                            <li className="mx-2"><a href="#">HAIR</a></li>
+                            {categories.map(cat => (
+                                <li className="mx-2" key={cat.value}>
+                                    <button
+                                        type="button"
+                                        className="btn btn-link p-0 color-main"
+                                        style={{ textDecoration: "none", color: "inherit" }}
+                                        onClick={() => handleCategoryClick(cat.value)}
+                                    >
+                                        {cat.label}
+                                    </button>
+                                </li>
+                            ))}
                         </ul>
-
                     </div>
                 </div>
             </div>
