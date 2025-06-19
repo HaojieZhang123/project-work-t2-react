@@ -11,13 +11,17 @@ const DetailsPage = () => {
     const [product, setProduct] = useState([]);
     const [open, setOpen] = useState(false); // stato accordion
     const endpoint = `http://localhost:3000/api/products/${slug}`;
+    const [brandName, setBrandName] = useState('');
+    const [categoryName, setCategoryName] = useState('');
 
     // function to fetch product
     const fetchProduct = () => {
         axios.get(endpoint)
             .then(response => {
                 setProduct(response.data);
-                console.log(response.data);
+                // console.log(response.data);
+                setBrandName(response.data.brand_name);
+                setCategoryName(response.data.category_name);
             })
             .catch(error => {
                 console.error("There was an error fetching the product!", error);
@@ -51,10 +55,10 @@ const DetailsPage = () => {
                 <div className="col-md-6 d-flex flex-column justify-content-between pt-4 px-4">
                     <div className='margin-b-details-page'>
                         {/* nome brand al momento vuoto */}
-                        <h6 className='text-gray-details-page'>{product.brand_id}</h6>
+                        <h6 className='text-gray-details-page'>{brandName.charAt(0).toUpperCase() + brandName.slice(1)}</h6>
                         <h2>{product.product_name}</h2>
                         {/* categorie al momento vuoto */}
-                        <p className='text-gray-details-page'>{product.category}</p>
+                        <p className='text-gray-details-page'>{categoryName.charAt(0).toUpperCase() + categoryName.slice(1)}</p>
                         <hr className='hr-details-page my-5' />
                         <h4 className='text-end'>&#8364;{product.price}</h4>
                         <div className="d-flex flex-column align-items-start my-4">
