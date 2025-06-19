@@ -14,6 +14,7 @@ import NotFound from './pages/NotFound'
 import Cart from './pages/Cart'
 import Checkout from './pages/Checkout'
 import WishList from './pages/WishList'
+import SummaryPage from './pages/SummaryPage'
 
 function App() {
 
@@ -30,7 +31,7 @@ function App() {
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/checkout" element={<Checkout />} />
                 <Route path="/wishlist" element={<WishList />} />
-
+                <Route path="/summary" element={<SummaryPage />} />
                 {/* 404 not found page */}
                 <Route path="*" element={<NotFound />} />
               </Route>
