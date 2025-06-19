@@ -1,6 +1,11 @@
 import { useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
+// context
+import { CartProvider } from '../context/CartContext'
+import { WishlistProvider } from '../context/WishlistContext'
+
+// components
 import DefaultLayout from '../layout/DefaultLayout'
 import Homepage from '../pages/Homepage'
 import SearchPage from '../pages/SearchPage'
@@ -10,27 +15,29 @@ import Cart from '../pages/Cart'
 import Checkout from '../pages/Checkout'
 import WishList from '../pages/WishList'
 
-
-
 function App() {
 
   return (
     <>
-      <BrowserRouter>
-        <Routes>
-          <Route element={<DefaultLayout />}>
-            <Route path="/" element={<Homepage />} />
-            <Route path="/search" element={<SearchPage />} />
-            <Route path="/product/:slug" element={<DetailsPage />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/checkout" element={<Checkout />} />
-            <Route path="/wishlist" element={<WishList />} />
+      <CartProvider>
+        <WishlistProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route element={<DefaultLayout />}>
+                <Route path="/" element={<Homepage />} />
+                <Route path="/search" element={<SearchPage />} />
+                <Route path="/product/:slug" element={<DetailsPage />} />
+                <Route path="/cart" element={<Cart />} />
+                <Route path="/checkout" element={<Checkout />} />
+                <Route path="/wishlist" element={<WishList />} />
 
-            {/* 404 not found page */}
-            <Route path="*" element={<NotFound />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+                {/* 404 not found page */}
+                <Route path="*" element={<NotFound />} />
+              </Route>
+            </Routes>
+          </BrowserRouter>
+        </WishlistProvider>
+      </CartProvider>
     </>
   )
 }
