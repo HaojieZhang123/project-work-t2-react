@@ -19,6 +19,15 @@ const DetailsPage = () => {
     const [bestSellers, setBestSellers] = useState([])
     const [wishlist, setWishlist] = useState([])
 
+    // Calcolo se il prodotto è "new"
+    const today = new Date()
+    const addedDate = new Date(product.added_date)
+    const diffTime = today - addedDate
+    const diffDays = diffTime / (1000 * 60 * 60 * 24)
+    const isNew = diffDays <= 28 && diffDays >= 0
+
+    // Calcolo se il prodotto è "promo"
+    const isPromo = product.discount > 0
 
     // function to fetch product
     const fetchProduct = () => {
@@ -84,10 +93,8 @@ const DetailsPage = () => {
                 {/* Colonna dettagli */}
                 <div className="col-md-6 d-flex flex-column justify-content-between pt-4 px-4">
                     <div className='margin-b-details-page'>
-                        {/* nome brand al momento vuoto */}
                         <h6 className='text-gray-details-page'>{brandName.charAt(0).toUpperCase() + brandName.slice(1)}</h6>
                         <h2>{product.product_name}</h2>
-                        {/* categorie al momento vuoto */}
                         <p className='text-gray-details-page'>{categoryName.charAt(0).toUpperCase() + categoryName.slice(1)}</p>
                         <hr className='hr-details-page my-5' />
                         <h4 className='text-end'>
@@ -105,7 +112,10 @@ const DetailsPage = () => {
                             )}
                         </h4>
                         <div className="d-flex flex-column align-items-start my-4">
-                            <span className="green-bc-icon">LIMITED</span>
+                            <div className='d-flex justify-content-start align-items-center gap-2'>
+                                {isPromo && <div className="green-bc-icon">PROMO</div>}
+                                {isNew && <div className="green-bc-icon">NEW</div>}
+                            </div>
                             <span className="d-flex align-items-center text-gray-details-page mt-4">
                                 <span className="green-dot"></span>
                                 Disponibile
@@ -151,6 +161,7 @@ const DetailsPage = () => {
                     </div>
                 </div>
             </div>
+            {/* card suggeriti per te */}
             <div className="col-12 mt-5 pt-5">
                 <h2 className='mb-2'>SUGGERITI PER TE</h2>
                 <div className="d-flex justify-content-between overflow-auto align-items-stretch">
