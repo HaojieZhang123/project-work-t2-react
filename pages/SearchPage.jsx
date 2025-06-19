@@ -3,6 +3,7 @@ import Cards from '../components/Cards'
 import { Link, useSearchParams } from 'react-router-dom'
 import { useState } from 'react'
 import axios from 'axios'
+import CardsList from '../components/CardsList'
 
 const SearchPage = () => {
 
@@ -11,6 +12,9 @@ const SearchPage = () => {
     const [products, setProducts] = useState([]);
     const endpoint = 'http://localhost:3000/api/products/'
     const [filteredProducts, setFilteredProducts] = useState([]);
+
+    // initial state view grid is true
+    const [isGrid, setIsGrid] = useState(true);
 
     // get params for query string
     const [searchParams, setSearchParams] = useSearchParams();
@@ -108,6 +112,22 @@ const SearchPage = () => {
                             {promo && 'on promo'}
 
                         </p>
+
+                        {/* Toggle grid/list */}
+                        <div className="d-flex justify-content-end mb-3">
+                            <button
+                                className={`btn btn-sm me-2 ${isGrid ? 'btn-secondary' : 'btn-outline-secondary'}`}
+                                onClick={() => setIsGrid(true)}
+                            >
+                                <i className="fas fa-th-large me-1"></i> Grid View
+                            </button>
+                            <button
+                                className={`btn btn-sm ${!isGrid ? 'btn-secondary' : 'btn-outline-secondary'}`}
+                                onClick={() => setIsGrid(false)}
+                            >
+                                <i className="fas fa-list me-1"></i> List View
+                            </button>
+                        </div>
                     </div>
                 </div>
 
@@ -193,17 +213,19 @@ const SearchPage = () => {
                     <section className='col-md-9 gx-5'>
                         <div className="row">
                             <div className="col-12">
-                                <div className="d-flex justify-content-around flex-wrap">
+                                <div className={`d-flex ${isGrid ? 'justify-content-around flex-wrap' : 'flex-column'} `}>
                                     {/* cards */}
                                     {filteredProducts.map((product) => (
-                                        <div className="card-content mb-3" key={product.id}>
+                                        <div className={`card-content mb-3 position-relative`} key={product.id}>
                                             <i
                                                 className={`wishlist-heart fa-heart position-absolute top-0 end-0 m-2 ${wishlist.includes(product.id) ? 'fas' : 'far'}`}
                                                 onClick={() => toggleWishlist(product.id)}
                                             ></i>
-                                            <Link className='card-link'
-                                                to={`/product/${product.slug}`}>
-                                                <Cards product={product} />
+                                            <Link to={`/product/${product.slug}`} className='card-link'>
+                                                {isGrid
+                                                    ? <Cards product={product} />
+                                                    : <CardsList product={product} />
+                                                }
                                             </Link>
                                         </div>
                                     ))}
