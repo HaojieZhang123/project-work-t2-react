@@ -98,7 +98,7 @@ header ul li a {
 }
 
 .card-content {
-    width: 230px;
+    /* width: 230px; */
     display: inline-block;
     position: relative;
 }
@@ -362,11 +362,9 @@ footer ul li {
     background: #f9f9f9;
 }
 
-.cards-list-img img {
-    width: 120px;
-    height: auto;
-    object-fit: cover;
-    border-radius: 6px;
+
+.cards-list .card-list-img img {
+    width: 200px;
 }
 
 .cards-list-info {
@@ -382,6 +380,7 @@ footer ul li {
     font-weight: bold;
     font-size: 1.1rem;
     margin: 0.25rem 0;
+    color: black;
 }
 
 .cards-list-category {
@@ -392,6 +391,7 @@ footer ul li {
 .cards-list-price {
     font-size: 1rem;
     margin-top: 0.5rem;
+    color: black;
 }
 
 .cards-list-original {
@@ -406,7 +406,7 @@ footer ul li {
 }
 
 .tag {
-    background: #ffc107;
+    background: #a8bba2;
     color: #000;
     font-size: 0.75rem;
     padding: 0.25rem 0.5rem;
