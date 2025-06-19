@@ -66,8 +66,9 @@ const WishList = () => {
     return (
         <>
             <div className='container py-3'>
-                <h3 className='wishlist-heading'>your wishlist <b className='wishlist-counter'><i>{`(3 products)`}</i></b></h3>
-
+                <h3 className='wishlist-heading'>
+                    your wishlist <b className='wishlist-counter'><i>({products.length} products)</i></b>
+                </h3>
                 <div className="wishlist-product-list">
                     {/* stampo in pagina le card dei prodotti in wishlist */}
                     {products.map(product => {
@@ -82,7 +83,7 @@ const WishList = () => {
                 <div className="container">
                     {/* card suggeriti per te */}
                     <div className="col-12 my-5 pt-5">
-                        <h2 className='mb-2'>SUGGERITI PER TE</h2>
+                        <h2 className='mb-2'>TAKE A LOOK AT</h2>
                         <div className="d-flex justify-content-between overflow-auto align-items-stretch">
                             {/* cards */}
                             {bestSellers.map((product) => (
