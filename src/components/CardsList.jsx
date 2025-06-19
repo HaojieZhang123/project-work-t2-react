@@ -16,23 +16,23 @@ const CardsList = ({ product }) => {
 
 
     return (
-        <div className="cards-list d-flex align-items-center">
+        <div className="cards-list d-flex">
             <div className="card-list-img">
                 <img src={image} alt={product_name} />
             </div>
             <div className="card-list-info">
-                <div className="cards-list-brand">Brand N°{brand_id}</div>
-                <div className="cards-list-name">{product_name}</div>
-                <div className="cards-list-category">Categoria prodotto</div>
-                <div className="cards-list-price">
+                <div className="cards-list-brand py-2">Brand N°{brand_id}</div>
+                <div className="cards-list-name py-2">{product_name}</div>
+                <div className="cards-list-category py-2">Categoria prodotto</div>
+                <div className="cards-list-price py-2">
                     {`€ ${actualPrice.toFixed(2)}`}
                     {discount !== 0 && (
                         <span className="cards-list-original">€ {price}</span>
                     )}
                 </div>
                 <div className="cards-list-tags">
-                    {isPromo && <span className="tag">promo</span>}
-                    {isNew && <span className="tag">new</span>}
+                    {isPromo && <span className="tag py-2">promo</span>}
+                    {isNew && <span className="tag py-2">new</span>}
                 </div>
             </div>
         </div>
