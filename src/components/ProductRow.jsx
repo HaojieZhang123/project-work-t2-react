@@ -54,12 +54,22 @@ const ProductRow = ({ state, product }) => {
     // Calcolo se il prodotto è "promo"
     const isPromo = discount > 0
 
-    console.log(quantityValue);
-
     // calculate de quantity of a product in the cart
     useEffect(() => {
         updateCartQuantity(slug, quantityValue);
     }, [quantityValue])
+
+    // add product to cart. if already in cart, increase quantity by 1
+    const addCartButtonHandler = (slug) => {
+        if (isInCart(slug)) {
+            // get the current quantity and increase it by 1
+            const currentQuantity = cart.find(item => item.slug === slug)?.quantity || 0;
+            // update the cart quantity
+            updateCartQuantity(slug, currentQuantity + 1);
+        } else {
+            addToCart(slug, 1);
+        }
+    };
 
     return (
         <>
@@ -87,8 +97,8 @@ const ProductRow = ({ state, product }) => {
                             <div className="product-row-delete" onClick={() => toggleWishlistIcon(slug)}>
                                 <i className="fa-solid fa-trash"></i>
                             </div>
-                            <div className="product-row-add-to-cart color-main">
-                                <span>Add to cart</span>
+                            <div className="product-row-add-to-cart color-main" onClick={() => addCartButtonHandler(product.slug)}>
+                                <span>Add to Cart {isInCart(product.slug) ? `(${cart.find(item => item.slug === product.slug)?.quantity}) ` : ' '}</span>
                             </div>
                         </div>
                     </div>

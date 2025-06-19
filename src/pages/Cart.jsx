@@ -13,6 +13,9 @@ const SHIPPING_COST = 5;
 const Cart = () => {
     const [productRowsState, setProductRowsState] = useState(2) // 1 for wishlist, 2 for cart    
     const [products, setProducts] = useState([])
+
+    const [subtotal, setSubtotal] = useState(0);
+
     // context
     const {
         cart,
@@ -29,39 +32,24 @@ const Cart = () => {
         isInWishlist
     } = useWishlist();
 
-    // Calculate the quantity of aproduct in the cart
-    const findQuantity = (slug) => {
-        const item = cart.find(item => item.slug === slug);
-        return item ? item.quantity : 1; // Default to 1 if not in cart
-    }
-
-    // Find the total price of a product by its quantity
-    const findPrice = (slug) => {
-        const quantity = findQuantity(slug);
-        const product = products.find(item => item.slug === slug);
-        // Calculate the actual price after discount
-        const discountValue = (product.price * product.discount) / 100
-        const actualPrice = (product.price - discountValue).toFixed(2)
-
-        return product ? actualPrice * quantity : 0;
-    }
-
-    // Calculate the subtotal of the cart
-    const findSubtotal = (cart) => {
-        return cart.reduce((total, item) => {
-            const itemPrice = findPrice(item.slug);
-            return total + itemPrice;
+    const calculateSubtotal = () => {
+        return cart.reduce((acc, cartItem) => {
+            const product = products.find(p => p.slug === cartItem.slug);
+            if (!product) return acc;
+            const price = parseFloat(product.price) || 0;
+            const discount = parseFloat(product.discount) || 0;
+            const discountedPrice = price - (price * discount / 100);
+            return acc + discountedPrice * cartItem.quantity;
         }, 0);
-    }
-
+    };
 
     const [promoCode, setPromoCode] = useState('');
     const [appliedPromo, setAppliedPromo] = useState(null);
     const navigate = useNavigate();
 
-    // Placeholder values
-    const subtotal = findSubtotal(cart); // Replace with real subtotal calculation
-    const promoDiscount = appliedPromo ? 10 : 0; // Replace with real promo logic
+    const promoDiscount = appliedPromo ? 10 : 0;
+
+    // Replace with real promo logic
     const subtotalAfterPromo = subtotal - promoDiscount;
     const shipping = subtotalAfterPromo >= SHIPPING_THRESHOLD ? 0 : SHIPPING_COST;
     const total = subtotalAfterPromo + shipping;
@@ -90,7 +78,11 @@ const Cart = () => {
 
     useEffect(() => {
         fetchProduct();
-    }, [cart])
+    }, [cart]);
+
+    useEffect(() => {
+        setSubtotal(calculateSubtotal());
+    }, [cart, products]);
 
     return (
         <div className="cart-container">
