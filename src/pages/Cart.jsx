@@ -1,126 +1,111 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
-const initialCart = [
-    { id: 1, name: 'Prodotto 1', price: 10, quantity: 1 },
-    { id: 2, name: 'Prodotto 2', price: 20, quantity: 2 },
-];
+// context
+import { useCart } from '../context/CartContext'
+import { useWishlist } from '../context/WishlistContext'
 
-const PROMOCODES = {
-    SCONTO10: 0.1, // 10% discount
-    SCONTO20: 0.2, // 20% discount
-};
+const SHIPPING_THRESHOLD = 50;
+const SHIPPING_COST = 5;
 
 const Cart = () => {
-    // state for product rows
     const [productRowsState, setProductRowsState] = useState(2) // 1 for wishlist, 2 for cart
-    const [cart, setCart] = useState(initialCart);
-    const [promocode, setPromocode] = useState('');
-    const [discount, setDiscount] = useState(0);
-    const [promoMessage, setPromoMessage] = useState('');
-    const [checkoutMessage, setCheckoutMessage] = useState('');
+    // context
+    const {
+        cart,
+        addToCart,
+        removeFromCart,
+        updateCartQuantity,
+        isInCart
+    } = useCart();
 
-    const removeFromCart = (id) => {
-        setCart(cart.filter(item => item.id !== id));
-    };
+    const {
+        wishlist,
+        addToWishlist,
+        removeFromWishlist,
+        isInWishlist
+    } = useWishlist();
 
-    const getTotal = () => {
-        const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-        return (total * (1 - discount)).toFixed(2);
-    };
 
-    const handleApplyPromocode = () => {
-        const code = promocode.trim().toUpperCase();
-        if (PROMOCODES[code]) {
-            setDiscount(PROMOCODES[code]);
-            setPromoMessage(`Codice promozionale applicato: -${PROMOCODES[code] * 100}%`);
-        } else {
-            setDiscount(0);
-            setPromoMessage('Codice promozionale non valido.');
-        }
-    };
+    const [promoCode, setPromoCode] = useState('');
+    const [appliedPromo, setAppliedPromo] = useState(null);
+    const navigate = useNavigate();
 
-    const handleCheckout = () => {
-        if (cart.length === 0) {
-            setCheckoutMessage('Il carrello è vuoto.');
-        } else {
-            setCheckoutMessage('Checkout effettuato con successo!');
-            setCart([]);
-            setDiscount(0);
-            setPromocode('');
-            setPromoMessage('');
-        }
+    // Placeholder values
+    const subtotal = 100; // Replace with real subtotal calculation
+    const promoDiscount = appliedPromo ? 10 : 0; // Replace with real promo logic
+    const subtotalAfterPromo = subtotal - promoDiscount;
+    const shipping = subtotalAfterPromo >= SHIPPING_THRESHOLD ? 0 : SHIPPING_COST;
+    const total = subtotalAfterPromo + shipping;
+
+    // Placeholder function for applying promo code
+    const handleApplyPromo = () => {
+        setAppliedPromo({ code: promoCode });
     };
 
     return (
-        <div className='container'>
-            <div className='row'>
-                <div className='col'>
-                    <h4>Your Cart</h4>
+        <div className="cart-container">
+            <h2 className="cart-title">Your Shopping Cart</h2>
+            <div className="row">
+                <div className="col-md-8">
                     {cart.length === 0 ? (
-                        <h6>Cart is empty</h6>
+                        <p>Your cart is empty.</p>
                     ) : (
-                        <table className="table">
-                            <thead>
-                                <tr>
-                                    <th>Product</th>
-                                    <th>Price</th>
-                                    <th>Quantity</th>
-                                    <th>Total</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {cart.map(item => (
-                                    <tr key={item.id}>
-                                        <td>{item.name}</td>
-                                        <td>€ {item.price}</td>
-                                        <td>{item.quantity}</td>
-                                        <td>€ {item.price * item.quantity}</td>
-                                        <td>
-                                            <button className="btn btn-danger btn-sm" onClick={() => removeFromCart(item.id)}>
-                                                Rimuovi
-                                            </button>
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    )}
-                    <div className="mb-3">
-                        <input
-                            type="text"
-                            className="form-control d-inline-block w-auto"
-                            placeholder="Inserisci codice promozionale"
-                            value={promocode}
-                            onChange={e => setPromocode(e.target.value)}
-                            disabled={cart.length === 0}
-                        />
-                        <button
-                            className="btn btn-primary ms-2"
-                            onClick={handleApplyPromocode}
-                            disabled={cart.length === 0}
-                        >
-                            Applica
-                        </button>
-                        {promoMessage && (
-                            <div className="mt-2">
-                                <small>{promoMessage}</small>
-                            </div>
-                        )}
-                    </div>
-                    <h5>Totale: € {getTotal()}</h5>
-                    <button
-                        className="btn btn-success mt-3 mb-3"
-                        onClick={handleCheckout}
-                        disabled={cart.length === 0}
-                    >
-                        Checkout
-                    </button>
-                    {checkoutMessage && (
-                        <div className="mt-3">
-                            <strong>{checkoutMessage}</strong>
+                        <div>
+                            {cart.map(item => (
+                                <div key={item.slug}>
+                                    {/* Replace with your CartItem component */}
+                                    <div>Product: {item.slug} (x{item.quantity})</div>
+                                </div>
+                            ))}
                         </div>
                     )}
+                </div>
+                <div className="col-md-4">
+                    <div>
+                        <h5>Promo Code</h5>
+                        <div className="promo-row">
+                            <input
+                                type="text"
+                                className="promo-input"
+                                placeholder="Enter promo code"
+                                value={promoCode}
+                                onChange={e => setPromoCode(e.target.value)}
+                            />
+                            <button
+                                className="promo-btn"
+                                onClick={handleApplyPromo}
+                                disabled={!promoCode}
+                            >
+                                Apply
+                            </button>
+                        </div>
+                        {appliedPromo && (
+                            <div className="promo-success">
+                                Promo code <b>{appliedPromo.code}</b> applied!
+                            </div>
+                        )}
+                        <div className="summary-row">
+                            <span>Subtotal</span>
+                            <span>€ {subtotalAfterPromo.toFixed(2)}</span>
+                        </div>
+                        <div className="summary-row">
+                            <span>Shipping</span>
+                            <span>{shipping === 0 ? 'Free' : `€ ${shipping.toFixed(2)}`}</span>
+                        </div>
+                        <div className="summary-row total-row">
+                            <span>Total</span>
+                            <span>€ {total.toFixed(2)}</span>
+                        </div>
+                        <button
+                            className="checkout-btn"
+                            onClick={() => navigate('/checkout')}
+                            disabled={cart.length === 0}
+                        >
+                            Proceed to Checkout
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
