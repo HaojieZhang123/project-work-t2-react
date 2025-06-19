@@ -471,7 +471,7 @@ footer ul li {
 }
 
 .product-row-image {
-    width: 200px;
+    width: 150px;
     margin-right: 20px;
 }
 
@@ -480,12 +480,16 @@ footer ul li {
     height: auto;
 }
 
+.product-row-details {
+    width: calc(100% - 350px);
+}
+
 .product-row-details .card-tag {
     margin-top: auto;
 }
 
 .product-row-price-section {
-    width: 250px;
+    width: 200px;
     margin-left: auto;
     text-align: end;
 }
@@ -515,12 +519,12 @@ footer ul li {
 
 .product-row-add-to-cart {
     background-color: #a8bba2;
-    padding: 20px 40px;
-    font-size: 1.2rem;
+    padding: 20px 30px;
+    /* font-size: 1.2rem; */
     font-weight: 500;
     cursor: pointer;
     transition: 0.3s ease;
-    margin-left: 20px;
+    margin-left: 10px;
 }
 
 .product-row-add-to-cart:hover {
