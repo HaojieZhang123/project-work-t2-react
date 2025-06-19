@@ -3,13 +3,38 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 import Cards from '../components/Cards'
 
+//context
+import { useWishlist } from '../context/WishlistContext'
+
 const WishList = () => {
     const [bestSellers, setBestSellers] = useState([])
-    const [wishlist, setWishlist] = useState([])
+    const [products, setProducts] = useState([])
     const endpointBestSellers = 'http://localhost:3000/api/products/special/best-sellers'
+
+    // context    
+    const {
+        wishlist,
+        addToWishlist,
+        removeFromWishlist,
+        isInWishlist
+    } = useWishlist();
+
+    console.log(products);
 
     // function to fetch product
     const fetchProduct = () => {
+        // fetch products in wishlist
+        axios.get('http://localhost:3000/api/products')
+            .then(response => {
+                const allProducts = response.data;
+                // filter products that are in the wishlist
+                const wishlistProducts = allProducts.filter(product => wishlist.includes(product.slug));
+                setProducts(wishlistProducts)
+            })
+            .catch(error => {
+                console.error("There was an error fetching the products!", error);
+            });
+
         // fetch best sellers
         axios.get(endpointBestSellers)
             .then(response => {
@@ -20,50 +45,59 @@ const WishList = () => {
             });
     };
 
-    const toggleWishlist = (productId) => {
-        setWishlist(prev =>
-            prev.includes(productId)
-                ? prev.filter(id => id !== productId)
-                : [...prev, productId]
-        );
+    const toggleWishlistIcon = (slug) => {
+        if (isInWishlist(slug)) {
+            removeFromWishlist(slug);
+        } else {
+            addToWishlist(slug);
+        }
     };
 
     useEffect(() => {
         fetchProduct();
-    }, []);
+    }, [wishlist]);
+    console.log(wishlist);
+
+
 
     return (
         <>
             <div className='container py-3'>
                 <h3 className='wishlist-heading'>your wishlist <b className='wishlist-counter'><i>{`(3 products)`}</i></b></h3>
 
-                <div className="wishlist-product-list">
-                    <div className="wishlist-product-card">
-                        <div className="wishlist-card-image">
-                            <img src="https://media.douglas.it/medias/eJGVgt015658-0-global.jpg?context=bWFzdGVyfGltYWdlc3w1NzM1MnxpbWFnZS9qcGVnfGFEQm1MMmhpWkM4Mk16VTBNRFE1TlRZeE16azRNaTlsU2tkV1ozUXdNVFUyTlRoZk1GOW5iRzlpWVd3dWFuQm58ZTViYzg3MDMwZjdiNmI2MGZiMzdhNGEyYWY1ZWY0ZDJjODA5ODE1NzRiM2FmN2FmNWU1Nzg4YWI1OTgwNGUyYw&grid=true&imPolicy=grayScaled&imdensity=1&imwidth=775" alt="" />
-                        </div>
-
-                        <div className="wishlist-card-details color-main">
-                            <div className="card-brand color-main-subtle">the ordinary</div>
-                            <div className="card-product-name">peptidi niacinamide 10% zinco 1%</div>
-                            <div className="card-category color-main-subtle">serum</div>
-                            <div className="card-tag">promo</div>
-                        </div>
-
-                        <div className="wishlist-card-price-section">
-                            <div className="card-price">€23,00</div>
-                            <div className="wishlist-card-cta">
-                                <div className="card-delete">
-                                    <i className="fa-solid fa-trash"></i>
+                {/* stampo in pagina le card dei prodotti in wishlist */}
+                {products.map(product => {
+                    return (
+                        <div className="wishlist-product-list" key={product.id}>
+                            <div className="wishlist-product-card">
+                                <div className="wishlist-card-image">
+                                    <img src={product.image} alt="" />
                                 </div>
-                                <div className="card-add-to-cart color-main">
-                                    <span>Add to cart</span>
+
+                                <div className="wishlist-card-details color-main">
+                                    <div className="card-brand color-main-subtle">{product.brand_name}</div>
+                                    <div className="card-product-name">{product.product_name}</div>
+                                    <div className="card-category color-main-subtle">{product.category_name.toUpperCase()}</div>
+                                    {product.discount != 0 && <div className="card-tag">promo</div>}
+                                </div>
+
+                                <div className="wishlist-card-price-section">
+                                    <div className="card-original-price">{`€ ${product.price}`}</div>
+                                    <div className="card-price">{`€ ${(product.price - (product.price * product.discount) / 100).toFixed(2)}`}</div>
+                                    <div className="wishlist-card-cta">
+                                        <div className="card-delete" onClick={() => toggleWishlistIcon(product.slug)}>
+                                            <i className="fa-solid fa-trash"></i>
+                                        </div>
+                                        <div className="card-add-to-cart color-main">
+                                            <span>Add to cart</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+                            <div className="wishlist-separator"></div>
                         </div>
-                    </div>
-                    <div className="wishlist-separator"></div>
-                </div>
+                    )
+                })}
 
             </div>
             <div className="background-rose pb-5">
