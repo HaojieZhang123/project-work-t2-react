@@ -171,14 +171,14 @@ const SearchPage = () => {
 
                          {/*Ordina*/}
                 <div className="mb-3">
-                    <label className="me-2">Ordina per:</label>
+                    <label className="me-2">Sort by:</label>
                         <select
                             value={sortOrder}
                             onChange={e => setSortOrder(e.target.value)}
                             className="form-select form-select-sm d-inline-block w-auto"
                         >
-                            <option value="price-asc">Prezzo crescente</option>
-                            <option value="price-desc">Prezzo decrescente</option>
+                            <option value="price-asc">Increasing price</option>
+                            <option value="price-desc">Decreasing price</option>
                         </select>
                  </div>
 
