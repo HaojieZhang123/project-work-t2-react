@@ -113,11 +113,11 @@ const DetailsPage = () => {
 
                 {/* Colonna immagine */}
                 <div className="col-md-6 d-flex justify-content-center align-items-start p-0">
-                    <div className="w-100 h-100">
+                    <div className="w-100 h-100 img-zoom-container">
                         <img
                             src={product.image}
                             alt={product.product_name}
-                            className="w-100 h-100 object-fit-cover"
+                            className="w-100 h-100 object-fit-cover img-zoom"
                         />
                     </div>
                 </div>

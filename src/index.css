@@ -301,7 +301,20 @@ footer ul li {
 }
 
 .btn-add-to-wishlist:hover {
-    background-color: #b84442;
+    background-color: #d4c5ba;
+}
+
+.img-zoom-container {
+    overflow: hidden;
+    display: inline-block;
+}
+
+.img-zoom {
+    transition: transform 0.3s ease;
+}
+
+.img-zoom-container:hover .img-zoom {
+    transform: scale(1.2);
 }
 
 /* price */
