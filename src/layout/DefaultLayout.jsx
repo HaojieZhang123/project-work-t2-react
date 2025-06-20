@@ -11,13 +11,13 @@ const DefaultLayout = () => {
     const isSidebarVisible = cart.length > 0;
     return (
         <>
-            <div className="d-flex flex-column min-vh-100">
-                <div className={`main-content${isSidebarVisible ? ' with-sidebar' : ''}`}>
+            <div>
+                <div className={`main-content${isSidebarVisible ? ' with-sidebar' : ''} d-flex flex-column min-vh-100`}>
                     <header>
                         <Header />
                     </header>
 
-                    <main className="main-content">
+                    <main className="content-center">
                         <Outlet />
                     </main>
 
