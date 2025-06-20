@@ -15,20 +15,6 @@ header ul li a {
     padding: 11px;
 }
 
-.category-groups {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    padding-top: 1rem;
-    justify-content: center;
-}
-
-.category-group select {
-    margin-left: 0.5rem;
-    padding: 0.4rem;
-    font-size: 1rem;
-}
-
 /* homepage */
 
 .hero-banner {
@@ -40,6 +26,31 @@ header ul li a {
     border-color: #f9e6d8 !important;
     box-shadow: 0 0 0 0.25rem #f9e6d86e !important;
 }
+
+/* header */
+.category-group select {
+    padding: 6px 10px;
+    border-radius: 6px;
+    background-color: white;
+    border: none;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    outline: none;
+    width: 100%;
+}
+
+.category-group select:focus {
+    border-color: #92a58c;
+    box-shadow: 0 0 5px #92a58c;
+}
+
+.category-group select option:disabled {
+    color: #f9e6d8;
+    font-weight: 700;
+    cursor: default;
+}
+
 
 /* header RESPONSIVE *
 

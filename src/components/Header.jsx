@@ -95,7 +95,7 @@ const Header = () => {
 
                 {/* Drop-down menu per categorie */}
                 <div className="row">
-                    <div className="col-12 pt-4 d-flex justify-content-center flex-wrap gap-3">
+                    <div className="col-12 pt-4 d-flex justify-content-around flex-wrap gap-3">
 
                         <div className="category-group">
                             <select onChange={(e) => handleCategoryClick(e.target.value)} defaultValue="">
