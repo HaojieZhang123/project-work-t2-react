@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { useCart } from '../context/CartContext'
+import { Link } from 'react-router-dom'
 
 
 const Cards = ({ product }) => {
@@ -8,7 +10,28 @@ const Cards = ({ product }) => {
     //const { category_name } = category
 
     //const { brand_name } = brand
+    // context
+    const {
+        cart,
+        addToCart,
+        removeFromCart,
+        updateCartQuantity,
+        isInCart
+    } = useCart();
 
+    // add product to cart. if already in cart, increase quantity by 1
+    const addCartButtonHandler = (slug) => {
+        if (isInCart(slug)) {
+            // get the current quantity and increase it by 1
+            const currentQuantity = cart.find(item => item.slug === slug)?.quantity || 0;
+            // update the cart quantity
+            updateCartQuantity(slug, currentQuantity + 1);
+        } else {
+            addToCart(slug, 1);
+        }
+    };
+
+    // calcolo il prezzo effettivo dopo lo sconto
     const discountValue = (price * discount) / 100
 
     const actualPrice = price - discountValue
@@ -25,25 +48,31 @@ const Cards = ({ product }) => {
     const isPromo = discount > 0
 
     return (
-        <div className="product-card color-main h-100">
-            <div className="card-body-container">
-                <div className="card-image-container">
-                    <img src={image} alt="" />
+        <div className="product-card h-100">
+            <Link to={`/product/${slug}`} className='card-link color-main'>
+                <div className="card-body-container">
+                    <div className="card-image-container">
+                        <img src={image} alt="" />
+                    </div>
+                    <div className="card-brand color-main-subtle">{brand_name}</div>
+
+                    <div className="card-product-name">{product_name}</div>
+                    <div className="card-category color-main-subtle">{category_name}</div>
                 </div>
-                <div className="card-brand color-main-subtle">{brand_name}</div>
-                
-                <div className="card-product-name">{product_name}</div>
-                <div className="card-category color-main-subtle">{category_name}</div>
-            </div>
-            <div className="card-bottom-row">
-                <div className="card-price">
-                    {`€ ${actualPrice.toFixed(2)}`}
-                    {discount != 0 && <i className='card-original-price ms-2 color-main-subtle'>{`€ ${price}`}</i>}
+                <div className="card-bottom-row">
+                    <div className="card-price color-main">
+                        {`€ ${actualPrice.toFixed(2)}`}
+                        {discount != 0 && <i className='card-original-price ms-2 color-main-subtle'>{`€ ${price}`}</i>}
+                    </div>
+                    <div className='d-flex justify-content-start align-items-center gap-2'>
+                        {isPromo && <div className='card-tag tag-promo'>promo</div>}
+                        {isNew && <div className='card-tag tag-new'>new</div>}
+                    </div>
                 </div>
-                <div className='d-flex justify-content-start align-items-center gap-2'>
-                    {isPromo && <div className="card-tag">promo</div>}
-                    {isNew && <div className="card-tag">new</div>}
-                </div>
+            </Link>
+
+            <div className="card-add-to-cart color-main mt-3" onClick={() => addCartButtonHandler(product.slug)}>
+                <span>Add to Cart {isInCart(product.slug) ? `(${cart.find(item => item.slug === product.slug)?.quantity}) ` : ' '}</span>
             </div>
         </div>
     )
