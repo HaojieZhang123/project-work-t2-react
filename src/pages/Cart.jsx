@@ -76,6 +76,10 @@ const Cart = () => {
         setPromoCode('');
     };
 
+
+    // Function to check if promo is disabled
+    const isPromoDisabled = () => ! !appliedPromo;
+
     console.log(cart);
     console.log(products);
 
@@ -126,14 +130,16 @@ const Cart = () => {
                             <input
                                 type="text"
                                 className="promo-input"
-                                placeholder="Enter promo code"
+                                // placeholder="Enter promo code"
                                 value={promoCode}
                                 onChange={e => setPromoCode(e.target.value)}
+                                disabled={isPromoDisabled()}
+                                placeholder={isPromoDisabled() ? "Promo code already applied" : "Enter promo code"}
                             />
                             <button
                                 className="promo-btn"
                                 onClick={handleApplyPromo}
-                                disabled={!promoCode}
+                                disabled={!promoCode || isPromoDisabled()}
                             >
                                 Apply
                             </button>
