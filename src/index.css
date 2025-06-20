@@ -676,6 +676,137 @@ form input[type="submit"]:hover {
     cursor: not-allowed;
 }
 
+/* SIDEBAR CART */
+.sidebar-cart {
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 150px;
+    height: 100%;
+    background: #fff;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-cart .sidebar-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1d1d1d;
+    padding: 5px;
+    text-align: center;
+}
+
+.sidebar-cart .subtotal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #f9e6d8;
+    border-radius: 8px;
+    padding: 10px 0;
+    margin: 10px 0;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #1d1d1d;
+    box-shadow: 0 2px 8px #a8bba233;
+}
+
+.sidebar-cart .view-cart-btn {
+    display: block;
+    width: 100%;
+    background: #a8bba2;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 0;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    margin-bottom: 18px;
+    transition: background 0.2s;
+    cursor: pointer;
+}
+
+.sidebar-cart .view-cart-btn:hover {
+    background: #92a58c;
+    color: #fff;
+    text-decoration: none;
+}
+
+.sidebar-cart ul {
+    padding: 0;
+    margin: 0;
+    flex: 1;
+    overflow-y: auto;
+}
+
+.sidebar-cart li {
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+    color: #1d1d1d;
+}
+
+.sidebar-cart li img {
+    width: 120px;
+    height: 120px;
+}
+
+/* SIDEBAR CART QUANTITY CONTROL */
+.sidebar-cart .quantity-control {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 0;
+}
+
+.sidebar-cart .quantity-control button {
+    background: #a8bba2;
+    color: #fff;
+    border: none;
+    border-radius: 0;
+    width: 32px;
+    height: 32px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.sidebar-cart .quantity-control button:disabled {
+    background: #ccc;
+    color: #888;
+    cursor: not-allowed;
+}
+
+.sidebar-cart .quantity-control span {
+    flex: 1 1 auto;
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #1d1d1d;
+    background: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    padding: 2px 0;
+    min-width: 0;
+    margin: 0 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 32px;
+}
+
+.display-none {
+    display: none;
+}
+
+
 /* Responsive */
 @media (max-width: 900px) {
     .cart-layout {

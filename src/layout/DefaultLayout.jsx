@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom"
 
 import Header from "../components/Header"
 import Footer from "../components/Footer"
+import SidebarCart from "../components/SidebarCart"
 
 const DefaultLayout = () => {
     return (
@@ -17,6 +18,10 @@ const DefaultLayout = () => {
             <footer>
                 <Footer />
             </footer>
+
+            <div>
+                <SidebarCart />
+            </div>
         </>
     )
 }
