@@ -2,7 +2,7 @@ import React from 'react'
 
 const CardsList = ({ product }) => {
 
-    const { product_name, slug, brand_id, price, discount, added_date, image } = product;
+    const { product_name, slug, brand_id, brand_name, category_name, price, discount, added_date, image } = product;
 
     const discountValue = (price * discount) / 100;
     const actualPrice = price - discountValue;
@@ -21,9 +21,9 @@ const CardsList = ({ product }) => {
                 <img src={image} alt={product_name} />
             </div>
             <div className="card-list-info">
-                <div className="cards-list-brand py-2">Brand N°{brand_id}</div>
+                <div className="cards-list-brand py-2">{brand_name}</div>
                 <div className="cards-list-name py-2">{product_name}</div>
-                <div className="cards-list-category py-2">Categoria prodotto</div>
+                <div className="cards-list-category py-2">{category_name}</div>
                 <div className="cards-list-price py-2">
                     {`€ ${actualPrice.toFixed(2)}`}
                     {discount !== 0 && (
