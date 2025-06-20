@@ -67,14 +67,14 @@ const Header = () => {
             items: [
                 { label: "SHAMPOO", value: "shampoo" },
                 { label: "CONDITIONER", value: "conditioner" },
-                { label: "PROTECTOR", value: "heat+protector" },
+                { label: "HEAT PROTECTOR", value: "heat+protector" },
             ]
         },
     ];
 
     // Funzione per gestire il click su una categoria
     const handleCategoryClick = (category) => {
-        window.location.href = `/search?cat=${(category)}`;
+        window.location.href = `/search?cat=${category}`;
     };
 
     return (
@@ -106,6 +106,7 @@ const Header = () => {
                         </form>
                     </div>
 
+                    {/* logo centrale */}
                     <div className='col-4 d-flex justify-content-center logo-container'>
                         <Link to="/">
                             <img src="/Logo-black.svg" alt="logo" className="logo-img" />
@@ -122,17 +123,22 @@ const Header = () => {
                             <i className="fa-solid fa-bars"></i>
                         </button>
 
+                        {/* Icona wishlist */}
                         <Link to="/wishlist" className='header-icon-link color-main'>
                             <div className='header-icon'>
                                 <i className="fa-regular fa-heart px-3 text-dark"></i>
+                                {/* contatore */}
                                 <div className='header-icon-counter header-icon-wishlist'>
                                     <b>{wishlistCounter}</b>
                                 </div>
                             </div>
                         </Link>
+
+                        {/* Icona cart */}
                         <Link to="/cart" className='header-icon-link color-white'>
                             <div className='header-icon'>
                                 <i className="fa-solid fa-bag-shopping text-dark"></i>
+                                {/* contatore */}
                                 <div className='header-icon-counter header-icon-cart'>
                                     <b>{cartCounter}</b>
                                 </div>
@@ -141,28 +147,50 @@ const Header = () => {
                     </div>
                 </div>
 
-                {/* tabs */}
-                <div className="row">
-                    <div className="col-12 pt-5">
-                        <ul className="d-flex flex-wrap justify-content-center px-3">
-                            {categories.map(cat => (
-                                <li className="mx-2" key={cat.value}>
-                                    <button
-                                        type="button"
-                                        className="btn btn-link p-0 color-main"
-                                        style={{ textDecoration: "none", color: "inherit" }}
-                                        onClick={() => handleCategoryClick(cat.value)}
+                {/* categorie - solo mobile con hamburger attivo */}
+                {mobileMenuOpen && (
+                    <div className="row d-md-none">
+                        <div className="col-12 pt-3 d-flex flex-column gap-2">
+                            {categoryGroups.map(group => (
+                                <div className="category-group" key={group.title}>
+                                    <select
+                                        onChange={(e) => handleCategoryClick(e.target.value)}
+                                        defaultValue=""
+                                        className="form-select"
                                     >
-                                        {cat.label}
-                                    </button>
-                                </li>
+                                        <option value="" disabled>{group.title}</option>
+                                        {group.items.map(item => (
+                                            <option value={item.value} key={item.value}>{item.label}</option>
+                                        ))}
+                                    </select>
+                                </div>
                             ))}
-                        </ul>
+                        </div>
+                    </div>
+                )}
+
+                {/* categorie - visibili solo su desktop */}
+                <div className="row d-none d-md-flex">
+                    <div className="col-12 pt-4 d-flex justify-content-around flex-wrap gap-3">
+                        {categoryGroups.map(group => (
+                            <div className="category-group" key={group.title}>
+                                <select
+                                    onChange={(e) => handleCategoryClick(e.target.value)}
+                                    defaultValue=""
+                                    className="form-select"
+                                >
+                                    <option value="" disabled>{group.title}</option>
+                                    {group.items.map(item => (
+                                        <option value={item.value} key={item.value}>{item.label}</option>
+                                    ))}
+                                </select>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>
         </>
-    )
-}
+    );
+};
 
 export default Header;
