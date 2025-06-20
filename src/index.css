@@ -70,6 +70,41 @@ header ul li a {
     cursor: default;
 }
 
+.header-icon-link {
+    position: relative;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+}
+
+.header-icon {
+    font-size: 1.3rem;
+}
+
+.header-icon-counter {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2px;
+    font-size: .8rem;
+}
+
+.header-icon-wishlist {
+    background-color: #F9E6D8;
+}
+
+.header-icon-cart {
+    background-color: #a8bba2;
+}
+
 
 /* header RESPONSIVE *
 
@@ -440,6 +475,10 @@ footer ul li {
 
 .color-accent2 {
     color: #F9E6D8;
+}
+
+.color-white {
+    color: white;
 }
 
 .background-rose {

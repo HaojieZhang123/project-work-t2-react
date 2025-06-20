@@ -1,15 +1,75 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
+import { useWishlist } from '../context/WishlistContext';
+import { useCart } from '../context/CartContext';
 
 const Header = () => {
-    // Array delle categorie per i tab
-    const categories = [
-        { label: "SERUM", value: "serum" },
-        { label: "MASCARA", value: "mascara" },
-        { label: "FOUNDATION", value: "foundation" },
-        { label: "SCRUB", value: "scrub" },
-        { label: "BODY WASH ", value: "body+wash" },
-        { label: "SHAMPOO", value: "shampoo" },
+    // Stato per il menu mobile 
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+    // context
+    const {
+        cart,
+        addToCart,
+        removeFromCart,
+        updateCartQuantity,
+        isInCart
+    } = useCart();
+
+    const {
+        wishlist,
+        addToWishlist,
+        removeFromWishlist,
+        isInWishlist
+    } = useWishlist();
+
+    const wishlistCounter = wishlist.length
+
+    const cartCounter = cart.length != 0 ? cart.map(item => item.quantity).reduce((tot, amount) => parseInt(tot) + parseInt(amount)) : 0
+
+
+    // Categorie raggruppate per menu
+    const categoryGroups = [
+        {
+            title: "SKINCARE",
+            items: [
+                { label: "SERUM", value: "serum" },
+                { label: "MOISTURIZER", value: "moisturizer" },
+                { label: "TONER", value: "toner" },
+            ]
+        },
+        {
+            title: "FACE",
+            items: [
+                { label: "FOUNDATION", value: "foundation" },
+                { label: "CONCEALER", value: "concealer" },
+                { label: "POWDER", value: "powder" },
+            ]
+        },
+        {
+            title: "EYES & LIPS",
+            items: [
+                { label: "MASCARA", value: "mascara" },
+                { label: "EYELINER", value: "eyeliner" },
+                { label: "LIPSTICK", value: "lipstick" },
+            ]
+        },
+        {
+            title: "BODY",
+            items: [
+                { label: "BODY WASH", value: "body+wash" },
+                { label: "SCRUB", value: "scrub" },
+                { label: "BODY CREAM", value: "body+cream" },
+            ]
+        },
+        {
+            title: "HAIR",
+            items: [
+                { label: "SHAMPOO", value: "shampoo" },
+                { label: "CONDITIONER", value: "conditioner" },
+                { label: "PROTECTOR", value: "heat+protector" },
+            ]
+        },
     ];
 
     // Funzione per gestire il click su una categoria
@@ -51,18 +111,33 @@ const Header = () => {
                             <img src="/Logo-black.svg" alt="logo" className="logo-img" />
                         </Link>
                     </div>
-                    {/* div laterale carrello e wish-list */}
-                    <div className='col-4 d-flex justify-content-end'>
-                        <div className='wishlist-size'>
-                            <Link to="/wishlist">
+
+                    {/* icone a destra + hamburger per mobile */}
+                    <div className='col-4 d-flex justify-content-end align-items-center'>
+                        {/* hamburger visibile solo su mobile */}
+                        <button
+                            className="btn d-md-none me-2"
+                            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                        >
+                            <i className="fa-solid fa-bars"></i>
+                        </button>
+
+                        <Link to="/wishlist" className='header-icon-link color-main'>
+                            <div className='header-icon'>
                                 <i className="fa-regular fa-heart px-3 text-dark"></i>
-                            </Link>
-                        </div>
-                        <div>
-                            <Link to="/cart">
+                                <div className='header-icon-counter header-icon-wishlist'>
+                                    <b>{wishlistCounter}</b>
+                                </div>
+                            </div>
+                        </Link>
+                        <Link to="/cart" className='header-icon-link color-white'>
+                            <div className='header-icon'>
                                 <i className="fa-solid fa-bag-shopping text-dark"></i>
-                            </Link>
-                        </div>
+                                <div className='header-icon-counter header-icon-cart'>
+                                    <b>{cartCounter}</b>
+                                </div>
+                            </div>
+                        </Link>
                     </div>
                 </div>
 
