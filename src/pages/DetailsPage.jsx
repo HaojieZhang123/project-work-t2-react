@@ -64,7 +64,7 @@ const DetailsPage = () => {
             });
 
         // fetch best sellers
-        axios.get(`http://localhost:3001/api/products/${slug}/related`)
+        axios.get(`http://localhost:3000/api/products/${slug}/related`)
             .then(response => {
                 setRelatedProducts(response.data)
             })
