@@ -25,7 +25,7 @@ const Header = () => {
 
     const wishlistCounter = wishlist.length
 
-    const cartCounter = cart.map(item => item.quantity).reduce((tot, amount) => tot + amount)
+    const cartCounter = cart.map(item => item.quantity).reduce((tot, amount) => parseInt(tot) + parseInt(amount))
 
     // Categorie raggruppate per menu
     const categoryGroups = [
