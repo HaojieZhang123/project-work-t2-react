@@ -6,18 +6,21 @@ import Footer from "../components/Footer"
 const DefaultLayout = () => {
     return (
         <>
-            <header>
-                <Header />
-            </header>
+            <div className="d-flex flex-column min-vh-100">
+                <header>
+                    <Header />
+                </header>
 
-            <main>
-                <Outlet />
-            </main>
+                <main className="main-content">
+                    <Outlet />
+                </main>
 
-            <footer>
-                <Footer />
-            </footer>
+                <footer>
+                    <Footer />
+                </footer>
+            </div>
         </>
+
     )
 }
 
