@@ -54,7 +54,7 @@ const ProductRow = ({ state, product }) => {
     // Calcolo se il prodotto è "promo"
     const isPromo = discount > 0
 
-    // calculate de quantity of a product in the cart
+    // calculate the quantity of a product in the cart
     useEffect(() => {
         updateCartQuantity(slug, quantityValue);
     }, [quantityValue])
@@ -83,16 +83,19 @@ const ProductRow = ({ state, product }) => {
                     <div className="product-row-details color-main">
                         <div className="card-brand color-main-subtle">{brand_name}</div>
                         <div className="card-product-name">{product_name}</div>
-                        <div className="card-category color-main-subtle">{category_name.toUpperCase()}</div>
+                        <div className="card-category color-main-subtle">{category_name}</div>
                         <div className='product-row-tags'>
-                            {isPromo && <div className="card-tag">promo</div>}
-                            {isNew && <div className="card-tag">new</div>}
+                            {isPromo && <div className="card-tag tag-promo">promo</div>}
+                            {isNew && <div className="card-tag tag-new">new</div>}
                         </div>
                     </div>
 
                     <div className="product-row-price-section">
-                        <div className="card-original-price color-main-subtle">{`€ ${price}`}</div>
-                        <div className="card-price">{`€ ${actualPrice}`}</div>
+                        <div className="d-flex justify-content-end align-items-center">
+                            <div className="card-original-price color-main-subtle">{`€ ${price}`}</div>
+                            <div className="card-price ms-3">{`€ ${actualPrice}`}</div>
+                        </div>
+
                         <div className="product-row-cta">
                             <div className="product-row-delete" onClick={() => toggleWishlistIcon(slug)}>
                                 <i className="fa-solid fa-trash"></i>
@@ -118,8 +121,8 @@ const ProductRow = ({ state, product }) => {
                         <div className="card-product-name">{product_name}</div>
                         <div className="card-category color-main-subtle">{category_name.toUpperCase()}</div>
                         <div className='product-row-tags'>
-                            {isPromo && <div className="card-tag">promo</div>}
-                            {isNew && <div className="card-tag">new</div>}
+                            {isPromo && <div className="card-tag tag-promo">promo</div>}
+                            {isNew && <div className="card-tag tag-new">new</div>}
                         </div>
                     </div>
 
@@ -132,8 +135,10 @@ const ProductRow = ({ state, product }) => {
                                 <input type="number" min="1" max="99" className="product-row-quantity-input p-2 ms-3" value={quantityValue} onChange={(e) => setQuantityValue(e.target.value)} />
                             </div>
                         </div>
-                        <div className="card-original-price color-main-subtle">{`€ ${price}`}</div>
-                        <div className="card-price">{`€ ${actualPrice}`}</div>
+                        <div className="d-flex justify-content-end align-items-center">
+                            <div className="card-original-price color-main-subtle">{`€ ${price}`}</div>
+                            <div className="card-price ms-3">{`€ ${actualPrice}`}</div>
+                        </div>
                     </div>
                 </div>
             }

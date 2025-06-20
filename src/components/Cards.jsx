@@ -64,7 +64,7 @@ const Cards = ({ product }) => {
                         {`€ ${actualPrice.toFixed(2)}`}
                         {discount != 0 && <i className='card-original-price ms-2 color-main-subtle'>{`€ ${price}`}</i>}
                     </div>
-                    <div className='d-flex justify-content-start align-items-center gap-2'>
+                    <div className='card-tags'>
                         {isPromo && <div className='card-tag tag-promo'>promo</div>}
                         {isNew && <div className='card-tag tag-new'>new</div>}
                     </div>
