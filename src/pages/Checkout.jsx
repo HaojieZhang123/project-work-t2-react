@@ -92,16 +92,27 @@ const Checkout = () => {
                                 onChange={handleChange}
                             />
                         </div>
-                       
-                        <Link
-                            to={{
-                                pathname: "/summary",
-                                state: { formCheckout }
-                            }}
-                            state={formCheckout}
-                        >
-                            <button type='button' className='mb-3'>Next Step</button>
-                        </Link>
+
+                        <div className='d-flex justify-content-between' >
+                            <Link
+                                to={{
+                                    pathname: "/cart",
+                                    state: { formCheckout }
+                                }}
+                                state={formCheckout}
+                            >
+                                <button type='button' className='mb-3'><i class="fa-solid fa-arrow-left"></i> Back to Cart</button>
+                            </Link>
+                            <Link
+                                to={{
+                                    pathname: "/summary",
+                                    state: { formCheckout }
+                                }}
+                                state={formCheckout}
+                            >
+                                <button type='button' className='mb-3'>Next Step <i class="fa-solid fa-arrow-right"></i></button>
+                            </Link>
+                        </div>
                     </form>
                 </div>
             </div>
