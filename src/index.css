@@ -51,6 +51,7 @@ header ul li a {
     font-size: 1rem;
     cursor: pointer;
     outline: none;
+    min-width: 150px;
     width: 100%;
 }
 
