@@ -95,7 +95,7 @@ const ProductRow = ({ state, product }) => {
                         <div className="card-price">{`€ ${actualPrice}`}</div>
                         <div className="product-row-cta">
                             <div className="product-row-delete" onClick={() => toggleWishlistIcon(slug)}>
-                                <i className="fa-solid fa-trash"></i>
+                                <i className="fa-solid fa-heart-circle-minus"></i>
                             </div>
                             <div className="product-row-add-to-cart color-main" onClick={() => addCartButtonHandler(product.slug)}>
                                 <span>Add to Cart {isInCart(product.slug) ? `(${cart.find(item => item.slug === product.slug)?.quantity}) ` : ' '}</span>
