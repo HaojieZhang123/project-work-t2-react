@@ -235,10 +235,7 @@ const DetailsPage = () => {
                                 onClick={() => toggleWishlistIcon(product.slug)}
                                 style={{ cursor: 'pointer' }}
                             ></i>
-                            <Link className='card-link'
-                                to={`/product/${product.slug}`}>
-                                <Cards product={product} />
-                            </Link>
+                            <Cards product={product} />
                         </div>
                     ))}
                 </div>
