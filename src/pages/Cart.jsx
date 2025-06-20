@@ -44,6 +44,7 @@ const Cart = () => {
 
     const [promoCode, setPromoCode] = useState('');
     const [appliedPromo, setAppliedPromo] = useState(null);
+    const [promoError, setPromoError] = useState('');
     const navigate = useNavigate();
 
     const promoDiscount = appliedPromo ? 10 : 0;
@@ -60,10 +61,16 @@ const Cart = () => {
                 const promo = response.data;
                 if (promo && promo.code === promoCode) {
                     setAppliedPromo(promo);
+                    setPromoError('');
+                } else {
+                    setAppliedPromo(null);
+                    setPromoError('Promo code is invalid or does not exist.');
                 }
             })
             .catch(error => {
                 console.error("There was an error applying the promo code!", error);
+                setAppliedPromo(null);
+                setPromoError('Promo code is invalid or does not exist.');
             });
 
         setPromoCode('');
@@ -136,6 +143,13 @@ const Cart = () => {
                                 Promo code <b>{appliedPromo.code}</b> applied!
                             </div>
                         )}
+
+                        {promoError && (
+                            <div className="promo-error">
+                                {promoError}
+                            </div>
+                        )}
+
                         <div className="summary-row">
                             <span>Subtotal</span>
                             <span>€ {subtotalAfterPromo.toFixed(2)}</span>

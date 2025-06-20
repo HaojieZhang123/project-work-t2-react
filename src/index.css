@@ -655,6 +655,15 @@ form input[type="submit"]:hover {
     font-size: 20px;
 }
 
+.promo-error {
+    color: #8e3838;
+    background: #fbe7e7;
+    border-radius: 4px;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
 .summary-row {
     display: flex;
     justify-content: space-between;
