@@ -191,6 +191,7 @@ const SearchPage = () => {
                             <h6 className='p-1'>CATEGORY</h6>
                             <div className="category-group">
                                 <select
+                                    className='width-100'
                                     onChange={(e) => {
                                         const selectedCategory = e.target.value;
                                         setSearchParams({
@@ -213,8 +214,9 @@ const SearchPage = () => {
                         {/* BRAND */}
                         <div className="mb-4">
                             <h6 className="p-1">BRAND</h6>
-                            <div className="category-group">
+                            <div className="category-group with-100">
                                 <select
+                                    className='width-100'
                                     onChange={(e) => {
                                         const selectedBrand = e.target.value;
                                         setSearchParams({

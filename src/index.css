@@ -55,9 +55,15 @@ header ul li a {
     font-size: 1rem;
     cursor: pointer;
     outline: none;
-    /* width: 100%; */
+}
+
+.category-group-width {
     min-width: 115px;
     max-width: 100%;
+}
+
+.width-100 {
+    width: 100%;
 }
 
 .category-group select:focus {

@@ -117,10 +117,10 @@ const Header = () => {
                     <div className='col-4 d-flex justify-content-end align-items-center'>
                         {/* hamburger visibile solo su mobile */}
                         <button
-                            className="btn d-md-none me-2"
+                            className="btn d-md-none mx-2 align-self-center d-flex align-items-center"
                             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                         >
-                            <i className="fa-solid fa-bars"></i>
+                            <i className="fa-solid fa-bars fs-4 text-dark"></i>
                         </button>
 
                         {/* Icona wishlist */}
@@ -152,7 +152,7 @@ const Header = () => {
                     <div className="row d-md-none">
                         <div className="col-12 pt-3 d-flex flex-column gap-0">
                             {categoryGroups.map(group => (
-                                <div className="category-group" key={group.title}>
+                                <div className="category-group category-group-width" key={group.title}>
                                     <select
                                         onChange={(e) => handleCategoryClick(e.target.value)}
                                         defaultValue=""
@@ -173,7 +173,7 @@ const Header = () => {
                 <div className="row d-none d-md-flex">
                     <div className="col-12 pt-4 d-flex justify-content-around flex-wrap gap-0">
                         {categoryGroups.map(group => (
-                            <div className="category-group" key={group.title}>
+                            <div className="category-group category-group-width " key={group.title}>
                                 <select
                                     onChange={(e) => handleCategoryClick(e.target.value)}
                                     defaultValue=""
