@@ -55,8 +55,9 @@ header ul li a {
     font-size: 1rem;
     cursor: pointer;
     outline: none;
-    min-width: 150px;
-    width: 100%;
+    /* width: 100%; */
+    min-width: 115px;
+    max-width: 100%;
 }
 
 .category-group select:focus {
@@ -934,7 +935,7 @@ form input[type="submit"]:hover {
 
 /* Mobile cart overlay */
 .mobile-cart-overlay {
-    background: white;
+    background: white !important;
     position: fixed;
     top: 0;
     left: 0;
@@ -942,40 +943,15 @@ form input[type="submit"]:hover {
     width: 100vw;
     height: 100vh;
     padding: 10px;
-
+    background: rgba(0, 0, 0, 0.5);
     display: flex;
     flex-direction: column;
-}
-
-.overlay-header,
-.overlay-content,
-.overlay-footer {
-    max-width: 500px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.overlay-title {
-    font-size: 2rem;
-    font-weight: 600;
-    color: #1d1d1d;
-    padding: 5px;
-    margin-bottom: 30px;
-    border-bottom: 1px solid #e0e0e0;
-    text-align: center;
-}
-
-.overlay-content {
-    flex: 1 1 auto;
-    overflow-y: auto;
-    max-height: calc(100vh - 180px);
-    /* adjust 180px if your header/footer are taller/shorter */
-    padding-bottom: 10px;
+    align-items: center;
+    justify-content: center;
 }
 
 .overlay-footer {
-    flex: 0 0 auto;
-    width: 100%;
+    width: 70%;
 }
 
 .overlay-footer .subtotal {

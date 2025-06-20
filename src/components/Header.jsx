@@ -47,7 +47,7 @@ const Header = () => {
             ]
         },
         {
-            title: "EYES & LIPS",
+            title: "EYES-LIPS",
             items: [
                 { label: "MASCARA", value: "mascara" },
                 { label: "EYELINER", value: "eyeliner" },
@@ -67,7 +67,7 @@ const Header = () => {
             items: [
                 { label: "SHAMPOO", value: "shampoo" },
                 { label: "CONDITIONER", value: "conditioner" },
-                { label: "HEAT PROTECTOR", value: "heat+protector" },
+                { label: "PROTECTOR", value: "heat+protector" },
             ]
         },
     ];
@@ -79,7 +79,7 @@ const Header = () => {
 
     return (
         <>
-            <div className="container p-3">
+            <div className="container pt-3 pb-3">
                 {/* main header */}
                 <div className="row">
                     {/* Div laterale barra di ricerca */}
@@ -150,7 +150,7 @@ const Header = () => {
                 {/* categorie - solo mobile con hamburger attivo */}
                 {mobileMenuOpen && (
                     <div className="row d-md-none">
-                        <div className="col-12 pt-3 d-flex flex-column gap-2">
+                        <div className="col-12 pt-3 d-flex flex-column gap-0">
                             {categoryGroups.map(group => (
                                 <div className="category-group" key={group.title}>
                                     <select
@@ -171,7 +171,7 @@ const Header = () => {
 
                 {/* categorie - visibili solo su desktop */}
                 <div className="row d-none d-md-flex">
-                    <div className="col-12 pt-4 d-flex justify-content-around flex-wrap gap-3">
+                    <div className="col-12 pt-4 d-flex justify-content-around flex-wrap gap-0">
                         {categoryGroups.map(group => (
                             <div className="category-group" key={group.title}>
                                 <select
