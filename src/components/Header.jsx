@@ -1,56 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from "react-router-dom";
 
 const Header = () => {
-    // Stato per il menu mobile 
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-    // Categorie raggruppate per menu
-    const categoryGroups = [
-        {
-            title: "SKINCARE",
-            items: [
-                { label: "SERUM", value: "serum" },
-                { label: "MOISTURIZER", value: "moisturizer" },
-                { label: "TONER", value: "toner" },
-            ]
-        },
-        {
-            title: "FACE",
-            items: [
-                { label: "FOUNDATION", value: "foundation" },
-                { label: "CONCEALER", value: "concealer" },
-                { label: "POWDER", value: "powder" },
-            ]
-        },
-        {
-            title: "EYES & LIPS",
-            items: [
-                { label: "MASCARA", value: "mascara" },
-                { label: "EYELINER", value: "eyeliner" },
-                { label: "LIPSTICK", value: "lipstick" },
-            ]
-        },
-        {
-            title: "BODY",
-            items: [
-                { label: "BODY WASH", value: "body+wash" },
-                { label: "SCRUB", value: "scrub" },
-                { label: "BODY CREAM", value: "body+cream" },
-            ]
-        },
-        {
-            title: "HAIR",
-            items: [
-                { label: "SHAMPOO", value: "shampoo" },
-                { label: "CONDITIONER", value: "conditioner" },
-                { label: "PROTECTOR", value: "heat+protector" },
-            ]
-        },
+    // Array delle categorie per i tab
+    const categories = [
+        { label: "SERUM", value: "serum" },
+        { label: "MASCARA", value: "mascara" },
+        { label: "FOUNDATION", value: "foundation" },
+        { label: "SCRUB", value: "scrub" },
+        { label: "BODY WASH ", value: "body+wash" },
+        { label: "SHAMPOO", value: "shampoo" },
     ];
 
+    // Funzione per gestire il click su una categoria
     const handleCategoryClick = (category) => {
-        window.location.href = `/search?cat=${category}`;
+        window.location.href = `/search?cat=${(category)}`;
     };
 
     return (
@@ -58,10 +22,11 @@ const Header = () => {
             <div className="container p-3">
                 {/* main header */}
                 <div className="row">
-                    {/* barra di ricerca */}
+                    {/* Div laterale barra di ricerca */}
                     <div className='col-4 d-flex search-container justify-content-start align-items-center'>
                         <form
                             className="d-flex w-100"
+                            // passaggio dei parametri di ricerca tramite query string
                             onSubmit={e => {
                                 e.preventDefault();
                                 const name = e.target.elements.search.value.trim();
@@ -75,82 +40,54 @@ const Header = () => {
                                 type="text"
                                 name="search"
                                 placeholder="Search"
-                                className="search-input form-control"
+                                className="search-input flex-grow-1"
                                 autoComplete="off"
                             />
                         </form>
                     </div>
 
-                    {/* logo centrale */}
                     <div className='col-4 d-flex justify-content-center logo-container'>
                         <Link to="/">
                             <img src="/Logo-black.svg" alt="logo" className="logo-img" />
                         </Link>
                     </div>
-
-                    {/* icone a destra + hamburger per mobile */}
-                    <div className='col-4 d-flex justify-content-end align-items-center'>
-                        {/* hamburger visibile solo su mobile */}
-                        <button
-                            className="btn d-md-none me-2"
-                            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                        >
-                            <i className="fa-solid fa-bars"></i>
-                        </button>
-
-                        <Link to="/wishlist">
-                            <i className="fa-regular fa-heart px-3 text-dark"></i>
-                        </Link>
-                        <Link to="/cart">
-                            <i className="fa-solid fa-bag-shopping text-dark"></i>
-                        </Link>
+                    {/* div laterale carrello e wish-list */}
+                    <div className='col-4 d-flex justify-content-end'>
+                        <div className='wishlist-size'>
+                            <Link to="/wishlist">
+                                <i className="fa-regular fa-heart px-3 text-dark"></i>
+                            </Link>
+                        </div>
+                        <div>
+                            <Link to="/cart">
+                                <i className="fa-solid fa-bag-shopping text-dark"></i>
+                            </Link>
+                        </div>
                     </div>
                 </div>
 
-                {/* categorie - solo mobile con hamburger attivo */}
-                {mobileMenuOpen && (
-                    <div className="row d-md-none">
-                        <div className="col-12 pt-3 d-flex flex-column gap-2">
-                            {categoryGroups.map(group => (
-                                <div className="category-group" key={group.title}>
-                                    <select
-                                        onChange={(e) => handleCategoryClick(e.target.value)}
-                                        defaultValue=""
-                                        className="form-select"
+                {/* tabs */}
+                <div className="row">
+                    <div className="col-12 pt-5">
+                        <ul className="d-flex flex-wrap justify-content-center px-3">
+                            {categories.map(cat => (
+                                <li className="mx-2" key={cat.value}>
+                                    <button
+                                        type="button"
+                                        className="btn btn-link p-0 color-main"
+                                        style={{ textDecoration: "none", color: "inherit" }}
+                                        onClick={() => handleCategoryClick(cat.value)}
                                     >
-                                        <option value="" disabled>{group.title}</option>
-                                        {group.items.map(item => (
-                                            <option value={item.value} key={item.value}>{item.label}</option>
-                                        ))}
-                                    </select>
-                                </div>
+                                        {cat.label}
+                                    </button>
+                                </li>
                             ))}
-                        </div>
-                    </div>
-                )}
-
-                {/* categorie - visibili solo su desktop */}
-                <div className="row d-none d-md-flex">
-                    <div className="col-12 pt-4 d-flex justify-content-around flex-wrap gap-3">
-                        {categoryGroups.map(group => (
-                            <div className="category-group" key={group.title}>
-                                <select
-                                    onChange={(e) => handleCategoryClick(e.target.value)}
-                                    defaultValue=""
-                                    className="form-select"
-                                >
-                                    <option value="" disabled>{group.title}</option>
-                                    {group.items.map(item => (
-                                        <option value={item.value} key={item.value}>{item.label}</option>
-                                    ))}
-                                </select>
-                            </div>
-                        ))}
+                        </ul>
                     </div>
                 </div>
             </div>
         </>
-    );
-};
+    )
+}
 
 export default Header;
