@@ -13,6 +13,7 @@ header ul li a {
 
 .search-icon {
     padding: 11px;
+    vertical-align: middle;
 }
 
 /* homepage */
@@ -582,6 +583,16 @@ form button:hover,
 form input[type="submit"]:hover {
     background: #f9e6d8;
 }
+
+/*.search-container,
+.logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+*/
+
 
 /* CART */
 .cart-container {

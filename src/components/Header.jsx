@@ -21,9 +21,9 @@ const Header = () => {
         <>
             <div className="container p-3">
                 {/* main header */}
-                <div className="row align-items-center">
+                <div className="row">
                     {/* Div laterale barra di ricerca */}
-                    <div className='col-4 d-flex search-container align-items-center'>
+                    <div className='col-4 d-flex search-container justify-content-start align-items-center'>
                         <form
                             className="d-flex w-100"
                             // passaggio dei parametri di ricerca tramite query string
