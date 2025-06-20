@@ -68,14 +68,21 @@ const WishList = () => {
             <div className='container py-3'>
                 <h3 className='wishlist-heading'>your wishlist <b className='wishlist-counter'><i>{`${products.length} product(s)`}</i></b></h3>
 
-                <div className="wishlist-product-list">
-                    {/* stampo in pagina le card dei prodotti in wishlist */}
-                    {products.map(product => {
-                        return (
-                            <ProductRow state={productRowsState} product={product} key={product.slug} />
+
+                {/* se la wishlist è vuota */}
+                {wishlist.length === 0 ? (
+                    <p>Your wishlist is empty.</p>
+                ) : (
+                    <div className="wishlist-product-list">
+                        {/* stampo in pagina le card dei prodotti in wishlist */}
+                        {products.map(product => (
+                            <div key={product.slug}>
+                                <ProductRow state={productRowsState} product={product} />
+                            </div>
                         )
-                    })}
-                </div>
+                        )}
+                    </div>
+                )}
 
             </div>
             <div className="background-rose pb-5">
@@ -92,10 +99,7 @@ const WishList = () => {
                                         onClick={() => toggleWishlistIcon(product.slug)}
                                         style={{ cursor: 'pointer' }}
                                     ></i>
-                                    <Link className='card-link'
-                                        to={`/product/${product.slug}`}>
-                                        <Cards product={product} />
-                                    </Link>
+                                    <Cards product={product} />
                                 </div>
                             ))}
                         </div>

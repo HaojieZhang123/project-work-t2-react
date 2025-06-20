@@ -279,12 +279,10 @@ const SearchPage = () => {
                                                 onClick={() => toggleWishlistIcon(product.slug)}
                                                 style={{ cursor: 'pointer' }}
                                             ></i>
-                                            <Link to={`/product/${product.slug}`} className='card-link'>
-                                                {isGrid
-                                                    ? <Cards product={product} />
-                                                    : <CardsList product={product} />
-                                                }
-                                            </Link>
+                                            {isGrid
+                                                ? <Cards product={product} />
+                                                : <CardsList product={product} />
+                                            }
                                         </div>
                                     ))}
                                 </div>

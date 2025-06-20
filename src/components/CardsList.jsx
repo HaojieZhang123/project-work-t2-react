@@ -1,41 +1,74 @@
 import React from 'react'
+import { useCart } from '../context/CartContext';
 
 const CardsList = ({ product }) => {
 
-    const { product_name, slug, brand_id, brand_name, category_name, price, discount, added_date, image } = product;
+    const { slug, image, brand_name, product_name, category_name, price, discount, added_date } = product;
 
+    // context
+    const {
+        cart,
+        addToCart,
+        removeFromCart,
+        updateCartQuantity,
+        isInCart
+    } = useCart();
+
+    // Calculate the actual price after discount
     const discountValue = (price * discount) / 100;
-    const actualPrice = price - discountValue;
+    const actualPrice = (price - discountValue).toFixed(2);
 
+    // Calcolo se il prodotto è "new"
     const today = new Date();
     const addedDate = new Date(added_date);
     const diffTime = today - addedDate;
     const diffDays = diffTime / (1000 * 60 * 60 * 24);
     const isNew = diffDays <= 28 && diffDays >= 0;
+
+    // Calcolo se il prodotto è "promo"
     const isPromo = discount > 0;
+
+    // add product to cart. if already in cart, increase quantity by 1
+    const addCartButtonHandler = (slug) => {
+        if (isInCart(slug)) {
+            // get the current quantity and increase it by 1
+            const currentQuantity = cart.find(item => item.slug === slug)?.quantity || 0;
+            // update the cart quantity
+            updateCartQuantity(slug, currentQuantity + 1);
+        } else {
+            addToCart(slug, 1);
+        }
+    };
 
 
     return (
-        <div className="cards-list d-flex">
-            <div className="card-list-img">
-                <img src={image} alt={product_name} />
-            </div>
-            <div className="card-list-info">
-                <div className="cards-list-brand py-2">{brand_name}</div>
-                <div className="cards-list-name py-2">{product_name}</div>
-                <div className="cards-list-category py-2">{category_name}</div>
-                <div className="cards-list-price py-2">
-                    {`€ ${actualPrice.toFixed(2)}`}
-                    {discount !== 0 && (
-                        <span className="cards-list-original">€ {price}</span>
-                    )}
+        <>
+            <div className="card-list">
+                <div className="card-list-img">
+                    <img src={image} alt={product_name} />
                 </div>
-                <div className="cards-list-tags">
-                    {isPromo && <span className="tag py-2">promo</span>}
-                    {isNew && <span className="tag py-2">new</span>}
+
+                <div className="card-list-info color-main">
+                    <div className="card-brand color-main-subtle">{brand_name}</div>
+                    <div className="card-product-name">{product_name}</div>
+                    <div className="card-category color-main-subtle">{category_name}</div>
+                    <div className="card-list-bottom">
+                        {isPromo && <span className="card-tag tag-promo">promo</span>}
+                        {isNew && <span className="card-tag tag-new">new</span>}
+                        <div className="card-original-price color-main-subtle ms-4">{`€ ${price}`}</div>
+                        <div className="card-price ms-2">{`€ ${actualPrice}`}</div>
+                    </div>
+                </div>
+
+                <div className="card-list-cta">
+                    <div className="card-add-to-cart color-main" onClick={() => addCartButtonHandler(product.slug)}>
+                        <span>Add to Cart {isInCart(product.slug) ? `(${cart.find(item => item.slug === product.slug)?.quantity}) ` : ' '}</span>
+                    </div>
                 </div>
             </div>
-        </div>
+
+            <div className="product-row-separator"></div>
+        </>
     )
 }
 

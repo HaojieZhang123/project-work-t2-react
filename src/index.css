@@ -104,11 +104,15 @@ header ul li a {
 
 .card-link {
     text-decoration: none;
+    min-height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
 }
 
 .product-card {
     width: 230px;
-    height: 500px;
     padding: 5px;
     display: flex;
     flex-direction: column;
@@ -164,15 +168,15 @@ label {
 .card-brand {
     text-transform: uppercase;
     font-size: .8rem;
-    margin-bottom: 5px;
 }
 
 .card-product-name {
     font-size: 1.2rem;
 }
 
+
 .card-category {
-    margin-bottom: 20px;
+    text-transform: Capitalize;
 }
 
 /* .card-bottom-row {} */
@@ -180,7 +184,6 @@ label {
 .card-price {
     font-weight: 500;
     font-size: 1.2rem;
-    margin-bottom: 20px;
 }
 
 .card-original-price {
@@ -190,13 +193,36 @@ label {
 
 .card-tag {
     display: inline-block;
-    background-color: #a8bba2;
     padding: 2px 20px;
     margin-right: 5px;
     text-align: center;
     font-weight: 500;
     text-transform: uppercase;
     font-size: .8rem;
+}
+
+.tag-promo {
+    background-color: #b84442;
+    color: white;
+}
+
+.tag-new {
+    background-color: #a8bba2;
+    color: white;
+}
+
+.card-add-to-cart {
+    background-color: #a8bba2;
+    padding: 10px 20px;
+    text-align: center;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.card-add-to-cart:hover {
+    background-color: #92a58c;
+    color: white;
 }
 
 /* FOOTER */
@@ -433,70 +459,35 @@ footer ul li {
 
 /* CARD LIST */
 
-.cards-list {
-    padding: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    gap: 1.5rem;
-    margin-bottom: 1rem;
-    transition: 0.2s ease;
+.card-list {
+    display: flex;
+    align-items: center;
 }
 
-.cards-list:hover {
-    background: #f9f9f9;
+.card-list-img {
+    width: 100px;
+    margin-right: 20px;
 }
 
+.card-list-img img {
+    width: 100%;
+    height: auto;
+}
 
-.cards-list .card-list-img img {
+.card-list-info {
+    width: calc(100% - 120px);
+}
+
+.card-list-bottom {
+    display: flex;
+    align-items: center;
+}
+
+.card-list-cta {
     width: 200px;
-}
-
-.cards-list-info {
-    flex: 1;
-}
-
-.cards-list-brand {
-    font-size: 0.85rem;
-    color: #888;
-}
-
-.cards-list-name {
-    font-weight: bold;
-    font-size: 1.1rem;
-    margin: 0.25rem 0;
-    color: black;
-}
-
-.cards-list-category {
-    font-size: 0.85rem;
-    color: #aaa;
-}
-
-.cards-list-price {
-    font-size: 1rem;
-    margin-top: 0.5rem;
-    color: black;
-}
-
-.cards-list-original {
-    margin-left: 0.5rem;
-    text-decoration: line-through;
-    color: #999;
-    font-size: 0.9rem;
-}
-
-.cards-list-tags {
-    margin-top: 0.5rem;
-}
-
-.tag {
-    background: #a8bba2;
-    color: #000;
-    font-size: 0.75rem;
-    padding: 0.25rem 0.5rem;
-    margin-right: 0.5rem;
-    border-radius: 4px;
-    text-transform: uppercase;
+    margin-left: auto;
+    text-align: end;
+    align-self: flex-end;
 }
 
 /* WISHLIST */
@@ -546,7 +537,9 @@ footer ul li {
 .product-row-price-section {
     width: 200px;
     margin-left: auto;
-    text-align: end;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .product-row-cta {
@@ -559,7 +552,7 @@ footer ul li {
     margin-top: 20px;
     margin-bottom: 20px;
     background-color: #a8bba2;
-    height: 2px;
+    height: 1px;
 }
 
 .product-row-delete {
@@ -578,7 +571,7 @@ footer ul li {
 
 .product-row-add-to-cart {
     background-color: #a8bba2;
-    padding: 20px 30px;
+    padding: 10px 20px;
     /* font-size: 1.2rem; */
     font-weight: 500;
     cursor: pointer;
