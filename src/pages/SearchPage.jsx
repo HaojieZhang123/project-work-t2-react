@@ -189,43 +189,49 @@ const SearchPage = () => {
                         {/* CATEGORY */}
                         <div className="mb-4">
                             <h6 className='p-1'>CATEGORY</h6>
-                            <ul>
-                                {categories.map((category) => (
-                                    <li key={`cat-${category}`}>
-                                        <input type="checkbox"
-                                            onChange={() => {
-                                                // update query params
-                                                setSearchParams({
-                                                    ...Object.fromEntries(searchParams.entries()),
-                                                    cat: cat === category ? '' : category // unselect if already selected
-                                                });
-                                            }}
-                                            checked={cat === category} />
-                                        {category}
-                                    </li>
-                                ))}
-                            </ul>
+                            <div className="category-group">
+                                <select
+                                    onChange={(e) => {
+                                        const selectedCategory = e.target.value;
+                                        setSearchParams({
+                                            ...Object.fromEntries(searchParams.entries()),
+                                            cat: selectedCategory,
+                                        });
+                                    }}
+                                    value={cat || ""}
+                                >
+                                    <option value="">--</option>
+                                    {categories.map((category) => (
+                                        <option key={`cat-${category}`} value={category}>
+                                            {category}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
                         </div>
 
                         {/* BRAND */}
                         <div className="mb-4">
-                            <h6 className='p-1'>BRAND</h6>
-                            <ul>
-                                {brands.map((brandName) => (
-                                    <li key={`brand-${brandName}`}>
-                                        <input type="checkbox"
-                                            onChange={() => {
-                                                // update query params
-                                                setSearchParams({
-                                                    ...Object.fromEntries(searchParams.entries()),
-                                                    brand: brand === brandName ? '' : brandName // unselect if already selected
-                                                });
-                                            }}
-                                            checked={brand === brandName} />
-                                        {brandName}
-                                    </li>
-                                ))}
-                            </ul>
+                            <h6 className="p-1">BRAND</h6>
+                            <div className="category-group">
+                                <select
+                                    onChange={(e) => {
+                                        const selectedBrand = e.target.value;
+                                        setSearchParams({
+                                            ...Object.fromEntries(searchParams.entries()),
+                                            brand: selectedBrand,
+                                        });
+                                    }}
+                                    value={brand || ""}
+                                >
+                                    <option value="">--</option>
+                                    {brands.map((brandName) => (
+                                        <option key={`brand-${brandName}`} value={brandName}>
+                                            {brandName}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
                         </div>
 
                         {/* PRICE */}
