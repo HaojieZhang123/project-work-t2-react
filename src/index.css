@@ -932,6 +932,73 @@ form input[type="submit"]:hover {
     display: none;
 }
 
+/* Mobile cart overlay */
+.mobile-cart-overlay {
+    background: white !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    width: 100vw;
+    height: 100vh;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.overlay-footer {
+    width: 70%;
+}
+
+.overlay-footer .subtotal {
+    text-align: center;
+    background: #f9e6d8;
+    border-radius: 8px;
+    padding: 10px 0;
+    margin: 10px 0;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #1d1d1d;
+    box-shadow: 0 2px 8px #a8bba233;
+}
+
+.overlay-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 1rem;
+}
+
+.overlay-actions .back-btn,
+.overlay-actions .view-cart-btn {
+    flex: 1;
+    padding: 10px 0;
+    border: none;
+    /* border-radius: 6px; */
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    background: #a8bba2;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.overlay-actions .back-btn {
+    background: #d44e4b;
+}
+
+.overlay-actions .back-btn:hover {
+    background: #b0302d;
+}
+
+.overlay-actions .view-cart-btn:hover {
+    background: #92a58c;
+}
 
 /* Responsive */
 @media (min-width: 769px) {
