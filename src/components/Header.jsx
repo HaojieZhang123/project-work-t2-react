@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 
 const Header = () => {
+    // Stato per il menu mobile 
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
     // Categorie raggruppate per menu
     const categoryGroups = [
         {
@@ -41,7 +44,7 @@ const Header = () => {
             items: [
                 { label: "SHAMPOO", value: "shampoo" },
                 { label: "CONDITIONER", value: "conditioner" },
-                { label: "HEAT PROTECTOR", value: "heat+protector" },
+                { label: "PROTECTOR", value: "heat+protector" },
             ]
         },
     ];
@@ -55,7 +58,7 @@ const Header = () => {
             <div className="container p-3">
                 {/* main header */}
                 <div className="row">
-                    {/* Div laterale barra di ricerca */}
+                    {/* barra di ricerca */}
                     <div className='col-4 d-flex search-container justify-content-start align-items-center'>
                         <form
                             className="d-flex w-100"
@@ -78,13 +81,23 @@ const Header = () => {
                         </form>
                     </div>
 
+                    {/* logo centrale */}
                     <div className='col-4 d-flex justify-content-center logo-container'>
                         <Link to="/">
                             <img src="/Logo-black.svg" alt="logo" className="logo-img" />
                         </Link>
                     </div>
 
-                    <div className='col-4 d-flex justify-content-end'>
+                    {/* icone a destra + hamburger per mobile */}
+                    <div className='col-4 d-flex justify-content-end align-items-center'>
+                        {/* hamburger visibile solo su mobile */}
+                        <button
+                            className="btn d-md-none me-2"
+                            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                        >
+                            <i className="fa-solid fa-bars"></i>
+                        </button>
+
                         <Link to="/wishlist">
                             <i className="fa-regular fa-heart px-3 text-dark"></i>
                         </Link>
@@ -94,58 +107,47 @@ const Header = () => {
                     </div>
                 </div>
 
-                {/* Drop-down menu per categorie */}
-                <div className="row">
+                {/* categorie - solo mobile con hamburger attivo */}
+                {mobileMenuOpen && (
+                    <div className="row d-md-none">
+                        <div className="col-12 pt-3 d-flex flex-column gap-2">
+                            {categoryGroups.map(group => (
+                                <div className="category-group" key={group.title}>
+                                    <select
+                                        onChange={(e) => handleCategoryClick(e.target.value)}
+                                        defaultValue=""
+                                        className="form-select"
+                                    >
+                                        <option value="" disabled>{group.title}</option>
+                                        {group.items.map(item => (
+                                            <option value={item.value} key={item.value}>{item.label}</option>
+                                        ))}
+                                    </select>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                )}
+
+                {/* categorie - visibili solo su desktop */}
+                <div className="row d-none d-md-flex">
                     <div className="col-12 pt-4 d-flex justify-content-around flex-wrap gap-3">
-
-                        <div className="category-group">
-                            <select onChange={(e) => handleCategoryClick(e.target.value)} defaultValue="">
-                                <option value="" disabled>SKINCARE</option>
-                                <option value="serum">SERUM</option>
-                                <option value="moisturizer">MOISTURIZER</option>
-                                <option value="toner">TONER</option>
-                            </select>
-                        </div>
-
-                        <div className="category-group">
-                            <select onChange={(e) => handleCategoryClick(e.target.value)} defaultValue="">
-                                <option value="" disabled>FACE</option>
-                                <option value="foundation">FOUNDATION</option>
-                                <option value="concealer">CONCEALER</option>
-                                <option value="powder">POWDER</option>
-                            </select>
-                        </div>
-
-                        <div className="category-group">
-                            <select onChange={(e) => handleCategoryClick(e.target.value)} defaultValue="">
-                                <option value="" disabled>EYES & LIPS</option>
-                                <option value="mascara">MASCARA</option>
-                                <option value="eyeliner">EYELINER</option>
-                                <option value="lipstick">LIPSTICK</option>
-                            </select>
-                        </div>
-
-                        <div className="category-group">
-                            <select onChange={(e) => handleCategoryClick(e.target.value)} defaultValue="">
-                                <option value="" disabled>BODY</option>
-                                <option value="body+wash">BODY WASH</option>
-                                <option value="scrub">SCRUB</option>
-                                <option value="body+cream">BODY CREAM</option>
-                            </select>
-                        </div>
-
-                        <div className="category-group">
-                            <select onChange={(e) => handleCategoryClick(e.target.value)} defaultValue="">
-                                <option value="" disabled>HAIR</option>
-                                <option value="shampoo">SHAMPOO</option>
-                                <option value="conditioner">CONDITIONER</option>
-                                <option value="heat+protector">HEAT PROTECTOR</option>
-                            </select>
-                        </div>
-
+                        {categoryGroups.map(group => (
+                            <div className="category-group" key={group.title}>
+                                <select
+                                    onChange={(e) => handleCategoryClick(e.target.value)}
+                                    defaultValue=""
+                                    className="form-select"
+                                >
+                                    <option value="" disabled>{group.title}</option>
+                                    {group.items.map(item => (
+                                        <option value={item.value} key={item.value}>{item.label}</option>
+                                    ))}
+                                </select>
+                            </div>
+                        ))}
                     </div>
                 </div>
-
             </div>
         </>
     );
