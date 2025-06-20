@@ -857,6 +857,25 @@ form input[type="submit"]:hover {
     flex-shrink: 0;
 }
 
+.sidebar-cart .quantity-control .remove-btn {
+    background: #d44e4b;
+    color: #fff;
+    border: none;
+    border-radius: 0;
+    width: 32px;
+    height: 32px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.sidebar-cart .quantity-control .remove-btn:hover {
+    background: #b0302d;
+}
+
 .sidebar-cart .quantity-control button:disabled {
     background: #ccc;
     color: #888;
@@ -886,6 +905,21 @@ form input[type="submit"]:hover {
 
 
 /* Responsive */
+@media (min-width: 769px) {
+    .main-content.with-sidebar {
+        margin-right: 150px;
+        /* Same as .sidebar-cart width */
+        transition: margin-right 0.3s;
+    }
+}
+
+/* sidebar disappears when under 768px */
+@media (max-width: 768px) {
+    .sidebar-cart {
+        display: none;
+    }
+}
+
 @media (max-width: 900px) {
     .cart-layout {
         flex-direction: column;

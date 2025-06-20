@@ -45,6 +45,11 @@ export const CartProvider = ({ children }) => {
                 item.slug === slug ? { ...item, quantity } : item
             )
         );
+
+        // Remove item if quantity is 0
+        if (quantity <= 0) {
+            removeFromCart(slug);
+        }
     };
 
     const isInCart = (slug) => cart.some(item => item.slug === slug);
