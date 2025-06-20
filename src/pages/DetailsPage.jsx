@@ -64,7 +64,7 @@ const DetailsPage = () => {
             });
 
         // fetch best sellers
-        axios.get(`http://localhost:3000/api/products/${slug}/related`)
+        axios.get(`http://localhost:3001/api/products/${slug}/related`)
             .then(response => {
                 setRelatedProducts(response.data)
             })
@@ -101,6 +101,25 @@ const DetailsPage = () => {
         } else {
             addToCart(slug, 1);
         }
+    };
+
+    const removeCartButtonHandler = (slug) => {
+        if (isInCart(slug)) {
+            // get the current quantity and increase it by 1
+            const currentQuantity = cart.find(item => item.slug === slug)?.quantity || 0;
+            // update the cart quantity
+            if (currentQuantity > 0) {
+                updateCartQuantity(slug, currentQuantity - 1);
+            }
+        } else {
+            removeFromCart(slug, 1);
+        }
+    };
+
+    // Check if the cart is empty for the current product
+    const isCartEmpty = (cart.find(item => item.slug === slug)?.quantity || 0) === 0;
+    const hideIfCartEmpty = (element) => {
+        return isCartEmpty ? null : element;
     };
 
     if (!product) {
@@ -162,7 +181,7 @@ const DetailsPage = () => {
                                 tabIndex={0}
                                 onClick={() => setOpen(!open)}
                                 onKeyDown={e => {
-                                    if (e.key === "Enter" || e.key === " ") setOpen(!open);
+                                    setOpen(!open);
                                 }}
                                 aria-expanded={open}
                                 aria-controls="product-details-content"
@@ -187,7 +206,12 @@ const DetailsPage = () => {
                             </p>
                         </div>
                     </div>
-                    <div className="d-flex align-items-center gap-1">
+                    <div className="d-flex align-items-center gap-1 ">
+                        {hideIfCartEmpty(
+                            <button className="btn-remove-to-cart " onClick={() => removeCartButtonHandler(product.slug)}>
+                                <i className="fa-solid fa-cart-arrow-down "></i>
+                            </button>
+                        )}
                         <button className="btn-add-to-cart" onClick={() => addCartButtonHandler(product.slug)}>
                             ADD TO CART {isInCart(product.slug) ? `(${cart.find(item => item.slug === product.slug)?.quantity}) ` : ' '}
                             <i className="fa-solid fa-cart-shopping"></i>
