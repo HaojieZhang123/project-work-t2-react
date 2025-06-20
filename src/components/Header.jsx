@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import { useWishlist } from '../context/WishlistContext';
 import { useCart } from '../context/CartContext';
@@ -25,7 +25,8 @@ const Header = () => {
 
     const wishlistCounter = wishlist.length
 
-    const cartCounter = cart.map(item => item.quantity).reduce((tot, amount) => parseInt(tot) + parseInt(amount))
+    const cartCounter = cart.length != 0 ? cart.map(item => item.quantity).reduce((tot, amount) => parseInt(tot) + parseInt(amount)) : 0
+
 
     // Categorie raggruppate per menu
     const categoryGroups = [
