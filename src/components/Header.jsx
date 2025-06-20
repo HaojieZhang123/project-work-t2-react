@@ -1,9 +1,31 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
+import { useWishlist } from '../context/WishlistContext';
+import { useCart } from '../context/CartContext';
 
 const Header = () => {
     // Stato per il menu mobile 
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+    // context
+    const {
+        cart,
+        addToCart,
+        removeFromCart,
+        updateCartQuantity,
+        isInCart
+    } = useCart();
+
+    const {
+        wishlist,
+        addToWishlist,
+        removeFromWishlist,
+        isInWishlist
+    } = useWishlist();
+
+    const wishlistCounter = wishlist.length
+
+    const cartCounter = cart.map(item => item.quantity).reduce((tot, amount) => tot + amount)
 
     // Categorie raggruppate per menu
     const categoryGroups = [
@@ -98,11 +120,21 @@ const Header = () => {
                             <i className="fa-solid fa-bars"></i>
                         </button>
 
-                        <Link to="/wishlist">
-                            <i className="fa-regular fa-heart px-3 text-dark"></i>
+                        <Link to="/wishlist" className='header-icon-link color-main'>
+                            <div className='header-icon'>
+                                <i className="fa-regular fa-heart px-3 text-dark"></i>
+                                <div className='header-icon-counter header-icon-wishlist'>
+                                    <b>{wishlistCounter}</b>
+                                </div>
+                            </div>
                         </Link>
-                        <Link to="/cart">
-                            <i className="fa-solid fa-bag-shopping text-dark"></i>
+                        <Link to="/cart" className='header-icon-link color-white'>
+                            <div className='header-icon'>
+                                <i className="fa-solid fa-bag-shopping text-dark"></i>
+                                <div className='header-icon-counter header-icon-cart'>
+                                    <b>{cartCounter}</b>
+                                </div>
+                            </div>
                         </Link>
                     </div>
                 </div>
