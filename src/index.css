@@ -304,6 +304,21 @@ footer ul li {
     background-color: #d4c5ba;
 }
 
+.btn-remove-to-cart {
+    background-color: #D44E4B;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-remove-to-cart:hover {
+    background-color: #d4c5ba;
+}
+
+
 .img-zoom-container {
     overflow: hidden;
     display: inline-block;
@@ -515,6 +530,10 @@ footer ul li {
 .product-row-delete:hover {
     cursor: pointer;
     color: #b84442;
+}
+
+.b-red{
+    background-color: #D44E4B;
 }
 
 .product-row-add-to-cart {
