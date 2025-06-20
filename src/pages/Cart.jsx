@@ -14,6 +14,8 @@ const Cart = () => {
     const [productRowsState, setProductRowsState] = useState(2) // 1 for wishlist, 2 for cart    
     const [products, setProducts] = useState([])
     const [subtotal, setSubtotal] = useState(0);
+    const [fullSubtotal, setFullSubtotal] = useState(0);
+    const [productDiscountTotal, setProductDiscountTotal] = useState(0);
 
     // context
     const {
@@ -32,14 +34,25 @@ const Cart = () => {
     } = useWishlist();
 
     const calculateSubtotal = () => {
-        return cart.reduce((acc, cartItem) => {
+        let full = 0;
+        let discountTotal = 0;
+
+        cart.forEach(cartItem => {
             const product = products.find(p => p.slug === cartItem.slug);
-            if (!product) return acc;
+            if (!product) return;
             const price = parseFloat(product.price) || 0;
             const discount = parseFloat(product.discount) || 0;
-            const discountedPrice = price - (price * discount / 100);
-            return acc + discountedPrice * cartItem.quantity;
-        }, 0);
+            const quantity = cartItem.quantity;
+
+            full += price * quantity;
+            discountTotal += (price * discount / 100) * quantity;
+        });
+
+        const subtotalAfterDiscount = full - discountTotal;
+
+        setFullSubtotal(full);
+        setProductDiscountTotal(discountTotal);
+        setSubtotal(subtotalAfterDiscount);
     };
 
     const [promoCode, setPromoCode] = useState('');
@@ -47,9 +60,7 @@ const Cart = () => {
     const [promoError, setPromoError] = useState('');
     const navigate = useNavigate();
 
-    const promoDiscount = appliedPromo ? 10 : 0;
-
-    // Replace with real promo logic
+    const promoDiscount = appliedPromo ? (appliedPromo.discount || 0) : 0;
     const subtotalAfterPromo = subtotal - promoDiscount;
     const shipping = subtotalAfterPromo >= SHIPPING_THRESHOLD ? 0 : SHIPPING_COST;
     const total = subtotalAfterPromo + shipping;
@@ -102,7 +113,7 @@ const Cart = () => {
     }, [cart]);
 
     useEffect(() => {
-        setSubtotal(calculateSubtotal());
+        calculateSubtotal();
     }, [cart, products]);
 
     return (
@@ -158,16 +169,33 @@ const Cart = () => {
 
                         <div className="summary-row">
                             <span>Subtotal</span>
-                            <span>€ {subtotalAfterPromo.toFixed(2)}</span>
+                            <span>€ {fullSubtotal.toFixed(2)}</span>
                         </div>
+
+                        {productDiscountTotal > 0 && (
+                            <div className="summary-row text-danger">
+                                <span>Discount Products</span>
+                                <span>- € {productDiscountTotal.toFixed(2)}</span>
+                            </div>
+                        )}
+
+                        {promoDiscount > 0 && (
+                            <div className="summary-row text-danger">
+                                <span>Promo code</span>
+                                <span>- € {promoDiscount.toFixed(2)}</span>
+                            </div>
+                        )}
+
                         <div className="summary-row">
-                            <span>Shipping</span>
+                            <span>Shipping cost</span>
                             <span>{shipping === 0 ? 'Free' : `€ ${shipping.toFixed(2)}`}</span>
                         </div>
+
                         <div className="summary-row total-row">
                             <span>Total</span>
                             <span>€ {total.toFixed(2)}</span>
                         </div>
+
                         <button
                             className="checkout-btn"
                             onClick={() => navigate('/checkout')}
