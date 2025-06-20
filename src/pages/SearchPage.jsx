@@ -270,7 +270,7 @@ const SearchPage = () => {
                     <section className='col-md-9 gx-5'>
                         <div className="row">
                             <div className="col-12">
-                                <div className={`d-flex ${isGrid ? 'justify-content-around flex-wrap' : 'flex-column'} `}>
+                                <div className={`d-flex ${isGrid ? 'justify-content-start flex-wrap' : 'flex-column'} `}>
                                     {/* cards */}
                                     {filteredProducts.map((product) => (
                                         <div className={`card-content mb-3 position-relative`} key={product.id}>
