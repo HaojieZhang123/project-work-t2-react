@@ -74,9 +74,8 @@ const MobileCartOverlay = ({ onClose }) => {
         <>
             <div className="mobile-cart-overlay">
                 <div className="overlay-header">
-                    <h2>Cart</h2>
+                    <h2 className="overlay-title">Cart</h2>
                 </div>
-
                 <div className="overlay-content">
                     {products.length > 0 ? (
                         products.map((product, index) => (
@@ -98,7 +97,6 @@ const MobileCartOverlay = ({ onClose }) => {
                         <button className="view-cart-btn" onClick={handleViewCart}>View Cart</button>
                     </div>
                 </div>
-
             </div>
         </>
     )

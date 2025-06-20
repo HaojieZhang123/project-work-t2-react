@@ -264,8 +264,6 @@ const SearchPage = () => {
                         </div>
                     </aside>
 
-
-
                     {/* RISULTATI */}
                     <section className='col-md-9 gx-5'>
                         <div className="row">

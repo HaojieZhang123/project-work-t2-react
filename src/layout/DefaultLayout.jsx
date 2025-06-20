@@ -9,13 +9,18 @@ import MobileCartOverlay from "../components/MobileCartOverlay"
 // contexts
 import { useCart } from '../context/CartContext';
 
+const HIDE_CART_PATHS = ['/cart', '/checkout', '/summary'];
+
 const DefaultLayout = () => {
     // access to cart context
     const { cart } = useCart();
 
+
     // useLocation to determine the current path, hide sidebar and overlay when in cart page
     const location = useLocation();
-    const isSidebarVisible = cart.length > 0 && location.pathname !== '/cart';
+    // Hide sidebar and overlay on these pages
+    const hideCartUI = HIDE_CART_PATHS.includes(location.pathname);
+    const isSidebarVisible = cart.length > 0 && !hideCartUI;
 
     // state to manage the mobile cart overlay
     const [showMobileCartOverlay, setShowMobileCartOverlay] = useState(false);
@@ -26,13 +31,13 @@ const DefaultLayout = () => {
         if (
             window.innerWidth < 768 &&
             cart.length > prevCartLength &&
-            location.pathname !== '/cart'
+            !hideCartUI
         ) {
             setShowMobileCartOverlay(true);
         }
         setPrevCartLength(cart.length);
         // eslint-disable-next-line
-    }, [cart.length]);
+    }, [cart.length, location.pathname]);
 
     return (
         <>
@@ -56,7 +61,7 @@ const DefaultLayout = () => {
                 </div>
             </div >
 
-            {showMobileCartOverlay && location.pathname !== '/cart' && (
+            {showMobileCartOverlay && !hideCartUI && (
                 <MobileCartOverlay onClose={() => setShowMobileCartOverlay(false)} />
             )}
         </>
