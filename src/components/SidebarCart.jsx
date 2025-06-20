@@ -94,8 +94,30 @@ const SidebarCart = () => {
                                     </div>
                                     {/* quantity with button to increase and decrease */}
                                     <div className="quantity-control">
-                                        <button disabled={cart.find(item => item.slug === product.slug)?.quantity === 1} onClick={() => updateCartQuantity(product.slug, Math.max(1, cart.find(item => item.slug === product.slug)?.quantity - 1 || 0))}>-</button>
+                                        {/* decrease/delete button */}
+                                        {cart.find(item => item.slug === product.slug)?.quantity === 1 ? (
+                                            <button
+                                                className="remove-btn"
+                                                onClick={() => removeFromCart(product.slug)}
+                                                title="Remove from cart"
+                                            >
+                                                <i className="fa-solid fa-trash"></i>
+                                            </button>
+                                        ) : (
+                                            <button
+                                                onClick={() =>
+                                                    updateCartQuantity(
+                                                        product.slug,
+                                                        (cart.find(item => item.slug === product.slug)?.quantity || 0) - 1
+                                                    )
+                                                }
+                                            >
+                                                -
+                                            </button>
+                                        )}
+
                                         <span>{cart.find(item => item.slug === product.slug)?.quantity || 0}</span>
+
                                         <button onClick={() => updateCartQuantity(product.slug, (cart.find(item => item.slug === product.slug)?.quantity || 0) + 1)}>+</button>
                                     </div>
                                 </div>
