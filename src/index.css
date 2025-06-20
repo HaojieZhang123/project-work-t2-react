@@ -104,11 +104,14 @@ header ul li a {
 
 .card-link {
     text-decoration: none;
-    min-height: 500px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
+}
+
+.card-height {
+    min-height: 500px;
 }
 
 .product-card {

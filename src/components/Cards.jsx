@@ -49,7 +49,7 @@ const Cards = ({ product }) => {
 
     return (
         <div className="product-card h-100">
-            <Link to={`/product/${slug}`} className='card-link color-main'>
+            <Link to={`/product/${slug}`} className='card-link card-height color-main'>
                 <div className="card-body-container">
                     <div className="card-image-container">
                         <img src={image} alt="" />
