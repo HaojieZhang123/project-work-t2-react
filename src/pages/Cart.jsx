@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import ProductRow from '../components/ProductRow';
 
 // context
 import { useCart } from '../context/CartContext'
-import { useWishlist } from '../context/WishlistContext'
 
 const SHIPPING_THRESHOLD = 50;
 const SHIPPING_COST = 5;
@@ -25,13 +24,6 @@ const Cart = () => {
         updateCartQuantity,
         isInCart
     } = useCart();
-
-    const {
-        wishlist,
-        addToWishlist,
-        removeFromWishlist,
-        isInWishlist
-    } = useWishlist();
 
     const calculateSubtotal = () => {
         let full = 0;
@@ -95,11 +87,11 @@ const Cart = () => {
     console.log(products);
 
     const fetchProduct = () => {
-        // fetch products in wishlist
+        // fetch products in cart
         axios.get('http://localhost:3000/api/products')
             .then(response => {
                 const allProducts = response.data;
-                // filter products that are in the wishlist
+                // filter products that are in the cart
                 const cartProducts = allProducts.filter(product => cart.some(item => item.slug === product.slug));
                 setProducts(cartProducts)
             })

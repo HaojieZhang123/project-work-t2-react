@@ -3,9 +3,6 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 // context
 import { useCart } from '../context/CartContext'
-// import { useWishlist } from '../context/WishlistContext'
-
-
 
 const SidebarCart = () => {
     const [products, setProducts] = useState([])

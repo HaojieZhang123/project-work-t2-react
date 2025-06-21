@@ -1,6 +1,5 @@
 import { useParams } from 'react-router-dom';
 // import products from '../data/products';
-import { Link } from 'react-router-dom';
 import Cards from '../components/Cards';
 import { useState, useEffect } from 'react';
 import axios from 'axios';

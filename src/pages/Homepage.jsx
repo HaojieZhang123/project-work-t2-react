@@ -1,12 +1,9 @@
-import React from 'react'
 import Cards from '../components/Cards'
-import { Link } from 'react-router-dom'
 
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 
 // context
-import { useCart } from '../context/CartContext'
 import { useWishlist } from '../context/WishlistContext'
 
 
@@ -14,21 +11,11 @@ const Homepage = () => {
 
     // context
     const {
-        cart,
-        addToCart,
-        removeFromCart,
-        updateCartQuantity,
-        isInCart
-    } = useCart();
-
-    const {
         wishlist,
         addToWishlist,
         removeFromWishlist,
         isInWishlist
     } = useWishlist();
-
-    const endpoint = 'http://localhost:3000/api/products/'
 
     const [bestSellers, setBestSellers] = useState([])
     const [latestProducts, setLatestProducts] = useState([])

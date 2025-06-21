@@ -5,7 +5,6 @@ import ProductRow from '../components/ProductRow';
 
 // context
 import { useCart } from '../context/CartContext'
-import { useWishlist } from '../context/WishlistContext'
 
 const MobileCartOverlay = ({ onClose }) => {
 
@@ -54,12 +53,6 @@ const MobileCartOverlay = ({ onClose }) => {
                 console.error("There was an error fetching the products!", error);
             });
     };
-
-    // get discounted price
-    // const getDiscountedPrice = (price, discount) => {
-    //     return (price * (1 - discount / 100)).toFixed(2);
-    // };
-
 
     useEffect(() => {
         fetchProduct();

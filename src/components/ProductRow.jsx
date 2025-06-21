@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 //context
 import { useWishlist } from '../context/WishlistContext'
 import { useCart } from '../context/CartContext'
 
 const ProductRow = ({ state, product }) => {
     const { slug, image, brand_name, product_name, category_name, price, discount, added_date } = product;
-
-
 
     // context
     const {
@@ -29,7 +27,6 @@ const ProductRow = ({ state, product }) => {
         const cartItem = cart.find(item => item.slug === slug);
         return cartItem ? cartItem.quantity : 1; // Default to 1 if not in cart
     });
-
 
     const toggleWishlistIcon = (slug) => {
         if (isInWishlist(slug)) {

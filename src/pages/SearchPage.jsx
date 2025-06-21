@@ -13,7 +13,6 @@ const SearchPage = () => {
 
     // context
     const {
-
         addToWishlist,
         removeFromWishlist,
         isInWishlist
@@ -177,8 +176,8 @@ const SearchPage = () => {
                         onChange={e => setSortOrder(e.target.value)}
                         className="form-select form-select-sm d-inline-block w-auto"
                     >
-                        <option value="price-asc">Increasing price</option>
-                        <option value="price-desc">Decreasing price</option>
+                        <option value="price-asc">Price: lowest first</option>
+                        <option value="price-desc">Price: highest first</option>
                     </select>
                 </div>
 

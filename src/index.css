@@ -191,20 +191,11 @@ header ul li a {
 }
 
 .card-content {
-    /* width: 230px; */
     display: inline-block;
     position: relative;
 }
 
 /* checkout */
-/* form {
-    max-width: 500px;
-    margin: 40px auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-} */
 
 label {
     display: block;
