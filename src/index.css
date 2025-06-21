@@ -776,6 +776,77 @@ form input[type="submit"]:hover {
     cursor: not-allowed;
 }
 
+/* --- SUMMARY PAGE STYLES --- */
+.summary-container {
+  max-width: 700px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px #a8bba22a;
+  padding: 32px;
+}
+
+.summary-title {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.summary-section {
+  margin-bottom: 32px;
+}
+
+.summary-section-title {
+  margin-bottom: 12px;
+  color: var(--main-color, #a8bba2);
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.summary-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.summary-list-item {
+  margin-bottom: 8px;
+  font-size: 1rem;
+}
+
+.summary-product-name {
+  font-weight: 500;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 1rem;
+}
+
+.summary-total-row {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  font-size: 1.1rem;
+  padding: 10px 0;
+  border-top: 2px solid #a8bba2;
+  margin-top: 12px;
+}
+
+.summary-btn-row {
+  text-align: center;
+  margin-top: 24px;
+}
+
+.summary-confirm-btn {
+  width: 250px;
+  font-size: 1.1rem;
+  padding: 12px 0;
+  border-radius: 8px;
+}
+
+
 /* SIDEBAR CART */
 .sidebar-cart {
     position: fixed;
@@ -992,6 +1063,27 @@ form input[type="submit"]:hover {
 .overlay-actions .view-cart-btn:hover {
     background: #92a58c;
 }
+
+/* LOADER */
+.loader {
+    width: 48px;
+    height: 48px;
+    border: 5px solid #FFF;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+    }
+
+    @keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+} 
 
 /* Responsive */
 @media (min-width: 769px) {

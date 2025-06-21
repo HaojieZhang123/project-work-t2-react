@@ -12,6 +12,8 @@ export const CartProvider = ({ children }) => {
         return stored ? JSON.parse(stored) : [];
     });
 
+    const [appliedPromo, setAppliedPromo] = useState(null);
+
     // Save to localStorage on change
     useEffect(() => {
         localStorage.setItem('cart', JSON.stringify(cart));
@@ -57,10 +59,13 @@ export const CartProvider = ({ children }) => {
     return (
         <CartContext.Provider value={{
             cart,
+            setCart,
             addToCart,
             removeFromCart,
             updateCartQuantity,
-            isInCart
+            isInCart,
+            appliedPromo,
+            setAppliedPromo
         }}>
             {children}
         </CartContext.Provider>

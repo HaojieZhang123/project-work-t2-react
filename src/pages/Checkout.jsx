@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const Checkout = () => {
@@ -7,7 +7,6 @@ const Checkout = () => {
         e.preventDefault();
         // Add your submit logic here
     };
-
 
     const [formCheckout, setFormCheckout] = useState({
         name: '',

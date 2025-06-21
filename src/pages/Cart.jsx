@@ -10,7 +10,7 @@ const SHIPPING_THRESHOLD = 50;
 const SHIPPING_COST = 5;
 
 const Cart = () => {
-    const [productRowsState, setProductRowsState] = useState(2) // 1 for wishlist, 2 for cart    
+    const [productRowsState] = useState(2) // 1 for wishlist, 2 for cart    
     const [products, setProducts] = useState([])
     const [subtotal, setSubtotal] = useState(0);
     const [fullSubtotal, setFullSubtotal] = useState(0);
@@ -19,10 +19,8 @@ const Cart = () => {
     // context
     const {
         cart,
-        addToCart,
-        removeFromCart,
-        updateCartQuantity,
-        isInCart
+        appliedPromo,
+        setAppliedPromo
     } = useCart();
 
     const calculateSubtotal = () => {
@@ -48,11 +46,10 @@ const Cart = () => {
     };
 
     const [promoCode, setPromoCode] = useState('');
-    const [appliedPromo, setAppliedPromo] = useState(null);
     const [promoError, setPromoError] = useState('');
     const navigate = useNavigate();
 
-    const promoDiscount = appliedPromo ? (appliedPromo.discount || 0) : 0;
+    const promoDiscount = appliedPromo ? (subtotal * (appliedPromo.discount || 0) / 100) : 0;
     const subtotalAfterPromo = subtotal - promoDiscount;
     const shipping = subtotalAfterPromo >= SHIPPING_THRESHOLD ? 0 : SHIPPING_COST;
     const total = subtotalAfterPromo + shipping;
