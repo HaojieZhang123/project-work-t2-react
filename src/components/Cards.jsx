@@ -1,11 +1,10 @@
-import { useState } from 'react'
 import { useCart } from '../context/CartContext'
 import { Link } from 'react-router-dom'
 
 
 const Cards = ({ product }) => {
 
-    const { product_name, slug, brand_id, price, discount, added_date, image, brand_name, category_name } = product
+    const { product_name, slug, price, discount, added_date, image, brand_name, category_name } = product
 
     //const { category_name } = category
 
@@ -14,7 +13,6 @@ const Cards = ({ product }) => {
     const {
         cart,
         addToCart,
-        removeFromCart,
         updateCartQuantity,
         isInCart
     } = useCart();

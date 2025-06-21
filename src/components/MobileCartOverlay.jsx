@@ -8,7 +8,7 @@ import { useCart } from '../context/CartContext'
 
 const MobileCartOverlay = ({ onClose }) => {
 
-    const [productRowsState, setProductRowsState] = useState(2) // 1 for wishlist, 2 for cart    
+    const [productRowsState] = useState(2) // 1 for wishlist, 2 for cart    
     const [products, setProducts] = useState([])
     const [subtotal, setSubtotal] = useState(0);
 
@@ -23,10 +23,6 @@ const MobileCartOverlay = ({ onClose }) => {
     // context
     const {
         cart,
-        addToCart,
-        removeFromCart,
-        updateCartQuantity,
-        isInCart
     } = useCart();
 
     const calculateSubtotal = () => {
@@ -53,6 +49,14 @@ const MobileCartOverlay = ({ onClose }) => {
                 console.error("There was an error fetching the products!", error);
             });
     };
+
+    useEffect(() => {
+        // Prevent background scroll
+        document.body.style.overflow = 'hidden';
+        return () => {
+            document.body.style.overflow = '';
+        };
+    }, []);
 
     useEffect(() => {
         fetchProduct();

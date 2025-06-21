@@ -99,7 +99,7 @@ const Checkout = () => {
                                 }}
                                 state={formCheckout}
                             >
-                                <button type='button' className='mb-3'><i class="fa-solid fa-arrow-left"></i> Back to Cart</button>
+                                <button type='button' className='mb-3'><i className="fa-solid fa-arrow-left"></i> Back to Cart</button>
                             </Link>
                             <Link
                                 to={{
@@ -108,7 +108,7 @@ const Checkout = () => {
                                 }}
                                 state={formCheckout}
                             >
-                                <button type='button' className='mb-3'>Next Step <i class="fa-solid fa-arrow-right"></i></button>
+                                <button type='button' className='mb-3'>Next Step <i className="fa-solid fa-arrow-right"></i></button>
                             </Link>
                         </div>
                     </form>
