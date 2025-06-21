@@ -147,7 +147,6 @@ header ul li a {
 }
 
 /* PRODUCT CARD */
-
 .card-link {
     text-decoration: none;
     display: flex;
@@ -167,7 +166,6 @@ header ul li a {
     flex-direction: column;
     justify-content: space-between;
 }
-
 
 /* cuore per wishlist */
 .wishlist-heart {
@@ -497,9 +495,6 @@ footer ul li {
     margin-top: -150px;
     margin-bottom: 100px;
 }
-
-
-
 
 /* CARD LIST */
 
@@ -831,7 +826,7 @@ form input[type="submit"]:hover {
     text-align: center;
     text-decoration: none;
     margin-bottom: 18px;
-    transition: background 0.2s;
+    transition: all 0.2s;
     cursor: pointer;
 }
 

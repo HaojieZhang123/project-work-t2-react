@@ -85,6 +85,9 @@ const SearchPage = () => {
                 product.brand_name && product.brand_name.toLowerCase() === brand.toLowerCase()
             );
         }
+        if (promo === 'true') {
+            filtered = filtered.filter(p => Number(p.discount) > 0);
+        }
         if (minPrice || maxPrice) {
             filtered = filtered.filter(product => {
                 const discount = product.discount || 0;
@@ -183,7 +186,7 @@ const SearchPage = () => {
 
                 {/* SIDEBAR */}
                 <div className="row">
-                    <aside className='background-accent1-subtle col-md-3 py-5 mb-3'>
+                    <aside className='background-accent1-subtle col-md-3 py-3 mb-3'>
 
                         {/* CATEGORY */}
                         <div className="mb-4">
@@ -235,6 +238,7 @@ const SearchPage = () => {
                             </div>
                         </div>
 
+
                         {/* PRICE */}
                         <div className="mb-4">
                             <h6 className='p-1'>PRICE</h6>
@@ -263,13 +267,32 @@ const SearchPage = () => {
                             </div>
                             {/* <button className="btn btn-outline-success btn-sm mt-2">APPLY</button> */}
                         </div>
+                        {/* PROMO */}
+                        <div className="mb-4">
+                            <h6 className='p-1'>DISCOUNT</h6>
+                            <div className="form-check">
+                                <input
+                                    className="form-check-input"
+                                    type="checkbox"
+                                    id="discountCheck"
+                                    checked={promo === 'true'}
+                                    onChange={e => setSearchParams({
+                                        ...Object.fromEntries(searchParams.entries()),
+                                        promo: e.target.checked ? 'true' : ''
+                                    })}
+                                />
+                                <label className="form-check-label" htmlFor="discountCheck">
+                                    Only discounted products
+                                </label>
+                            </div>
+                        </div>
                     </aside>
 
                     {/* RISULTATI */}
                     <section className='col-md-9 gx-5'>
                         <div className="row">
                             <div className="col-12">
-                                <div className={`d-flex ${isGrid ? 'justify-content-start flex-wrap' : 'flex-column'} `}>
+                                <div className={`d-flex ${isGrid ? 'flex-wrap' : 'flex-column'}`}>
                                     {/* cards */}
                                     {filteredProducts.map((product) => (
                                         <div className={`card-content mb-3 position-relative`} key={product.id}>
