@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 // import products from '../data/products';
 import Cards from '../components/Cards';
+import Slider from '../components/Slider';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -225,19 +226,9 @@ const DetailsPage = () => {
             {/* card suggeriti per te */}
             <div className="col-12 mt-5 pt-5">
                 <h2 className='mb-2'>TAKE A LOOK AT</h2>
-                <div className="d-flex justify-content-between overflow-auto align-items-stretch">
-                    {/* cards */}
-                    {relatedProducts.map((product) => (
-                        <div className="card-content" key={product.id}>
-                            <i
-                                className={`wishlist-heart fa-heart position-absolute top-0 end-0 m-2 ${isInWishlist(product.slug) ? 'fas' : 'far'}`}
-                                onClick={() => toggleWishlistIcon(product.slug)}
-                                style={{ cursor: 'pointer' }}
-                            ></i>
-                            <Cards product={product} />
-                        </div>
-                    ))}
-                </div>
+
+                <Slider products={relatedProducts} />
+                
             </div>
         </div>
     );

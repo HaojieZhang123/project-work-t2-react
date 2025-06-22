@@ -296,13 +296,14 @@ const SearchPage = () => {
                                     {/* cards */}
                                     {filteredProducts.map((product) => (
                                         <div className={`card-content mb-3 position-relative`} key={product.id}>
-                                            <i
-                                                className={`wishlist-heart fa-heart position-absolute top-0 end-0 m-2 ${isInWishlist(product.slug) ? 'fas' : 'far'}`}
-                                                onClick={() => toggleWishlistIcon(product.slug)}
-                                                style={{ cursor: 'pointer' }}
-                                            ></i>
                                             {isGrid
-                                                ? <Cards product={product} />
+                                                ? <div className="cards-grid">
+                                                    {filteredProducts.map(product => (
+                                                        <div className="card-content" key={product.id}>
+                                                            <Cards product={product} />
+                                                        </div>
+                                                    ))}
+                                                </div>
                                                 : <CardsList product={product} />
                                             }
                                         </div>

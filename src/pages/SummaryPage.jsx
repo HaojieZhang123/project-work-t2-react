@@ -105,7 +105,7 @@ const SummaryPage = () => {
       }
    };
 
-   if (loading) return <div><span class="loader"></span></div>;
+   if (loading) return <div><span className="loader"></span></div>;
    if (cart.length === 0) {
       return (
          <div className="container margin-y-details-page">

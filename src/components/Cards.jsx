@@ -1,4 +1,5 @@
 import { useCart } from '../context/CartContext'
+import { useWishlist } from '../context/WishlistContext'
 import { Link } from 'react-router-dom'
 
 
@@ -16,6 +17,13 @@ const Cards = ({ product }) => {
         updateCartQuantity,
         isInCart
     } = useCart();
+
+    const {
+        wishlist,
+        addToWishlist,
+        removeFromWishlist,
+        isInWishlist
+    } = useWishlist();
 
     // add product to cart. if already in cart, increase quantity by 1
     const addCartButtonHandler = (slug) => {
@@ -45,6 +53,14 @@ const Cards = ({ product }) => {
     // Calcolo se il prodotto è "promo"
     const isPromo = discount > 0
 
+    const toggleWishlistIcon = (slug) => {
+        if (isInWishlist(slug)) {
+            removeFromWishlist(slug);
+        } else {
+            addToWishlist(slug);
+        }
+    };
+
     return (
         <div className="product-card h-100">
             <Link to={`/product/${slug}`} className='card-link card-height color-main'>
@@ -68,6 +84,12 @@ const Cards = ({ product }) => {
                     </div>
                 </div>
             </Link>
+
+            <i
+                className={`wishlist-heart fa-heart position-absolute top-0 end-0 m-2 ${isInWishlist(product.slug) ? 'fas' : 'far'}`}
+                onClick={() => toggleWishlistIcon(product.slug)}
+                style={{ cursor: 'pointer' }}
+            ></i>
 
             <div className="card-add-to-cart color-main mt-3" onClick={() => addCartButtonHandler(product.slug)}>
                 <span>Add to Cart {isInCart(product.slug) ? `(${cart.find(item => item.slug === product.slug)?.quantity}) ` : ' '}</span>

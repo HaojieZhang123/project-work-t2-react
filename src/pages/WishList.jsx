@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import Cards from '../components/Cards'
+import Slider from '../components/Slider'
 
 //context
 import { useWishlist } from '../context/WishlistContext'
@@ -48,14 +49,6 @@ const WishList = () => {
             });
     };
 
-    const toggleWishlistIcon = (slug) => {
-        if (isInWishlist(slug)) {
-            removeFromWishlist(slug);
-        } else {
-            addToWishlist(slug);
-        }
-    };
-
     useEffect(() => {
         fetchProduct();
     }, [wishlist]);
@@ -90,19 +83,7 @@ const WishList = () => {
                     {/* card suggeriti per te */}
                     <div className="col-12 my-5 pt-5">
                         <h2 className='mb-2'>SUGGERITI PER TE</h2>
-                        <div className="d-flex justify-content-between overflow-auto align-items-stretch">
-                            {/* cards */}
-                            {bestSellers.map((product) => (
-                                <div className="card-content" key={product.id}>
-                                    <i
-                                        className={`wishlist-heart fa-heart position-absolute top-0 end-0 m-2 ${isInWishlist(product.slug) ? 'fas' : 'far'}`}
-                                        onClick={() => toggleWishlistIcon(product.slug)}
-                                        style={{ cursor: 'pointer' }}
-                                    ></i>
-                                    <Cards product={product} />
-                                </div>
-                            ))}
-                        </div>
+                        <Slider products={bestSellers} />
                     </div>
                 </div>
             </div>

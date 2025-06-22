@@ -1,21 +1,10 @@
-import Cards from '../components/Cards'
+import Slider from '../components/Slider'
 
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 
-// context
-import { useWishlist } from '../context/WishlistContext'
-
 
 const Homepage = () => {
-
-    // context
-    const {
-        wishlist,
-        addToWishlist,
-        removeFromWishlist,
-        isInWishlist
-    } = useWishlist();
 
     const [bestSellers, setBestSellers] = useState([])
     const [latestProducts, setLatestProducts] = useState([])
@@ -49,14 +38,6 @@ const Homepage = () => {
         fetchProducts()
     }, [])
 
-    const toggleWishlistIcon = (slug) => {
-        if (isInWishlist(slug)) {
-            removeFromWishlist(slug);
-        } else {
-            addToWishlist(slug);
-        }
-    };
-
     return (
         <>
             <div className="container pt-3 pb-3">
@@ -73,19 +54,7 @@ const Homepage = () => {
                     <div className="row">
                         <div className="col-12">
                             <h2 className='mb-5'>BEST SELLERS</h2>
-                            <div className="d-flex justify-content-between overflow-auto align-items-stretch">
-                                {/* cards */}
-                                {bestSellers.map((product) => (
-                                    <div className="card-content" key={product.id}>
-                                        <i
-                                            className={`wishlist-heart fa-heart position-absolute top-0 end-0 m-2 ${isInWishlist(product.slug) ? 'fas' : 'far'}`}
-                                            onClick={() => toggleWishlistIcon(product.slug)}
-                                            style={{ cursor: 'pointer' }}
-                                        ></i>
-                                        <Cards product={product} />
-                                    </div>
-                                ))}
-                            </div>
+                            <Slider products={bestSellers} />
                         </div>
                     </div>
                 </div>
@@ -95,19 +64,9 @@ const Homepage = () => {
                 <div className="row">
                     <div className="col-12">
                         <h2 className='mb-5'>LATEST PRODUCTS</h2>
-                        <div className="d-flex justify-content-between overflow-auto align-items-stretch">
-                            {/* cards */}
-                            {latestProducts.map((product) => (
-                                <div className="card-content" key={product.id}>
-                                    <i
-                                        className={`wishlist-heart fa-heart position-absolute top-0 end-0 m-2 ${isInWishlist(product.slug) ? 'fas' : 'far'}`}
-                                        onClick={() => toggleWishlistIcon(product.slug)}
-                                        style={{ cursor: 'pointer' }}
-                                    ></i>
-                                    <Cards product={product} />
-                                </div>
-                            ))}
-                        </div>
+
+                        <Slider products={latestProducts} />
+
                     </div>
                 </div>
             </div>

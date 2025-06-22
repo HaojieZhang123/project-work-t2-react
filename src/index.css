@@ -160,11 +160,13 @@ header ul li a {
 }
 
 .product-card {
-    width: 230px;
+    min-width: 200px;
+    max-width: 100%;
     padding: 5px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    height: 100%;
 }
 
 /* cuore per wishlist */
@@ -189,8 +191,33 @@ header ul li a {
 }
 
 .card-content {
-    display: inline-block;
     position: relative;
+    display: inline-block;
+}
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 24px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 24px 0;
+}
+
+/* SWIPER CARDS */
+.swiper-card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    position: relative;
+    height: 100%;
+}
+
+.card-content .wishlist-heart {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    z-index: 2;
 }
 
 /* checkout */
