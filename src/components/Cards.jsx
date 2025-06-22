@@ -19,7 +19,7 @@ const Cards = ({ product }) => {
     } = useCart();
 
     const {
-        wishlist,
+        // wishlist,
         addToWishlist,
         removeFromWishlist,
         isInWishlist

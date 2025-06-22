@@ -5,18 +5,7 @@ import { Link, useSearchParams } from 'react-router-dom'
 import axios from 'axios'
 import CardsList from '../components/CardsList'
 
-// context
-
-import { useWishlist } from '../context/WishlistContext'
-
 const SearchPage = () => {
-
-    // context
-    const {
-        addToWishlist,
-        removeFromWishlist,
-        isInWishlist
-    } = useWishlist();
     // state
     const [products, setProducts] = useState([]);
     const endpoint = 'http://localhost:3000/api/products/'
@@ -99,15 +88,6 @@ const SearchPage = () => {
         }
         setFilteredProducts(filtered);
     }, [products, name, cat, brand, minPrice, maxPrice, promo]);
-
-    // Funzione per il toggle del cuore wishlist
-    const toggleWishlistIcon = (slug) => {
-        if (isInWishlist(slug)) {
-            removeFromWishlist(slug);
-        } else {
-            addToWishlist(slug);
-        }
-    };
 
     // Stato per l'ordinamento
     const [sortOrder, setSortOrder] = useState('name-asc'); // 'name-asc', 'price-asc', 'price-desc'
