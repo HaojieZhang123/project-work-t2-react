@@ -27,6 +27,7 @@ header ul li a {
 .search-icon {
     display: flex;
     align-items: center;
+    font-size: 0.7em;
 }
 
 .search-container {
@@ -112,6 +113,15 @@ header ul li a {
     background-color: #a8bba2;
 }
 
+header .search-input{
+    max-width: 100%;
+    font-size: 0.8em;
+    border: transparent;
+    border-bottom: 1px solid #a8bba2;
+    outline: none;
+    margin-right: 20px;
+    overflow: hidden;
+}
 
 /* header RESPONSIVE *
 
@@ -131,7 +141,6 @@ header ul li a {
     /* rimpicciolisci barra di ricerca */
     .search-input {
         max-width: 120px;
-        font-size: 0.9rem;
     }
 }
 
@@ -142,7 +151,6 @@ header ul li a {
 
     .search-input {
         max-width: 90px;
-        font-size: 0.8rem;
     }
 }
 
@@ -652,7 +660,7 @@ footer ul li {
 /* CHECKOUT */
 /* FORM STYLES */
 
-form label {
+.checkout-form label {
     display: block;
     font-weight: 500;
     color: #1d1d1d;
@@ -660,29 +668,29 @@ form label {
     letter-spacing: 0.5px;
 }
 
-form input,
-form select,
-form textarea {
+.checkout-form input,
+.checkout-form select,
+.checkout-form textarea {
     width: 100%;
     padding: 0.75rem 1rem;
     border: 1px solid #a8bba2;
     border-radius: 6px;
     background: #f9f9f9;
-    margin-bottom: 1.25rem;
+    /* margin-bottom: 1.25rem; */
     font-size: 1rem;
     transition: border 0.2s;
 }
 
-form input:focus,
-form select:focus,
-form textarea:focus {
+.checkout-form input:focus,
+.checkout-form select:focus,
+.checkout-form textarea:focus {
     border-color: #f9e6d8;
     outline: none;
     background: #fff;
 }
 
-form button,
-form input[type="submit"] {
+.checkout-form button,
+.checkout-form input[type="submit"] {
     background: #a8bba2;
     color: #fff;
     border: none;
@@ -696,8 +704,8 @@ form input[type="submit"] {
     margin-top: 0.5rem;
 }
 
-form button:hover,
-form input[type="submit"]:hover {
+.checkout-form button:hover,
+.checkout-form input[type="submit"]:hover {
     background: #f9e6d8;
 }
 

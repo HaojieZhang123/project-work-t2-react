@@ -29,7 +29,7 @@ const Checkout = () => {
             <div className='row'>
                 <div className='col-12'>
                     <h1>Insert your data</h1>
-                    <form className='row g-3' onSubmit={handleSubmit}>
+                    <form className='row g-3 checkout-form' onSubmit={handleSubmit}>
                         <div className='col-md-6'>
                             <label htmlFor="name">Name* </label>
                             <input

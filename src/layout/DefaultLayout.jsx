@@ -15,7 +15,6 @@ const DefaultLayout = () => {
     // access to cart context
     const { cart } = useCart();
 
-
     // useLocation to determine the current path, hide sidebar and overlay when in cart page
     const location = useLocation();
     // Hide sidebar and overlay on these pages

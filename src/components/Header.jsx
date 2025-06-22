@@ -85,7 +85,7 @@ const Header = () => {
                     {/* Div laterale barra di ricerca */}
                     <div className='col-4 d-flex search-container justify-content-start align-items-center'>
                         <form
-                            className="d-flex w-100"
+                            className="d-flex align-items-center w-100"
                             // passaggio dei parametri di ricerca tramite query string
                             onSubmit={e => {
                                 e.preventDefault();
@@ -100,14 +100,13 @@ const Header = () => {
                                 type="text"
                                 name="search"
                                 placeholder="Search"
-                                className="search-input flex-grow-1"
-                                autoComplete="off"
+                                className="search-input"
                             />
                         </form>
                     </div>
 
                     {/* logo centrale */}
-                    <div className='col-4 d-flex justify-content-center logo-container'>
+                    <div className='col-4 d-flex justify-content-center align-items-center logo-container'>
                         <Link to="/">
                             <img src="/Logo-black.svg" alt="logo" className="logo-img" />
                         </Link>
