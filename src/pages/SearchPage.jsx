@@ -227,6 +227,7 @@ const SearchPage = () => {
                                     type="number"
                                     className="form-control form-control-sm"
                                     placeholder="€ 0"
+                                    min={0}
                                     value={minPrice}
                                     onChange={e => setSearchParams({
                                         ...Object.fromEntries(searchParams.entries()),
@@ -238,6 +239,7 @@ const SearchPage = () => {
                                     type="number"
                                     className="form-control form-control-sm"
                                     placeholder="€ 500"
+                                    min={0}
                                     value={maxPrice}
                                     onChange={e => setSearchParams({
                                         ...Object.fromEntries(searchParams.entries()),
