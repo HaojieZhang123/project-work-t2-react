@@ -97,8 +97,7 @@ const SummaryPage = () => {
          setCart([]);
          setAppliedPromo(null);
 
-         alert("Order confirmed!");
-         navigate("/");
+         navigate("/final");
       } catch (err) {
          alert("There was an error confirming the order!");
          console.error(err);

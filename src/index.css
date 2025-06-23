@@ -811,6 +811,31 @@ footer ul li {
     cursor: not-allowed;
 }
 
+/* --- FINAL PAGE STYLES --- */
+
+.final-page-container {
+        max-width: 500px;
+        margin: 60px auto;   
+        padding: 40px 24px;
+        background: #fff;
+        border-Radius: 12px;
+        box-Shadow: 0 2px 12px rgba(0,0,0,0.08);
+        text-Align: center;
+}
+
+.final-page-title {
+    color: "#2e7d32";
+    margin-bottom: 16px;
+}
+
+.final-page-message {
+    
+    font-size: 18px;
+    color: "#333";
+    line-height: 1.6;
+    
+}
+
 /* --- SUMMARY PAGE STYLES --- */
 .summary-container {
   max-width: 700px;
