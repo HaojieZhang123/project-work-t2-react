@@ -273,21 +273,21 @@ const SearchPage = () => {
                         <div className="row">
                             <div className="col-12">
                                 <div className={`d-flex ${isGrid ? 'flex-wrap' : 'flex-column'}`}>
-                                    {/* cards */}
-                                    {filteredProducts.map((product) => (
-                                        <div className={`card-content mb-3 position-relative`} key={product.id}>
-                                            {isGrid
-                                                ? <div className="cards-grid">
-                                                    {filteredProducts.map(product => (
-                                                        <div className="card-content" key={product.id}>
-                                                            <Cards product={product} />
-                                                        </div>
-                                                    ))}
+                                    {isGrid ? (
+                                        <div className="cards-grid">
+                                            {filteredProducts.map(product => (
+                                                <div className="card-content mb-3 position-relative" key={product.id}>
+                                                    <Cards product={product} />
                                                 </div>
-                                                : <CardsList product={product} />
-                                            }
+                                            ))}
                                         </div>
-                                    ))}
+                                    ) : (
+                                        filteredProducts.map(product => (
+                                            <div className="card-content mb-3 position-relative" key={product.id}>
+                                                <CardsList product={product} />
+                                            </div>
+                                        ))
+                                    )}
                                 </div>
                             </div>
                         </div>
