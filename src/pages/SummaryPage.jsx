@@ -139,7 +139,7 @@ const SummaryPage = () => {
                <li><strong>Email:</strong> {formCheckout.email || ""}</li>
                <li><strong>Phone number:</strong> {formCheckout.phone || ""}</li>
                <li><strong>Address:</strong> {formCheckout.address || ""}</li>
-               <li><strong>Payment Method:</strong> Carta di credito</li>
+               <li><strong>Payment Method:</strong> Credit Card</li>
                <li><strong>Current date:</strong> {formattedDate}</li>
             </ul>
          </div>

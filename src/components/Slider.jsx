@@ -5,7 +5,6 @@ import '../swiper-bundle.min.css';
 // components
 import Cards from '../components/Cards'
 
-
 const Slider = ({ products }) => {
 
     return (
