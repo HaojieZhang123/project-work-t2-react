@@ -915,13 +915,13 @@ footer ul li {
 /* --- FINAL PAGE STYLES --- */
 
 .final-page-container {
-        max-width: 500px;
-        margin: 60px auto;   
-        padding: 40px 24px;
-        background: #fff;
-        border-Radius: 12px;
-        box-Shadow: 0 2px 12px rgba(0,0,0,0.08);
-        text-Align: center;
+    max-width: 500px;
+    margin: 60px auto;
+    padding: 40px 24px;
+    background: #fff;
+    border-Radius: 12px;
+    box-Shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    text-Align: center;
 }
 
 .final-page-title {
@@ -930,11 +930,11 @@ footer ul li {
 }
 
 .final-page-message {
-    
+
     font-size: 18px;
     color: "#333";
     line-height: 1.6;
-    
+
 }
 
 /* --- SUMMARY PAGE STYLES --- */
@@ -1273,6 +1273,84 @@ footer ul li {
     top: 20px;
     max-height: calc(100vh - 100px);
     overflow-y: auto;
+}
+
+
+/* MOBILE FIILTER MENU */
+.mobile-filter-menu {
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 100;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+
+.toggle-filter-btn {
+    background: #a8bba2;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.filter-scroll {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    max-height: 60vh;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+.filter-item {
+    display: flex;
+    flex-direction: column;
+    min-width: calc(50% - 10px);
+    font-size: 0.9rem;
+}
+
+.filter-item input,
+.filter-item select {
+    padding: 4px 6px;
+    font-size: 0.85rem;
+    width: 100%;
+}
+
+.form-check {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+
+@media (max-width: 767px) {
+    aside.sticky-sidebar {
+        display: none !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .mobile-filter-menu {
+        display: flex;
+    }
+}
+
+@media (min-width: 768px) {
+    .mobile-filter-menu {
+        display: none;
+    }
 }
 
 

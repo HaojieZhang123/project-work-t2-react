@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import Cards from '../components/Cards'
 import { Link, useSearchParams } from 'react-router-dom'
+import MobileFilterMenu from '../components/MobileFilterMenu'
 
 import axios from 'axios'
 import CardsList from '../components/CardsList'
@@ -133,6 +134,8 @@ const SearchPage = () => {
 
                         </p>
 
+
+
                         {/* Toggle grid/list */}
                         <div className="d-flex justify-content-end mb-3">
                             <button
@@ -150,6 +153,9 @@ const SearchPage = () => {
                         </div>
                     </div>
                 </div>
+
+                <MobileFilterMenu categories={categories} brands={brands} />
+
 
                 {/*Ordina*/}
                 <div className="mb-3">
