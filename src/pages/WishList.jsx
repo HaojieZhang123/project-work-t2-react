@@ -10,7 +10,7 @@ import ProductRow from '../components/ProductRow'
 
 const WishList = () => {
     // state for product rows
-    const [productRowsState, setProductRowsState] = useState(1) // 1 for wishlist, 2 for cart
+    const [productRowsState, setProductRowsState] = useState(1) // 1 for wishlist, 2 for cart, 3 for summary
     const [bestSellers, setBestSellers] = useState([])
     const [products, setProducts] = useState([])
     const endpointBestSellers = 'http://localhost:3000/api/products/special/best-sellers'
