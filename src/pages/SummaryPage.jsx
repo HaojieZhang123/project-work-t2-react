@@ -118,34 +118,36 @@ const SummaryPage = () => {
    }
 
    return (
-      <div className="container margin-y-details-page summary-container">
+      <div className="container margin-y-details-page summary-container p-5">
          <h2 className="cart-title summary-title">Order Summary</h2>
-         <div className="summary-section">
-            <h4 className="summary-section-title">Ordered products</h4>
-            <ul className="summary-list">
-               {cart.map((item, idx) => {
-                  const detail = getProductDetail(item.slug);
-                  return (
-                     <li key={idx} className="summary-list-item">
-                        <span className="summary-product-name">{detail.name || item.slug}</span> &times; {item.quantity}
-                     </li>
-                  );
-               })}
-            </ul>
+         <div className="summary-layout d-flex justify-content-between">
+            <div className="summary-section summary-order">
+               <h4 className="summary-section-title">Ordered products</h4>
+               <ul className="summary-list">
+                  {cart.map((item, idx) => {
+                     const detail = getProductDetail(item.slug);
+                     return (
+                        <li key={idx} className="summary-list-item">
+                           <span className="summary-product-name">{detail.name || item.slug}</span> &times; {item.quantity}
+                        </li>
+                     );
+                  })}
+               </ul>
+            </div>
+            <div className="summary-section summary-customer">
+               <h4 className="summary-section-title">Your informations</h4>
+               <ul className="summary-list">
+                  <li><strong>First name:</strong> {formCheckout.name || ""}</li>
+                  <li><strong>Last name:</strong> {formCheckout.surname || ""}</li>
+                  <li><strong>Email:</strong> {formCheckout.email || ""}</li>
+                  <li><strong>Phone number:</strong> {formCheckout.phone || ""}</li>
+                  <li><strong>Address:</strong> {formCheckout.address || ""}</li>
+                  <li><strong>Payment Method:</strong> Credit Card</li>
+                  <li><strong>Current date:</strong> {formattedDate}</li>
+               </ul>
+            </div>
          </div>
-         <div className="summary-section">
-            <h4 className="summary-section-title">Your informations</h4>
-            <ul className="summary-list">
-               <li><strong>First name:</strong> {formCheckout.name || ""}</li>
-               <li><strong>Last name:</strong> {formCheckout.surname || ""}</li>
-               <li><strong>Email:</strong> {formCheckout.email || ""}</li>
-               <li><strong>Phone number:</strong> {formCheckout.phone || ""}</li>
-               <li><strong>Address:</strong> {formCheckout.address || ""}</li>
-               <li><strong>Payment Method:</strong> Credit Card</li>
-               <li><strong>Current date:</strong> {formattedDate}</li>
-            </ul>
-         </div>
-         <div className="summary-section">
+         <div className="summary-section summary-total">
             <h4 className="summary-section-title">Totals</h4>
             <div className="summary-row">
                <span>Subtotal</span>
