@@ -4,7 +4,7 @@ const NotFound = () => {
         <>
             <div className="container">
                 <div className="notFound-banner">
-                    <img src="./public/not-found-banner.PNG" alt="Not Found Banner" className="notFound-banner-image" />
+                    <img src="./public/not_found_banner.png" alt="Not Found Banner" className="notFound-banner-image" />
                 </div>
 
                 <div className='notFound-text'>

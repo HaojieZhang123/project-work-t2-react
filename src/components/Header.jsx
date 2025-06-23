@@ -108,7 +108,7 @@ const Header = () => {
                     {/* logo centrale */}
                     <div className='col-4 d-flex justify-content-center align-items-center logo-container'>
                         <Link to="/">
-                            <img src="/Logo-black.svg" alt="logo" className="logo-img" />
+                            <img src="/logo_black.svg" alt="logo" className="logo-img" />
                         </Link>
                     </div>
 

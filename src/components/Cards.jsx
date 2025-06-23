@@ -25,7 +25,7 @@ const Cards = ({ product }) => {
         isInWishlist
     } = useWishlist();
 
-    // add product to cart. if already in cart, increase quantity by 1
+    // add product to cart. If already in cart, increase quantity by 1
     const addCartButtonHandler = (slug) => {
         if (isInCart(slug)) {
             // get the current quantity and increase it by 1
