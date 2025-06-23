@@ -13,7 +13,7 @@ const SummaryPage = () => {
    const formCheckout = location.state || {};
 
    const today = new Date();
-   const formattedDate = `${today.getDate().toString().padStart(2, '0')}/${(today.getMonth()+1).toString().padStart(2, '0')}/${today.getFullYear()}`;
+   const formattedDate = `${today.getDate().toString().padStart(2, '0')}/${(today.getMonth() + 1).toString().padStart(2, '0')}/${today.getFullYear()}`;
 
    const [productsDetails, setProductsDetails] = useState([]);
    const [loading, setLoading] = useState(true);
@@ -70,7 +70,7 @@ const SummaryPage = () => {
          const products = cart.map(item => {
             const detail = getProductDetail(item.slug);
             return {
-               product_id: detail.id, 
+               product_id: detail.id,
                quantity: item.quantity
             };
          });
@@ -93,15 +93,18 @@ const SummaryPage = () => {
 
          await axios.post("http://localhost:3000/api/orders/withproducts", orderData);
 
+         await axios.post("http://localhost:3000/send", orderData);
+
          // reset cart
          setCart([]);
          setAppliedPromo(null);
 
-          navigate("/final", { state: { email: formCheckout.email } });
+         navigate("/final", { state: { email: formCheckout.email } });
       } catch (err) {
          alert("There was an error confirming the order!");
          console.error(err);
       }
+
    };
 
    if (loading) return <div><span className="loader"></span></div>;
@@ -120,14 +123,14 @@ const SummaryPage = () => {
          <div className="summary-section">
             <h4 className="summary-section-title">Ordered products</h4>
             <ul className="summary-list">
-            {cart.map((item, idx) => {
-               const detail = getProductDetail(item.slug);
-               return (
-                  <li key={idx} className="summary-list-item">
-                  <span className="summary-product-name">{detail.name || item.slug}</span> &times; {item.quantity}
-                  </li>
-               );
-            })}
+               {cart.map((item, idx) => {
+                  const detail = getProductDetail(item.slug);
+                  return (
+                     <li key={idx} className="summary-list-item">
+                        <span className="summary-product-name">{detail.name || item.slug}</span> &times; {item.quantity}
+                     </li>
+                  );
+               })}
             </ul>
          </div>
          <div className="summary-section">
@@ -153,10 +156,10 @@ const SummaryPage = () => {
                <span>-{productDiscountTotal().toFixed(2)} €</span>
             </div>
             {appliedPromo && (
-            <div className="summary-row">
-               <span>Promo code discount ({appliedPromo.code})</span>
-               <span>-{promoDiscount().toFixed(2)} €</span>
-            </div>
+               <div className="summary-row">
+                  <span>Promo code discount ({appliedPromo.code})</span>
+                  <span>-{promoDiscount().toFixed(2)} €</span>
+               </div>
             )}
             <div className="summary-row">
                <span>Shipping</span>
