@@ -166,7 +166,7 @@ const SearchPage = () => {
 
                 {/* SIDEBAR */}
                 <div className="row">
-                    <aside className='background-accent1-subtle col-md-3 py-3 mb-3'>
+                    <aside className='background-accent1-subtle col-md-3 py-3 mb-3 sticky-sidebar'>
 
                         {/* CATEGORY */}
                         <div className="mb-4">
