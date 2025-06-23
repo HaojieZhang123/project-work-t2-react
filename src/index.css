@@ -709,6 +709,15 @@ footer ul li {
     background: #f9e6d8;
 }
 
+.checkout-form button:disabled,
+.checkout-form input[type="submit"]:disabled {
+    background: #ccc !important;
+    color: #888 !important;
+    cursor: not-allowed !important;
+    opacity: 0.7;
+    border: none;
+}
+
 /* CART */
 .cart-container {
     max-width: 1100px;
