@@ -139,6 +139,27 @@ const ProductRow = ({ state, product }) => {
                     </div>
                 </div>
             }
+
+            {/* Product Row for Summary page */}
+            {state === 3 &&
+                <div className="card-list">
+                    <div className="card-list-img img-zoom-container">
+                        <img src={image} alt={product_name} className='img-zoom' />
+                    </div>
+
+                    <div className="card-list-info color-main">
+                        <div className="card-brand color-main-subtle">{brand_name}</div>
+                        <div className="card-product-name">{product_name}</div>
+                        <div className="card-category color-main-subtle">{category_name}</div>
+                        <div className="card-list-bottom">
+                            {isPromo && <span className="card-tag tag-promo">promo</span>}
+                            {isNew && <span className="card-tag tag-new">new</span>}
+                            <div className="card-original-price color-main-subtle ms-4">{`€ ${price}`}</div>
+                            <div className="card-price ms-2">{`€ ${actualPrice}`}</div>
+                        </div>
+                    </div>
+                </div>
+            }
             <div className="product-row-separator"></div>
         </>
     )
