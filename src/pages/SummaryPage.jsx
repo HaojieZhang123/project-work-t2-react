@@ -97,7 +97,7 @@ const SummaryPage = () => {
          setCart([]);
          setAppliedPromo(null);
 
-         navigate("/final");
+          navigate("/final", { state: { email: formCheckout.email } });
       } catch (err) {
          alert("There was an error confirming the order!");
          console.error(err);
