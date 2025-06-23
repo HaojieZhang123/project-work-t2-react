@@ -43,8 +43,8 @@ const CardsList = ({ product }) => {
     return (
         <>
             <div className="card-list">
-                <div className="card-list-img">
-                    <img src={image} alt={product_name} />
+                <div className="card-list-img img-zoom-container">
+                    <img src={image} alt={product_name} className='img-zoom' />
                 </div>
 
                 <div className="card-list-info color-main">

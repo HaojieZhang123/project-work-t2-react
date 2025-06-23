@@ -65,8 +65,8 @@ const Cards = ({ product }) => {
         <div className="product-card h-100">
             <Link to={`/product/${slug}`} className='card-link card-height color-main'>
                 <div className="card-body-container">
-                    <div className="card-image-container">
-                        <img src={image} alt="" />
+                    <div className="card-image-container img-zoom-container">
+                        <img src={image} alt="" className='img-zoom' />
                     </div>
                     <div className="card-brand color-main-subtle">{brand_name}</div>
 

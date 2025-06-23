@@ -5,12 +5,24 @@ const Footer = () => {
             <div className="row">
                 <div className="col-12 col-md-8 mb-3 mb-md-0">
                     <ul className='footer-list d-flex justify-content-between flex-wrap me-5'>
-                        <li>Privacy</li>
-                        <li>Contacts</li>
-                        <li>Recess rights</li>
-                        <li>Sell condition</li>
-                        <li>Compliance & Whistleblowing</li>
-                        <li>Cookie policy</li>
+                        <li>
+                            <a href="#">Privacy</a>
+                        </li>
+                        <li>
+                            <a href="#">Contacts</a>
+                        </li>
+                        <li>
+                            <a href="#">Recess rights</a>
+                        </li>
+                        <li>
+                            <a href="#">Sell condition</a>
+                        </li>
+                        <li>
+                            <a href="#">Compliance & Whistleblowing</a>
+                        </li>
+                        <li>
+                            <a href="#">Cookie policy</a>
+                        </li>
                     </ul>
                 </div>
 

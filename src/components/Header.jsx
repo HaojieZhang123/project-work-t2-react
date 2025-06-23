@@ -6,6 +6,7 @@ import { useCart } from '../context/CartContext';
 const Header = () => {
     // Stato per il menu mobile 
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [mobileDropdowns, setMobileDropdowns] = useState({});
 
     // context
     const {
@@ -117,7 +118,10 @@ const Header = () => {
                         {/* hamburger visibile solo su mobile */}
                         <button
                             className="btn d-md-none mx-2 align-self-center d-flex align-items-center"
-                            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                            onClick={() => {
+                                setMobileMenuOpen(!mobileMenuOpen)
+                                setMobileDropdowns({});
+                            }}
                         >
                             <i className="fa-solid fa-bars fs-4 text-dark"></i>
                         </button>
@@ -149,19 +153,28 @@ const Header = () => {
                 {/* categorie - solo mobile con hamburger attivo */}
                 {mobileMenuOpen && (
                     <div className="row d-md-none">
-                        <div className="col-12 pt-3 d-flex flex-column gap-0">
-                            {categoryGroups.map(group => (
-                                <div className="category-group category-group-width" key={group.title}>
-                                    <select
-                                        onChange={(e) => handleCategoryClick(e.target.value)}
-                                        defaultValue=""
-                                        className="form-select"
+                        <div className="col-12 pt-3 d-flex flex-column gap-2">
+                            {categoryGroups.map((group, index) => (
+                                <div className="mobile-dropdown-group" key={group.title}>
+                                    <div
+                                        className="mobile-dropdown-header"
+                                        onClick={() => setMobileMenuOpen(prev => ({
+                                            ...prev,
+                                            [group.title]: !prev[group.title]
+                                        }))}
                                     >
-                                        <option value="" disabled>{group.title}</option>
-                                        {group.items.map(item => (
-                                            <option value={item.value} key={item.value}>{item.label}</option>
-                                        ))}
-                                    </select>
+                                        {group.title}
+                                        <i className={`fa-solid fa-chevron-${mobileMenuOpen[group.title] ? 'up' : 'down'} float-end`}></i>
+                                    </div>
+                                    {mobileMenuOpen[group.title] && (
+                                        <ul className="mobile-dropdown-menu">
+                                            {group.items.map(item => (
+                                                <li key={item.value}>
+                                                    <a href={`/search?cat=${item.value}`}>{item.label}</a>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    )}
                                 </div>
                             ))}
                         </div>
@@ -170,24 +183,22 @@ const Header = () => {
 
                 {/* categorie - visibili solo su desktop */}
                 <div className="row d-none d-md-flex">
-                    <div className="col-12 pt-4 d-flex justify-content-around flex-wrap gap-0">
+                    <div className="col-12 pt-4 d-flex justify-content-around flex-wrap gap-2">
                         {categoryGroups.map(group => (
-                            <div className="category-group category-group-width " key={group.title}>
-                                <select
-                                    onChange={(e) => handleCategoryClick(e.target.value)}
-                                    defaultValue=""
-                                    className="form-select"
-                                >
-                                    <option value="" disabled>{group.title}</option>
+                            <div className="dropdown-wrapper" key={group.title}>
+                                <span className="dropdown-title">{group.title}</span>
+                                <ul className="dropdown-menu-custom">
                                     {group.items.map(item => (
-                                        <option value={item.value} key={item.value}>{item.label}</option>
+                                        <li key={item.value}>
+                                            <a href={`/search?cat=${item.value}`}>{item.label}</a>
+                                        </li>
                                     ))}
-                                </select>
+                                </ul>
                             </div>
                         ))}
                     </div>
                 </div>
-            </div>
+            </div >
         </>
     );
 };
