@@ -1,5 +1,9 @@
 import Slider from '../components/Slider'
 
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Scrollbar, Autoplay, Pagination, Navigation, A11y } from 'swiper/modules';
+import '../swiper-bundle.min.css';
+
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 
@@ -44,7 +48,67 @@ const Homepage = () => {
                 <div className="row">
                     {/* hero banner */}
                     <div className="col-12">
-                        <img src="./hero_banner_finale.png" alt="image" className="hero-banner" />
+                        <Swiper
+                        className='hero-banner-swiper'
+                            modules={[ Pagination, Autoplay, A11y]}
+                            // spaceBetween={20}
+                            slidesPerView={1}
+                            autoplay={{
+                                delay: 2500,
+                                disableOnInteraction: false,
+                            }}
+                            // navigation
+                            pagination={{ clickable: true }}
+                            // scrollbar={{ draggable: true }}
+                            // onSwiper={(swiper) => console.log(swiper)}
+                            // onSlideChange={() => console.log('slide change')}
+                        >
+                                <SwiperSlide>
+                                    <div className="hero-banner-aspect">
+                                        <img src="./hero_banner_finale.png" alt="" />
+                                    </div>
+                                </SwiperSlide>
+                                <SwiperSlide>
+                                    <div className="hero-banner-aspect">
+                                        <img src="./hero-banner-2.png" alt="" />
+                                    </div>
+                                </SwiperSlide>
+                                <SwiperSlide>
+                                    <div className="hero-banner-aspect">
+                                        <img src="./hero-banner-3.png" alt="" />
+                                    </div>
+                                </SwiperSlide>
+                                <SwiperSlide>
+                                    <div className="hero-banner-aspect">
+                                        <img src="./hero-banner-4.png" alt="" />
+                                    </div>
+                                </SwiperSlide>
+                                <SwiperSlide>
+                                    <div className="hero-banner-aspect">
+                                        <img src="./hero-banner-5.png" alt="" />
+                                    </div>
+                                </SwiperSlide>
+                                <SwiperSlide>
+                                    <div className="hero-banner-aspect">
+                                        <img src="./hero-banner-6.png" alt="" />
+                                    </div>
+                                </SwiperSlide>
+                                <SwiperSlide>
+                                    <div className="hero-banner-aspect">
+                                        <img src="./hero-banner-7.png" alt="" />
+                                    </div>
+                                </SwiperSlide>
+                                <SwiperSlide>
+                                    <div className="hero-banner-aspect">
+                                        <img src="./hero-banner-8.png" alt="" />
+                                    </div>
+                                </SwiperSlide>
+                                <SwiperSlide>
+                                    <div className="hero-banner-aspect">
+                                        <img src="./hero-banner-9.png" alt="" />
+                                    </div>
+                                </SwiperSlide>
+                        </Swiper>
                     </div>
                 </div>
             </div>

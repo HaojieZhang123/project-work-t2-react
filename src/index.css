@@ -1442,3 +1442,20 @@ footer ul li {
         margin-top: 2rem;
     }
 }
+
+.hero-banner-swiper .hero-banner-aspect {
+    width: 100%;
+    aspect-ratio: 16 / 9; /* Adjust as needed for your banners */
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f9f9f9;
+}
+
+.hero-banner-swiper .hero-banner-aspect img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
