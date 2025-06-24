@@ -43,14 +43,14 @@ const MobileFilterMenu = ({ categories, brands }) => {
                     </div>
                     <div className="filter-item">
                         <label>Price Min</label>
-                        <input type="number" value={minPrice} onChange={e => setSearchParams({
+                        <input type="number" value={minPrice} min={0} onChange={e => setSearchParams({
                             ...Object.fromEntries(searchParams.entries()),
                             minPrice: e.target.value
                         })} />
                     </div>
                     <div className="filter-item">
                         <label>Price Max</label>
-                        <input type="number" value={maxPrice} onChange={e => setSearchParams({
+                        <input type="number" value={maxPrice} min={0} onChange={e => setSearchParams({
                             ...Object.fromEntries(searchParams.entries()),
                             maxPrice: e.target.value
                         })} />
