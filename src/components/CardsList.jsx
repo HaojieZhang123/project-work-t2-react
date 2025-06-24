@@ -76,7 +76,8 @@ const CardsList = ({ product }) => {
                     <div className="card-list-bottom">
                         {isPromo && <span className="card-tag tag-promo">promo</span>}
                         {isNew && <span className="card-tag tag-new">new</span>}
-                        <div className="card-original-price color-main-subtle ms-4">{`€ ${price}`}</div>
+                        {/* if discount is 0, don't show the original price */}
+                        {isPromo && <div className="card-original-price color-main-subtle ms-4">{`€ ${price}`}</div>}
                         <div className="card-price ms-2">{`€ ${actualPrice}`}</div>
                     </div>
                 </div>
