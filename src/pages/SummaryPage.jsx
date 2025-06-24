@@ -20,6 +20,7 @@ const SummaryPage = () => {
 
    const [productsDetails, setProductsDetails] = useState([]);
    const [loading, setLoading] = useState(true);
+   const [confirming, setConfirming] = useState(false);
 
    useEffect(() => {
       if (cart.length === 0) return;
@@ -69,6 +70,7 @@ const SummaryPage = () => {
    }
 
    const handleConfirmOrder = async () => {
+      setConfirming(true);
       try {
          const products = cart.map(item => {
             const detail = getProductDetail(item.slug);
@@ -95,7 +97,6 @@ const SummaryPage = () => {
          };
 
          await axios.post("http://localhost:3000/api/orders/withproducts", orderData);
-
          await axios.post("http://localhost:3000/api/send", orderData);
 
          // reset cart
@@ -106,6 +107,8 @@ const SummaryPage = () => {
       } catch (err) {
          alert("There was an error confirming the order!");
          console.error(err);
+      } finally {
+      setConfirming(false);
       }
 
    };
@@ -182,8 +185,13 @@ const SummaryPage = () => {
             </div>
          </div>
          <div className="summary-btn-row">
-            <button className="checkout-btn summary-confirm-btn" onClick={handleConfirmOrder}>
-               Confirm order
+            <button 
+               className="checkout-btn summary-confirm-btn" 
+               onClick={handleConfirmOrder}
+               disabled={confirming}
+               style={confirming ? { pointerEvents: "none", opacity: 0.7 } : {}}
+            >
+               {confirming ? <span className="loader-summary"></span> : "Confirm order"}
             </button>
          </div>
       </div>
