@@ -93,7 +93,7 @@ const SummaryPage = () => {
 
          await axios.post("http://localhost:3000/api/orders/withproducts", orderData);
 
-         await axios.post("http://localhost:3000/send", orderData);
+         await axios.post("http://localhost:3000/api/send", orderData);
 
          // reset cart
          setCart([]);

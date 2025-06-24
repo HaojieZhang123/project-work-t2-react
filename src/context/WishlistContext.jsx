@@ -17,7 +17,7 @@ export const WishlistProvider = ({ children }) => {
         localStorage.setItem('wishlist', JSON.stringify(wishlist));
 
         // show wishlist in console for debugging
-        console.log('Wishlist updated:', wishlist);
+        // console.log('Wishlist updated:', wishlist);
     }, [wishlist]);
 
     // Wishlist functions
