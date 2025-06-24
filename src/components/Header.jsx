@@ -82,9 +82,9 @@ const Header = () => {
         <>
             <div className="container pt-3 pb-3">
                 {/* main header */}
-                <div className="row">
+                <div className="row d-flex justify-content-lg-between">
                     {/* Div laterale barra di ricerca */}
-                    <div className='col-4 d-flex search-container justify-content-start align-items-center'>
+                    <div className='col-12 col-lg-4 d-flex search-container justify-content-start align-items-center header-search'>
                         <form
                             className="d-flex align-items-center w-100"
                             // passaggio dei parametri di ricerca tramite query string
@@ -107,14 +107,14 @@ const Header = () => {
                     </div>
 
                     {/* logo centrale */}
-                    <div className='col-4 d-flex justify-content-center align-items-center logo-container'>
+                    <div className='col-6 col-lg-4 d-flex justify-content-center align-items-center logo-container'>
                         <Link to="/">
                             <img src="/logo_black.svg" alt="logo" className="logo-img" />
                         </Link>
                     </div>
 
                     {/* icone a destra + hamburger per mobile */}
-                    <div className='col-4 d-flex justify-content-end align-items-center'>
+                    <div className='col-6 col-lg-4 d-flex justify-content-end align-items-center menu-container'>
                         {/* hamburger visibile solo su mobile */}
                         <button
                             className="btn d-md-none mx-2 align-self-center d-flex align-items-center"
