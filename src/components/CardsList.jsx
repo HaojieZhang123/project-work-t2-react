@@ -1,4 +1,5 @@
 import { useCart } from '../context/CartContext';
+import {useWishlist} from '../context/WishlistContext';
 
 const CardsList = ({ product }) => {
 
@@ -12,6 +13,13 @@ const CardsList = ({ product }) => {
         updateCartQuantity,
         isInCart
     } = useCart();
+
+    const {
+        // wishlist,
+        addToWishlist,
+        removeFromWishlist,
+        isInWishlist
+    } = useWishlist();
 
     // Calculate the actual price after discount
     const discountValue = (price * discount) / 100;
@@ -39,10 +47,24 @@ const CardsList = ({ product }) => {
         }
     };
 
+    const toggleWishlistIcon = (slug) => {
+        if (isInWishlist(slug)) {
+            removeFromWishlist(slug);
+        } else {
+            addToWishlist(slug);
+        }
+    };
+
 
     return (
         <>
             <div className="card-list">
+                <i
+                    className={`wishlist-heart fa-heart position-absolute top-0 end-0 m-2 ${isInWishlist(product.slug) ? 'fas' : 'far'}`}
+                    onClick={() => toggleWishlistIcon(product.slug)}
+                    style={{ cursor: 'pointer' }}
+                ></i>
+
                 <div className="card-list-img img-zoom-container">
                     <img src={image} alt={product_name} className='img-zoom' />
                 </div>
