@@ -2,9 +2,9 @@
 const Footer = () => {
     return (
         <div className="container py-3">
-            <div className="row">
-                <div className="col-12 col-md-8 mb-3 mb-md-0">
-                    <ul className='footer-list d-flex justify-content-between flex-wrap me-5'>
+            <div className="row text-center text-md-start">
+                <div className="col-12 col-md-8 mb-3 mb-md-0 text-center text-md-start">
+                    <ul className='footer-list d-flex justify-content-md-between flex-wrap'>
                         <li>
                             <a href="#">Privacy</a>
                         </li>
@@ -26,8 +26,8 @@ const Footer = () => {
                     </ul>
                 </div>
 
-                <div className="col-12 col-md-4 d-flex justify-content-end pt-1">
-                    <div className='text-end'>
+                <div className="col-12 col-md-4 d-flex justify-content-center justify-content-md-end pt-1">
+                    <div className='text-center text-md-end'>
                         &copy; 2025 Boolean Italia S.p.A.
                     </div>
                 </div>
