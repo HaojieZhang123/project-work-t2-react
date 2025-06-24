@@ -1373,6 +1373,11 @@ footer ul li {
         /* Same as .sidebar-cart width */
         transition: margin-right 0.3s;
     }
+
+
+    .summary-order {
+        width: 60%;
+    }
 }
 
 /* sidebar disappears when under 767px */
@@ -1392,6 +1397,7 @@ footer ul li {
 
     .summary-order {
         order: 2;
+        width: 100%;
     }
 
     .summary-total {

@@ -2,11 +2,14 @@ import { useCart } from "../context/CartContext";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import ProductRow from "../components/ProductRow";
 
 const SHIPPING_THRESHOLD = 50;
 const SHIPPING_COST = 5;
 
 const SummaryPage = () => {
+   const [productRowsState, setProductRowsState] = useState(3) // 1 for wishlist, 2 for cart, 3 for summary
+
    const { cart = [], appliedPromo, setAppliedPromo, setCart } = useCart() || {};
    const location = useLocation();
    const navigate = useNavigate();
@@ -117,6 +120,13 @@ const SummaryPage = () => {
       );
    }
 
+   const products = cart.map(item => {
+      const detail = getProductDetail(item.slug);
+      return detail;
+   });
+
+   console.log(products)
+
    return (
       <div className="container margin-y-details-page summary-container p-5">
          <h2 className="cart-title summary-title">Order Summary</h2>
@@ -127,11 +137,10 @@ const SummaryPage = () => {
                   {cart.map((item, idx) => {
                      const detail = getProductDetail(item.slug);
                      return (
-                        <li key={idx} className="summary-list-item">
-                           <span className="summary-product-name">{detail.name || item.slug}</span> &times; {item.quantity}
-                        </li>
-                     );
-                  })}
+                        <ProductRow key={item.slug} state={productRowsState} product={detail} />
+                     )
+                  })
+                  }
                </ul>
             </div>
             <div className="summary-section summary-customer">
