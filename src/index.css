@@ -1342,6 +1342,9 @@ footer ul li {
     padding: 4px 6px;
     font-size: 0.85rem;
     width: 100%;
+    border: 1px solid #a8bba2;
+    background: #f9f9f9;
+    border-radius: 5px;
 }
 
 .form-check {
