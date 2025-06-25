@@ -82,7 +82,7 @@ const WishList = () => {
                 <div className="container">
                     {/* card suggeriti per te */}
                     <div className="col-12 my-5 pt-5">
-                        <h2 className='mb-2'>SUGGERITI PER TE</h2>
+                        <h2 className='mb-2'>SUGGESTED FOR YOU</h2>
                         <Slider products={bestSellers} />
                     </div>
                 </div>
