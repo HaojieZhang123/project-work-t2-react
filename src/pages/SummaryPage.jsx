@@ -108,7 +108,7 @@ const SummaryPage = () => {
          alert("There was an error confirming the order!");
          console.error(err);
       } finally {
-      setConfirming(false);
+         setConfirming(false);
       }
 
    };
@@ -177,7 +177,7 @@ const SummaryPage = () => {
             )}
             <div className="summary-row">
                <span>Shipping</span>
-               <span>{shipping() === 0 ? "Gratis" : `€${shipping().toFixed(2)}`}</span>
+               <span>{shipping() === 0 ? "FREE" : `€${shipping().toFixed(2)}`}</span>
             </div>
             <div className="summary-total-row">
                <span>Total</span>
@@ -185,8 +185,8 @@ const SummaryPage = () => {
             </div>
          </div>
          <div className="summary-btn-row">
-            <button 
-               className="checkout-btn summary-confirm-btn" 
+            <button
+               className="checkout-btn summary-confirm-btn"
                onClick={handleConfirmOrder}
                disabled={confirming}
                style={confirming ? { pointerEvents: "none", opacity: 0.7 } : {}}
