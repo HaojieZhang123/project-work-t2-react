@@ -9,7 +9,8 @@ const Slider = ({ products }) => {
 
     return (
         <Swiper
-            modules={[ Scrollbar, A11y]}
+            className='pb-3'
+            modules={[Scrollbar, A11y]}
             spaceBetween={20}
             slidesPerView={5}
             // navigation
@@ -45,7 +46,7 @@ const Slider = ({ products }) => {
                     <Cards product={product} />
                 </SwiperSlide>
             ))}
-                
+
         </Swiper>
     )
 }
