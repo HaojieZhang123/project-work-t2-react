@@ -13,6 +13,14 @@ const MobileCartOverlay = ({ onClose }) => {
     const [subtotal, setSubtotal] = useState(0);
 
     const navigate = useNavigate();
+    
+    // context
+    const {
+        cart,
+    } = useCart();
+
+    // Only show the last added product in the cart
+    const lastCartItem = cart.length > 0 ? cart[cart.length - 1] : null;
 
     // view cart button performs 2 actions: close the overlay and navigate to the cart page
     const handleViewCart = () => {
@@ -20,10 +28,6 @@ const MobileCartOverlay = ({ onClose }) => {
         navigate('/cart');
     };
 
-    // context
-    const {
-        cart,
-    } = useCart();
 
     const calculateSubtotal = () => {
         return cart.reduce((acc, cartItem) => {
@@ -43,7 +47,7 @@ const MobileCartOverlay = ({ onClose }) => {
                 const allProducts = response.data;
                 // filter products that are in the cart
                 const cartProducts = allProducts.filter(product => cart.some(item => item.slug === product.slug));
-                setProducts(cartProducts)
+                setProducts(cartProducts);
             })
             .catch(error => {
                 console.error("There was an error fetching the products!", error);
@@ -72,14 +76,23 @@ const MobileCartOverlay = ({ onClose }) => {
             <div className="mobile-cart-overlay">
                 <div className="overlay-header">
                     <h2 className="overlay-title">Cart</h2>
+                    <div className="overlay-close-btn" onClick={onClose}>
+                        <i class="fa-solid fa-xmark"></i>
+                    </div>
                 </div>
                 <div className="overlay-content">
-                    {products.length > 0 ? (
-                        products.map((product, index) => (
-                            <div key={index}>
-                                <ProductRow state={productRowsState} product={product} />
-                            </div>
-                        ))
+                    {products.length > 0 && lastCartItem ? (
+                        // products.map((product, index) => (
+                        //     <div key={index}>
+                        //         <ProductRow state={productRowsState} product={product} />
+                        //     </div>
+                        // ))
+
+                        <ProductRow 
+                            state={productRowsState} 
+                            product={products.find(p => p.slug === lastCartItem.slug)} 
+                            quantity={lastCartItem.quantity} 
+                        />
                     ) : (
                         <p>Your cart is empty.</p>
                     )}
