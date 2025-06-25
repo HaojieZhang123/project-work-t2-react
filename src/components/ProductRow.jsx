@@ -90,8 +90,17 @@ const ProductRow = ({ state, product }) => {
 
                         <div className="product-row-price-section">
                             <div className="d-flex justify-content-end align-items-center">
-                                <div className="card-original-price color-main-subtle">{`€ ${price}`}</div>
-                                <div className="card-price ms-3">{`€ ${actualPrice}`}</div>
+                                {/* <div className="card-original-price color-main-subtle">{`€ ${price}`}</div>
+                                <div className="card-price ms-3">{`€ ${actualPrice}`}</div> */}
+
+                                {isPromo ? (
+                                    <>
+                                        <div className="card-original-price color-main-subtle">{`€ ${price}`}</div>
+                                        <div className="card-price ms-3">{`€ ${actualPrice}`}</div>
+                                    </>
+                                ) : (
+                                    <div className="card-price">{`€ ${actualPrice}`}</div>
+                                )}
                             </div>
 
                             <div className="product-row-cta">
@@ -137,8 +146,16 @@ const ProductRow = ({ state, product }) => {
                                 </div>
                             </div>
                             <div className="d-flex justify-content-end align-items-center">
-                                <div className="card-original-price color-main-subtle">{`€ ${price}`}</div>
-                                <div className="card-price ms-3">{`€ ${actualPrice}`}</div>
+                                {/* <div className="card-original-price color-main-subtle">{`€ ${price}`}</div>
+                                <div className="card-price ms-3">{`€ ${actualPrice}`}</div> */}
+                                {isPromo ? (
+                                    <>
+                                        <div className="card-original-price color-main-subtle">{`€ ${price}`}</div>
+                                        <div className="card-price ms-3">{`€ ${actualPrice}`}</div>
+                                    </>
+                                ) : (
+                                    <div className="card-price">{`€ ${actualPrice}`}</div>
+                                )}
                             </div>
                         </div>
                     </div>
