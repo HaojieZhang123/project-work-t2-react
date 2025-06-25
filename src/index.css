@@ -634,12 +634,16 @@ footer ul li {
 
 .card-list {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
+    position: relative;
 }
 
 .card-list-img {
     width: 100px;
+    min-width: 80px;
     margin-right: 20px;
+    display: flex;
+    align-items: flex-start;
 }
 
 .card-list-img img {
@@ -647,20 +651,75 @@ footer ul li {
     height: auto;
 }
 
+.card-list-main {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 0;
+    gap: 10px;
+    min-width: 0;
+}
+
 .card-list-info {
-    width: calc(100% - 120px);
+    width: 100%;
 }
 
 .card-list-bottom {
     display: flex;
     align-items: center;
+    gap: 8px;
 }
 
 .card-list-cta {
-    width: 200px;
-    margin-left: auto;
-    text-align: end;
-    align-self: flex-end;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-left: 0;
+    margin-top: 8px;
+    flex-wrap: wrap;
+}
+
+.card-list-cta.spaced-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.card-list-prices {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.card-list-link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex: 1;
+}
+
+@media (max-width: 600px) {
+    .card-list-img {
+        width: 60px;
+        min-width: 60px;
+        margin-right: 10px;
+    }
+    .card-list-main {
+        gap: 6px;
+    }
+    .card-list-cta {
+        gap: 6px;
+        font-size: 0.98rem;
+        flex-wrap: wrap;
+    }
+    .card-list-prices {
+        gap: 6px;
+    }
+    .card-original-price,
+    .card-price {
+        font-size: 1rem;
+    }
 }
 
 /* WISHLIST */
@@ -686,7 +745,9 @@ footer ul li {
 /* PRODUCT ROW */
 
 .product-row {
+    margin-right: 0;
     display: flex;
+    align-items: flex-start;
 }
 
 .product-row-image {
@@ -699,8 +760,16 @@ footer ul li {
     height: auto;
 }
 
+.product-row-info-vertical {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 0;
+    gap: 10px;
+    min-width: 0;
+}
+
 .product-row-details {
-    width: calc(100% - 350px);
+    width: 100%;
 }
 
 .product-row-details .card-tag {
@@ -708,11 +777,39 @@ footer ul li {
 }
 
 .product-row-price-section {
-    width: 200px;
-    margin-left: auto;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-between;
+    align-items: flex-end;
+    width: 100%;
+}
+
+.product-row-price-section.cart,
+.product-row-price-section.wishlist {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 10px;
+}
+
+/* --- ProductRow number input and icon tweaks for mobile --- */
+.product-row-quantity-input {
+    width: 60px;
+    max-width: 100%;
+    font-size: 1rem;
+    border: 1px solid #a8bba2;
+    border-radius: 5px;
+    background: #f9f9f9;
+    text-align: center;
+    transition: border 0.2s;
+    margin-left: 6px;
+    padding: 6px 4px;
+}
+
+.product-row-quantity-input:focus {
+    border-color: #f9e6d8;
+    outline: none;
+    background: #fff;
 }
 
 .product-row-cta {
@@ -754,6 +851,39 @@ footer ul li {
 
 .product-row-add-to-cart:hover {
     background-color: #92a58c;
+}
+
+@media (max-width: 767px) {
+    .product-row {
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .product-row-image {
+        width: 70px;
+        min-width: 60px;
+        margin-right: 0;
+    }
+    .product-row-info-vertical {
+        gap: 8px;
+    }
+    .product-row-details {
+        width: 100%;
+    }
+    .product-row-price-section,
+    .product-row-price-section.cart,
+    .product-row-price-section.wishlist {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-end;
+        width: 100%;
+        gap: 8px;
+    }
+    .product-row-cta {
+        gap: 6px;
+    }
+    .product-row-cta.mb-5 {
+        margin-bottom: 0 !important;
+    }
 }
 
 /* CHECKOUT */
@@ -844,12 +974,17 @@ footer ul li {
     display: flex;
     gap: 10px;
     margin-bottom: 20px;
+    align-items: center;
 }
 
 .promo-input {
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: 220px;
     padding: 0.5rem 1rem;
     border: 1px solid #a8bba2;
     border-radius: 6px;
+    font-size: 1rem;
 }
 
 .promo-btn {
