@@ -80,8 +80,8 @@ const Cart = () => {
     // Function to check if promo is disabled
     const isPromoDisabled = () => ! !appliedPromo;
 
-    console.log(cart);
-    console.log(products);
+    // console.log(cart);
+    // console.log(products);
 
     const fetchProduct = () => {
         // fetch products in cart

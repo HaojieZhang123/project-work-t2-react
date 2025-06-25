@@ -77,7 +77,7 @@ const MobileCartOverlay = ({ onClose }) => {
                 <div className="overlay-header">
                     <h2 className="overlay-title">Cart</h2>
                     <div className="overlay-close-btn" onClick={onClose}>
-                        <i class="fa-solid fa-xmark"></i>
+                        <i className="fa-solid fa-xmark"></i>
                     </div>
                 </div>
                 <div className="overlay-content">
