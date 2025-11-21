@@ -1,28 +1,28 @@
-# 💄 E-Commerce Beauty Store
+# E-Commerce Beauty Store
 
 > A modern, fully responsive e-commerce frontend application inspired by industry leaders like Douglas and Sephora. Built with the latest React ecosystem technologies.
 
-## 📖 Project Overview
+## Project Overview
 
 This project is a sophisticated Single Page Application (SPA) designed to provide a seamless shopping experience for beauty products. It features a dynamic product catalog, a fully functional shopping cart with persistence, a wishlist system, and a streamlined checkout flow.
 
 The application connects to a backend API to fetch real-time product data, including "Best Sellers" and "Latest Products," ensuring the content is always fresh and engaging.
 
-## ✨ Key Features
+## Key Features
 
-- **🏠 Dynamic Homepage:** Features an interactive hero banner slider and curated product sections (Best Sellers, Latest Products) powered by Swiper.js.
-- **🔍 Advanced Search:** Dedicated search page with filtering capabilities to help users find exactly what they need.
-- **📄 Product Details:** Comprehensive product pages (`/product/:slug`) displaying detailed information, images, and add-to-cart functionality.
-- **🛒 Smart Shopping Cart:**
+- **Dynamic Homepage:** Features an interactive hero banner slider and curated product sections (Best Sellers, Latest Products) powered by Swiper.js.
+- **Advanced Search:** Dedicated search page with filtering capabilities to help users find exactly what they need.
+- **Product Details:** Comprehensive product pages (`/product/:slug`) displaying detailed information, images, and add-to-cart functionality.
+- **Smart Shopping Cart:**
   - Global state management using **Context API**.
   - **Persistent storage** using `localStorage` so users don't lose their items on refresh.
   - Sidebar cart for quick access and a dedicated full-page cart view.
   - Mobile-optimized cart overlay.
-- **❤️ Wishlist:** Functionality to save favorite items for later.
-- **💳 Checkout Simulation:** A multi-step checkout process (`Cart` -> `Checkout` -> `Summary` -> `Final`).
-- **📱 Fully Responsive:** Mobile-first design approach using **Bootstrap 5** and custom CSS, ensuring a perfect experience on all devices.
+- **Wishlist:** Functionality to save favorite items for later.
+- **Checkout Simulation:** A multi-step checkout process (`Cart` -> `Checkout` -> `Summary` -> `Final`).
+- **Fully Responsive:** Mobile-first design approach using **Bootstrap 5** and custom CSS, ensuring a perfect experience on all devices.
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 This project leverages a modern and robust technology stack to ensure performance, scalability, and developer experience:
 
@@ -47,7 +47,7 @@ This project leverages a modern and robust technology stack to ensure performanc
 - **[Axios](https://axios-http.com/):** Promise-based HTTP client for making API requests to the backend.
 - **ESLint:** For code quality and consistency.
 
-## 🏗️ Architecture & Design Patterns
+## Architecture & Design Patterns
 
 The project follows a clean, modular component-based architecture:
 
@@ -59,7 +59,7 @@ The project follows a clean, modular component-based architecture:
 - **`src/layout/`**: Layout wrappers (e.g., `DefaultLayout`) to ensure consistent structure (Header/Footer) across pages.
 - **Custom Hooks:** Utilizes hooks like `useCart` and `useLocation` for logic encapsulation and cleaner components.
 
-## 🚀 Getting Started
+## Getting Started
 
 Follow these steps to set up the project locally:
 
@@ -92,7 +92,7 @@ Follow these steps to set up the project locally:
 4.  **Open your browser:**
     Navigate to `http://localhost:5173` (or the port shown in your terminal).
 
-## 📂 Project Structure
+## Project Structure
 
 ```
 src/
@@ -105,13 +105,9 @@ src/
 └── index.css         # Global styles
 ```
 
-## 🔮 Future Improvements
+## Future Improvements
 
 - **User Authentication:** Implement full user login/signup with JWT.
 - **Payment Gateway:** Integrate Stripe or PayPal for real transactions.
 - **Backend Integration:** Connect to a production-ready backend (currently configured for localhost).
 - **Unit Testing:** Add tests using Vitest and React Testing Library.
-
----
-
-_Developed with ❤️ by [Your Name]_
